@@ -98,7 +98,7 @@ Slides Link
 
 ## UML Diagram 
   
-![UML drawio](https://user-images.githubusercontent.com/92248041/146685154-9d474f9c-3877-4fa4-8ee5-df2b3ca824ca.png)
+![UMLclient](https://user-images.githubusercontent.com/92248041/146689592-4cede930-c70a-4ccd-ac25-adb8821aa470.jpg)
 
 ## Page Layout 
 
