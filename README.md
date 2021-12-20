@@ -37,7 +37,7 @@ Tuwaiq Club is a platform that will save the projects for Tuwaiq members.
 ### Links:
 
 #### trello
-
+https://trello.com/b/MOLHmrhc/mp-project-rawan-almutairi 
 
 #### Slides
 The url to your presentation slides
