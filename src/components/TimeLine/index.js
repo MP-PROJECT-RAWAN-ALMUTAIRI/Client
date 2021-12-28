@@ -5,7 +5,7 @@ import "./style.css";
 import axios from "axios";
 import { storage } from "../firebase";
 import { useSelector } from "react-redux";
-import { useNavigate , useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const Post = () => {
   const BASE_URL = process.env.REACT_APP_BASE_URL;
@@ -146,7 +146,6 @@ const Post = () => {
     } catch (error) {
       console.log(error);
     }
-    // window.location.reload(false);
   };
 
   return (
@@ -162,14 +161,14 @@ const Post = () => {
         <hr />
         <br></br>
         <div>
-         <h1>Upload Photo here ... </h1> 
+          <h1>Upload Photo here ... </h1>
           <input type="file" name="post" onChange={handleChange} />
           <button
-            // className="custom-file-upload"
+            className="ProfileBtn"
             onClick={handleUpload}
             style={{ color: "white", fontSize: "15px" }}
           >
-           <h1> upload</h1>
+            <h1> upload</h1>
           </button>
           <br></br>
           <br></br>
@@ -180,12 +179,13 @@ const Post = () => {
           <textarea
             required
             rows="4"
-            className="input"
+            className="desc"
             placeholder="set you description"
             type="text"
             onChange={(e) => setDescription(e.target.value)}
+            style={{ color: "black", fontSize: "15px" }}
           />
-          <button className="btn" onClick={addNewPost}>
+          <button className="ProfileBtn" onClick={addNewPost}>
             <h1>Add</h1>
           </button>
           <br></br>
@@ -199,22 +199,30 @@ const Post = () => {
                   </div>
                   <br></br>
                   <br></br>
-                  <div className="dec">
-                    <h1>{item.description}</h1> 
+                  <div className="desc">
+                    <b>
+                      <h1>{item.description}</h1> 
+                    </b>
                   </div>
                   <br></br>
                   <br></br>
-                  <button className="ProfileBtn" onClick={() => updateTask(item._id)}>
-                   <h1>Update</h1> 
+                  <button
+                    className="ProfileBtn"
+                    onClick={() => updateTask(item._id)}
+                  >
+                    <h1>Update</h1>
                   </button>
-                  <button className="ProfileBtn" onClick={() => deleteTask(item._id)}>
-                   <h1>Delete</h1> 
+                  <button
+                    className="ProfileBtn"
+                    onClick={() => deleteTask(item._id)}
+                  >
+                    <h1>Delete</h1>
                   </button>
                   <button
                     className="ProfileBtn"
                     onClick={() => navigate(`/post/${item._id}`)}
                   >
-                   <h1> view</h1>
+                    <h1> view</h1>
                   </button>
                   <br></br>
                   <br></br>

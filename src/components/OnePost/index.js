@@ -13,7 +13,7 @@ const Onepost = () => {
   const BASE_URL = process.env.REACT_APP_BASE_URL;
   const [posts, setPosts] = useState(null);
   const navigate = useNavigate();
-  const [like, setLike] = useState([]);
+  const [like, setLike] = useState(null);
   const [comment, setComment] = useState("");
   const [ratting, setRatting] = useState("");
   const [newComment, setNewComment] = useState("");
@@ -63,6 +63,7 @@ const Onepost = () => {
           },
         }
       );
+      console.log(result.data , ".....like ....................");
     } catch (error) {
       console.log(error);
     }

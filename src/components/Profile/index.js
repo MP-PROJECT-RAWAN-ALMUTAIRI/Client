@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 const Profile = () => {
   const BASE_URL = process.env.REACT_APP_BASE_URL;
   const [user, setuser] = useState(null);
-  const [userPostss, setUserPostss] = useState(null);
+  const [userPostss, setUserPostss] = useState([]);
   const { id } = useParams();
 
   let navigate = useNavigate();
@@ -26,9 +26,11 @@ const Profile = () => {
         Authorization: `Bearer ${state.users.token}`,
       },
     });
-    console.log("user", user.data.result);
-    console.log("post", user.data.post);
+    console.log("...", user.data.post[0].pic);
+    console.log("user........", user.data.result);
+    console.log("post.........", user.data.post);
     setuser(user.data);
+    setUserPostss(user.data.post)
   };
 
   return (
@@ -55,11 +57,22 @@ const Profile = () => {
                 <img className="userAvatar" src={user.result.avatar} alt="img" />
               </div>
               </div>
+              {/* <---------------------------------------------------------------> */}
+              {/* <---------------------------------------------------------------> */}
+              {/* <---------------------------------------------------------------> */}
+              
               <div className="postDiv">
-              <img className="Picture" src={user.post.pic} alt="img" />
-              <br></br>
-              <br></br>
-              <p className="desc"><b>{user.post.description}</b></p>
+                {userPostss.length && 
+                userPostss.map((item) =>{
+                  return(
+                    <div key={item._id}>
+                    <img className="Picture" src={item.pic} alt="rawan img" />
+                    <br></br>
+                    <br></br>
+                    {/* <p className="desc"><b>{item.description}</b></p> */}
+                    </div>
+                  )
+                })}
               </div>
             </div> 
           ) : (

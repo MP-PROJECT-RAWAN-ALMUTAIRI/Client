@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+//import { useParams } from "react-router-dom";
 import Nav from "./../Nav";
 import "./style.css";
 
 const Users = () => {
-  let navigate = useNavigate();
+  //let navigate = useNavigate();
   const [allUsers, setAllUsers] = useState([]);
-  const { id } = useParams();
+  //const { id } = useParams();
 
   useEffect(() => {
     getAllUsers();
