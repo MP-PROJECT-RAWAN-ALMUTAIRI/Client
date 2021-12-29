@@ -46,6 +46,8 @@ const Onepost = () => {
       // setComment(result.data);
 
       // getAllComment();
+      setNewComment("");
+      setComment("");
     } catch (error) {
       console.log(error);
     }
@@ -77,7 +79,7 @@ const Onepost = () => {
         },
       });
       console.log(result);
-      setComment(result.data);
+      setComment(result.data); 
     } catch (error) {
       console.log(error);
     }
@@ -100,7 +102,6 @@ const Onepost = () => {
         }
       );
       console.log("new comment", result.data);
-      setNewComment("");
       getOnePosts();
     } catch (error) {
       console.log(error);
@@ -113,7 +114,7 @@ const Onepost = () => {
       {posts && (
         <div>
           <img src={posts.result.pic} />
-          <div className="dec">
+          <div className="decOnePage">
             <button> 
                 {like ? (
                   <MdFavorite className="likeIcon" onClick={addLike} />
@@ -121,26 +122,26 @@ const Onepost = () => {
                   <MdFavoriteBorder className="unLikeIcon" onClick={addLike} />
                 )}
             </button>
-            <h1>{posts.result.description}</h1>
+            <p>{posts.result.description}</p> 
           </div>
           <textarea
             required
             rows="4"
-            className="input"
+            className="inputTextArea"
             placeholder="set you description"
             type="text"
             onChange={(e) => setComment(e.target.value)}
           />
           <button className="btn" onClick={addNewComment}>
-            <h1>Add Comment</h1>
+            <h2>Add Comment</h2>
           </button>
           <div className="content">
             {posts.commnet.map((ele) => {
               return (
                 <div>
-                  <h1>user: {ele.userName}</h1>
+                  <p>user: {ele.userName}</p>
                   <br></br>
-                  <h1>comment: {ele.comment}</h1>
+                  <p>comment: {ele.comment}</p>
                 </div>
               );
             })}

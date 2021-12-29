@@ -40,6 +40,9 @@ const Login = () => {
     } else {
       navigate("/main");
     }
+    if (result.data.result.role.role === "trainer") {
+      navigate("/main");
+    }
   };
 
   return (

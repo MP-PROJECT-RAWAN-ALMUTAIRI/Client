@@ -4,18 +4,16 @@
 }
 .userInfo{
     padding-top: 5%;
-    background-color: gray;
     font-size: 1rem;
     font-style: italic; 
     font-family: 'Times New Roman', Times, serif;
 }
-h1{
+/* h1{
     margin: 9%;
     padding-left: 5%;
     
     align-items: center;
-    color: white;
-}
+} */
 .userAvatar{
     border-radius: 50%;
     padding: 5%;

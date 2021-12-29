@@ -161,47 +161,48 @@ const Post = () => {
         <hr />
         <br></br>
         <div>
-          <h1>Upload Photo here ... </h1>
+          <h2>Upload Photo here ... </h2>
           <input type="file" name="post" onChange={handleChange} />
           <button
             className="ProfileBtn"
             onClick={handleUpload}
             style={{ color: "white", fontSize: "15px" }}
           >
-            <h1> upload</h1>
+            <p> upload </p> 
           </button>
           <br></br>
           <br></br>
-          <h1>Image Description:</h1>
+          <h2>Image Description:</h2>
           <br></br>
           <img className="RawImg" src={url} />
           <br></br>
           <textarea
             required
             rows="4"
-            className="desc"
+            className="descTimeLine"
             placeholder="set you description"
             type="text"
             onChange={(e) => setDescription(e.target.value)}
             style={{ color: "black", fontSize: "15px" }}
           />
           <button className="ProfileBtn" onClick={addNewPost}>
-            <h1>Add</h1>
+            <h2>Add</h2>
           </button>
           <br></br>
           <br></br>
-          <div className="content">
+          <div className="postMap">
             {posts.length &&
               posts.map((item) => (
                 <div key={item._id}>
-                  <div className="img">
+                  <div className="imgTimeLine">
                     <img src={item.pic} alt="firebase" />
                   </div>
                   <br></br>
                   <br></br>
-                  <div className="desc">
+                  <div className="descTimeLine">
                     <b>
-                      <h1>{item.description}</h1> 
+                      
+                      <h2>{item.description}</h2> 
                     </b>
                   </div>
                   <br></br>
@@ -210,22 +211,22 @@ const Post = () => {
                     className="ProfileBtn"
                     onClick={() => updateTask(item._id)}
                   >
-                    <h1>Update</h1>
+                    <h2>Update</h2>
                   </button>
                   <button
                     className="ProfileBtn"
                     onClick={() => deleteTask(item._id)}
                   >
-                    <h1>Delete</h1>
+                    <h2>Delete</h2>
                   </button>
                   <button
                     className="ProfileBtn"
                     onClick={() => navigate(`/post/${item._id}`)}
                   >
-                    <h1> view</h1>
+                    <h2> view</h2>
                   </button>
                   <br></br>
-                  <br></br>
+                  <br></br> 
                   <br></br>
                 </div>
               ))}

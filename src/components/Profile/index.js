@@ -26,7 +26,7 @@ const Profile = () => {
         Authorization: `Bearer ${state.users.token}`,
       },
     });
-    console.log("...", user.data.post[0].pic);
+    // console.log("...", user.data.post[0].pic);
     console.log("user........", user.data.result);
     console.log("post.........", user.data.post);
     setuser(user.data);
@@ -44,14 +44,14 @@ const Profile = () => {
               <br></br>
               <div className="userInfo">
               <div className="emailDiv">
-                <h1>{user.result.email}</h1>
-                <h1>welcome : {user.result.userName}</h1>
-                <h1>{user.result.Bio}</h1>
+                <h2>{user.result.email}</h2>
+                <h2>welcome : {user.result.userName}</h2>
+                <h2>{user.result.Bio}</h2>
               </div>
               <div className="borderImg">
-                <h1>{user.result.following}</h1>
-                <h1>{user.result.followers}</h1>
-                <h1>{user.result.role}</h1>
+                <h2>{user.result.following}</h2>
+                <h2>{user.result.followers}</h2>
+                <h2>{user.result.role}</h2>
                 <br></br>
                 <br></br>
                 <img className="userAvatar" src={user.result.avatar} alt="img" />
@@ -68,8 +68,8 @@ const Profile = () => {
                     <div key={item._id}>
                     <img className="Picture" src={item.pic} alt="rawan img" />
                     <br></br>
-                    <br></br>
-                    {/* <p className="desc"><b>{item.description}</b></p> */}
+                    <br></br> <h2>user name : {user.result.userName}</h2>
+                    <p className="desc"><b>{item.description}</b></p>
                     </div>
                   )
                 })}

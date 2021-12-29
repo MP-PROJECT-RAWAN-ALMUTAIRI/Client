@@ -54,35 +54,41 @@ const Users = () => {
   };
 
   return (
-    <div className="contener">
+    <>
       <Nav />
-     
+      <div className="contener">
         {allUsers &&
           allUsers.map((ele) => {
             return (
-              <div>
+              <div className="mincontainer">
                 <div key={ele._id} className="users">
-                  <button className="btn" onClick={() => deleteUser(ele._id)}>
-                    delete
-                  </button>
-                  <h4 className="name">
-                    {ele.userName} 
+                  <h4 className="userName">
+                    {ele.userName}
                     <br></br>
                     {ele.email}
                     <br></br>
                     {ele.createdAt}
                     <br></br>
-                    <img className="img3" src={ele.avatar} alt="img" /> 
+                    <img
+                      className="usersImage"
+                      src={ele.avatar}
+                      alt="user Avatar"
+                    />
                   </h4>
                 </div>
+                <button
+                  className="ProfileBtn"
+                  onClick={() => deleteUser(ele._id)}
+                >
+                  delete
+                </button>
               </div>
             );
           })}
 
         {!allUsers.length && <h2>there is no user OR you are forbidden !!</h2>}
-      
-    </div>
+      </div>
+    </>
   );
 };
 export default Users;
- 

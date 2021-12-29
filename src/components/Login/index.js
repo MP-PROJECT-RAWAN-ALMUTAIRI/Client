@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { userLogin } from "../../reducers/users";
 import { useDispatch, useSelector } from "react-redux";
-
+import "./style.css";
 
 const Login = () => {
   const BASE_URL = process.env.REACT_APP_BASE_URL;
@@ -38,24 +38,46 @@ const Login = () => {
     if (result.data.result.role.role === "Admin") {
       navigate("/users");
     } else {
-      navigate("/post");
+      navigate("/main");
+    }
+    if (result.data.result.role.role === "trainer") {
+      navigate("/main");
     }
   };
 
   return (
     <>
-      <div class="background"></div>
-      <div class="container">
-        <h2>Login Form</h2>
-        <form action="">
-          <div class="form-item">
-            <span class="material-icons-outlined">account_circle</span>
+      <br></br>
+      <br></br>
+      <h2>Tuwaiq Clube ..</h2>
+      <p>We are a Tuwaiq Clube </p>
+      <p>
+        Note that the button and the form is fixed - they will always be
+        positioned to the bottom of the browser window.
+      </p>
+      <br></br>
+      <br></br>
+      <div className="divCon">
+        <form style={{ maxWidth: "500px", margin: "auto" }}>
+          {/* <h2>Register Form</h2> */}
+          {/* <div class="input-container">
+            <i class="fa fa-user icon"></i>
             <input
+              class="input-field"
               type="text"
+              placeholder="Username"
+              name="usrnm"
+            />
+          </div> */}
+
+          <div class="input-container">
+            <i class="fa fa-envelope icon"></i>
+            <input
+              class="input-field"
+              type="text"
+              placeholder="Email"
+              name="email"
               value={email}
-              name="e-mail"
-              id="text"
-              placeholder="Enter your email"
               onChange={(e) => {
                 // console.log(e);
                 setEmail(e.target.value);
@@ -63,14 +85,14 @@ const Login = () => {
             />
           </div>
 
-          <div class="form-item">
-            <span class="material-icons-outlined">lock</span>
+          <div class="input-container">
+            <i class="fa fa-key icon"></i>
             <input
+              class="input-field"
               type="password"
-              name="pass"
+              placeholder="Password"
+              name="psw"
               value={password}
-              id="pass"
-              placeholder="password"
               onChange={(e) => {
                 // console.log(e);
                 setPassword(e.target.value);
@@ -78,16 +100,11 @@ const Login = () => {
             />
           </div>
 
-          <button onClick={getUser} type="submit"> LOGIN </button>
-          <p> Or Login Using</p>
-          <div class="options">
-            {/* <button class="fb">Facebook</button> */}
-            <button class="gl">GitHup</button>
-          </div>
-          <p>
-            New User? <Link to="/signup" onClick={() => navigate(`/task`)}>Create an account</Link>
-          </p>
-        </form> 
+          <button type="submit" onClick={getUser} class="btnlogin">
+            login
+          </button>
+        </form>
+        <br></br>
       </div>
     </>
   );

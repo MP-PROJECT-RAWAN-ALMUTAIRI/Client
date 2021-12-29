@@ -64,6 +64,17 @@ const Nav = () => {
             </li>
 
             <li className="nav-item1">
+              <button
+                className="ProfileBtn"
+                type="submit"
+                onClick={() => navigate(`/discussion`)}
+              > 
+                Disscation
+              </button>
+            </li>
+
+
+            <li className="nav-item1">
               <button className="ProfileBtn" type="submit" onClick={logOut}>
                 Log out
               </button>

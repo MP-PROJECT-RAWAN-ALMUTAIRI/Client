@@ -1,7 +1,41 @@
-.TuwaiqTrainers{
-    border-radius: 50%;
+.TuwaiqTrainers {
+  justify-content: space-between;
+  align-items: center;
+  padding: 5%;
+  margin: 5%;
+  display: flex;
+  flex-wrap: wrap;
 }
-.BestPro{
+.minTuwaiq{
     border-radius: 50%;
-    width: 60%;
+    width: 284px;
+    padding: 10px 10px 20px 10px;
+    border: 1px solid #bfbfbf;
+    background-color: white;
+    /* box-shadow: 10px 10px 5px #aaaaaa; */
+}
+div.BestPro img {
+  width: 284px;
+  padding: 10px 10px 20px 10px;
+  border: 1px solid #bfbfbf;
+  background-color: white;
+  box-shadow: 10px 10px 5px #aaaaaa;
+}
+div.rotate_right {
+  float: left;
+  -ms-transform: rotate(7deg); /* IE 9 */
+  -webkit-transform: rotate(7deg); /* Safari */
+  transform: rotate(7deg);
+}
+img {
+  width: 284px;
+}
+.contMap {
+    justify-content: space-between;
+    align-items: center;
+    padding: 5%;
+    margin: 5%;
+    display: flex;
+    flex-wrap: wrap;
+    /* padding: 30px; */
 }

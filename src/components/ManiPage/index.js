@@ -59,37 +59,54 @@ const MainPage = () => {
       <div className="TuwaiqTrainers">
         {console.log(state.users.user._id, "state")}
 
-        <div>
+        <div className="minTuwaiq">
           {/* <img className="userAvatar" src={post.result.avatar} alt="img" /> */}
-          <img
+          <img 
+            src="./avatar.png"
+            alt="TuwaiqTrainers"
+            onClick={() => navigate(`/profile/${state.users.user._id}`)}
+          />
+          </div>
+          <div className="minTuwaiq">
+           <img
+            src="./avatar.png"
+            alt="TuwaiqTrainers"
+            onClick={() => navigate(`/profile/${state.users.user._id}`)}
+          />
+          </div>
+          <div className="minTuwaiq">
+           <img
             src="./avatar.png"
             alt="TuwaiqTrainers"
             onClick={() => navigate(`/profile/${state.users.user._id}`)}
           />
         </div>
-        {/* <img src="./avatar.png" alt="TuwaiqTrainers" />
-        <img src="./avatar.png" alt="TuwaiqTrainers" />
-        <img src="./avatar.png" alt="TuwaiqTrainers" /> */}
       </div>
       <br></br>
       <br></br>
       <p className="Bproject">
         <b>Best Project</b>
       </p>
+      <br></br>
+      <br></br>
+      <div className="contMap">
       {post.length &&
         post.map((item) => {
           return (
             <div key={item._id}>
-              <div className="BestPro">
-                <img className="BestPro"
+              <div className="BestPro rotate_right">
+                <img
                   src={item.pic}
                   alt="BeastProject"
                   onClick={() => navigate(`/post/${item._id}`)}
                 />
+                <br></br>
+                <p>{item.description}</p> 
               </div>
             </div>
           );
-        })}
+        })} 
+        </div>
       {/* <Footer /> */}
     </div>
   );

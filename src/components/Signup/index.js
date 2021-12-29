@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate , Link } from "react-router-dom";
 import axios from "axios";
-//import "./style.css";  
+import "./style.css";  
  
 const Signin = () => {
   const BASE_URL = process.env.REACT_APP_BASE_URL;
