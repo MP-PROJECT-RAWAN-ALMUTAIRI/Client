@@ -1,0 +1,37 @@
+.contener {
+  justify-content: space-between;
+  align-items: center;
+  padding: 5%;
+  margin: 5%;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 30px;
+}
+.mincontainer {
+  width: 25%;
+  border: none;
+  padding: 20px;
+  margin: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  transition: 1s;
+}
+.mincontainer:hover {
+  transform: scale(1.1);
+}
+.usersImage {
+  border-radius: 50%;
+  padding: 5%;
+  align-items: center;
+  align-content: center;
+  width: 50%;
+}
+
+.delButton{
+ color: aliceblue;
+ border-radius: 30px;
+ background-color: #003151;
+}
+
+.delButton:hover{
+  background-color: #5F9EA0;
+}

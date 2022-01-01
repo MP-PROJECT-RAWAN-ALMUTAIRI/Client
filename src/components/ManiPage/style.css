@@ -1,0 +1,81 @@
+.TuwaiqTrainers {
+  justify-content: space-between;
+  align-items: center;
+  padding: 5%;
+  margin: 5%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.userAvatar {
+  border-radius: 50%;
+  width: 284px;
+  padding: 10px 10px 20px 10px;
+  border: 1px solid #bfbfbf;
+  background-color: white;
+  transition: 1s;
+  /* box-shadow: 10px 10px 5px #aaaaaa; */
+}
+
+.userAvatar:hover {
+  transform: scale(1.1);
+}
+
+div.BestPro img {
+  width: 284px;
+  padding: 10px 10px 20px 10px;
+  border: 1px solid #bfbfbf;
+  background-color: white;
+  box-shadow: 10px 10px 5px #aaaaaa;
+}
+div.rotate_right {
+  float: left;
+  -ms-transform: rotate(7deg); /* IE 9 */
+  -webkit-transform: rotate(7deg); /* Safari */
+  transform: rotate(7deg);
+}
+img {
+  width: 284px;
+}
+.contMap {
+  justify-content: space-between;
+  align-items: center;
+  padding: 5%;
+  margin: 5%;
+  display: flex;
+  flex-wrap: wrap;
+  /* padding: 30px; */
+}
+.trainers {
+  font-size: 30px;
+  align-items: center;
+  text-align: center;
+  color: #003151;
+  /* text-decoration: cadetblue; */
+  width: 25%;
+  border: none;
+  padding: 2%;
+  margin: 20px auto;
+  box-shadow: 0 4px 8px 0 rgba(95, 158, 160), 0 6px 20px 0 rgba(95, 158, 160);
+  transition: 1s;
+  border-radius: 50%;
+}
+.trainers:hover {
+  transform: scale(1.1);
+}
+.userNameStyle {
+  color: #003151;
+}
+
+.cont {
+  justify-content: space-between;
+  align-items: center;
+  padding: 5%;
+  margin: 5%;
+  display: grid;
+
+  padding: 30px;
+}
+
+.descrition {
+  align-items: center;
+}

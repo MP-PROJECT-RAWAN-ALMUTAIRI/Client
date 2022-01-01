@@ -1,0 +1,89 @@
+body {margin: 0;}
+.navBar{
+  background-color: #003151;
+}
+ul.topnav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; 
+}
+
+ul.topnav li {float: left;}
+
+ul.topnav li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+ul.topnav li a:hover:not(.active) {background-color: #30869d;}
+
+ul.topnav li a.active {background-color: #30869d;} 
+
+ul.topnav li.right {float: right;}
+
+@media screen and (max-width: 600px) {
+  ul.topnav li.right, 
+  ul.topnav li {float: none;}
+}
+
+/* li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+.headerNav {
+  border-bottom: solid #e2e8f0;
+}
+
+.navBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+}
+.hamburger {
+  display: none;
+}
+.nav-menu1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-item1 {
+  margin-left: 5rem;
+}
+
+.nav-link {
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: #116a70;
+}
+
+.nav-link:hover {
+  color: #1de6cb; 
+}
+.nav-logo {
+  width: 15%;
+  color: #4caf50; 
+}
+.ProfileBtn {
+  border-radius: 12px;
+  background-color: #4caf50; /* Green */
+ 
+ /* border: none;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 9px;
+  cursor: pointer;
+} */
+
