@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
-//import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
-//import { useParams } from "react-router-dom";
 import Nav from "./../Nav";
 import "./style.css";
 
 const Users = () => {
-  //let navigate = useNavigate();
+  let navigate = useNavigate();
   const [allUsers, setAllUsers] = useState([]);
-  //const { id } = useParams();
 
   useEffect(() => {
     getAllUsers();
@@ -18,13 +16,14 @@ const Users = () => {
   const state = useSelector((state) => {
     return state;
   });
+
   const getAllUsers = async () => {
     const result = await axios.get(`${process.env.REACT_APP_BASE_URL}/users`, {
       headers: {
         Authorization: `Bearer ${state.users.token}`,
       },
     });
-    console.log(state.users.token);
+    //console.log(state.users.token);
     setAllUsers(result.data);
   };
   // const deleteUser = async (_id) => {
@@ -72,15 +71,16 @@ const Users = () => {
                     <img
                       className="usersImage"
                       src={ele.avatar}
+                      onClick={() => navigate(`/profile/${ele._id}`)}
                       alt="user Avatar"
                     />
                   </h4>
                 </div>
                 <button
-                  className="ProfileBtn"
+                  className="delButton"
                   onClick={() => deleteUser(ele._id)}
                 >
-                  delete
+                  <b> Delete </b>
                 </button>
               </div>
             );

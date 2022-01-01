@@ -3,36 +3,39 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import Nav from "./../Nav";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from "react-responsive-carousel";
 import "./style.css";
 
 const MainPage = () => {
   const BASE_URL = process.env.REACT_APP_BASE_URL;
   const navigate = useNavigate();
   const [post, setPost] = useState([]); // trainer avatar...
+  const [user, setUser] = useState([]);
   const { id } = useParams();
   const state = useSelector((state) => {
     return state;
   });
 
-  console.log(post, "......post ....................");
+  //console.log(post, "......post ....................");
 
   useEffect(() => {
     getAllPosts();
-    // getUser();
+    getUser();
     // eslint-disable-next-line
     // console.log(url);
   }, []);
 
-  // const getUser = async () => {
-  //   const user = await axios.get(`${BASE_URL}/user/${id}`, {
-  //     headers: {
-  //       Authorization: `Bearer ${state.users.token}`,
-  //     },
-  //   });
-  //   console.log("user", user.data.result);
-  //   console.log("post", user.data.post);
-  //   setuser(user.data);
-  // };
+  const getUser = async () => {
+    const user = await axios.get(`${BASE_URL}/users`, {
+      headers: {
+        Authorization: `Bearer ${state.users.token}`,
+      },
+    });
+    console.log("user rawan .............", user.data);
+    // console.log("post", user.data.post);
+    setUser(user.data);
+  };
 
   const getAllPosts = async () => {
     try {
@@ -41,7 +44,7 @@ const MainPage = () => {
           Authorization: `Bearer ${state.users.token}`,
         },
       });
-      console.log(result);
+      console.log(result.data, "post .....................2022");
       setPost(result.data);
     } catch (error) {
       console.log(error);
@@ -53,60 +56,88 @@ const MainPage = () => {
       <br></br>
       <br></br>
       <div className="BeastProject">
-        <img src="./tuwaiq.jpg" alt="BeastProject" />
+        <Carousel
+          className="carousel"
+          autoPlay={true}
+          infiniteLoop={true}
+          interval={2000}
+          // showStatus={false}
+          thumbWidth={50}
+          showIndicators={false}
+          showThumbs={false}
+          dynamicHeight={false}
+          labels={true}
+          stopOnHover={false}
+        >
+          {post.length &&
+            post.map((item) => {
+              return (
+                <div key={item._id}>
+                  <div>
+                    <img src={item.pic} alt="BeastProject" />
+                    <br></br>
+                    <p>{item.description}</p>
+                  </div>
+                </div>
+              );
+            })}
+        </Carousel>
       </div>
-      <p className="trainers">Tuwaiq Trainers</p>
+      <br></br>
+      <br></br>
+      <div className="trainers">
+        <b>Tuwaiq Trainers</b>
+      </div>
       <div className="TuwaiqTrainers">
-        {console.log(state.users.user._id, "state")}
-
-        <div className="minTuwaiq">
-          {/* <img className="userAvatar" src={post.result.avatar} alt="img" /> */}
-          <img 
-            src="./avatar.png"
-            alt="TuwaiqTrainers"
-            onClick={() => navigate(`/profile/${state.users.user._id}`)}
-          />
-          </div>
-          <div className="minTuwaiq">
-           <img
-            src="./avatar.png"
-            alt="TuwaiqTrainers"
-            onClick={() => navigate(`/profile/${state.users.user._id}`)}
-          />
-          </div>
-          <div className="minTuwaiq">
-           <img
-            src="./avatar.png"
-            alt="TuwaiqTrainers"
-            onClick={() => navigate(`/profile/${state.users.user._id}`)}
-          />
-        </div>
+        {/* <div className="minTuwaiq"> */}
+        {user.length &&
+          user.map((item) => {
+            return (
+              <div key={item._id}>
+                <img
+                  className="userAvatar"
+                  src={item.avatar}
+                  alt="img"
+                  onClick={() => navigate(`/profile/${item._id}`)}
+                />
+                <br></br>
+                <br></br>
+                <div className="userNameStyle">
+                  <b> {item.userName} </b>
+                </div>
+              </div>
+            );
+          })}
+        {/* {console.log(state.users.user._id, "state")} */}
+        {/* </div> */}
       </div>
       <br></br>
       <br></br>
-      <p className="Bproject">
+      <div className="trainers">
         <b>Best Project</b>
-      </p>
+      </div>
       <br></br>
       <br></br>
-      <div className="contMap">
-      {post.length &&
-        post.map((item) => {
-          return (
-            <div key={item._id}>
-              <div className="BestPro rotate_right">
+      <div className="TuwaiqTrainers">
+        {post.length &&
+          post.map((item) => {
+            return (
+              <div key={item._id}>
                 <img
+                  className="userAvatar"
                   src={item.pic}
                   alt="BeastProject"
                   onClick={() => navigate(`/post/${item._id}`)}
                 />
                 <br></br>
-                <p>{item.description}</p> 
+                {/* <br></br> <h4>user name :{item.userName}</h4> */}
+                <div className="userNameStyle">
+                  <b>{item.description}</b>
+                </div>
               </div>
-            </div>
-          );
-        })} 
-        </div>
+            );
+          })}
+      </div>
       {/* <Footer /> */}
     </div>
   );

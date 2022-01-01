@@ -30,7 +30,7 @@ const Profile = () => {
     console.log("user........", user.data.result);
     console.log("post.........", user.data.post);
     setuser(user.data);
-    setUserPostss(user.data.post)
+    setUserPostss(user.data.post);
   };
 
   return (
@@ -40,41 +40,52 @@ const Profile = () => {
         <>
           {user ? (
             <div className="contenerImg">
-              <br></br> 
+              <br></br>
               <br></br>
               <div className="userInfo">
-              <div className="emailDiv">
-                <h2>{user.result.email}</h2>
-                <h2>welcome : {user.result.userName}</h2>
-                <h2>{user.result.Bio}</h2>
-              </div>
-              <div className="borderImg">
-                <h2>{user.result.following}</h2>
-                <h2>{user.result.followers}</h2>
-                <h2>{user.result.role}</h2>
-                <br></br>
-                <br></br>
-                <img className="userAvatar" src={user.result.avatar} alt="img" />
-              </div>
+                <div className="emailDiv">
+                  <h2>{user.result.email}</h2>
+                  <h2>welcome : {user.result.userName}</h2>
+                  <h2>{user.result.Bio}</h2>
+                </div>
+                <div className="borderImg">
+                  <h2>{user.result.following}</h2>
+                  <h2>{user.result.followers}</h2>
+                  <h2>{user.result.role}</h2>
+                  <br></br>
+                  <br></br>
+                  <img
+                    className="userAvatar"
+                    src={user.result.avatar}
+                    alt="img"
+                  />
+                </div>
               </div>
               {/* <---------------------------------------------------------------> */}
               {/* <---------------------------------------------------------------> */}
               {/* <---------------------------------------------------------------> */}
-              
-              <div className="postDiv">
-                {userPostss.length && 
-                userPostss.map((item) =>{
-                  return(
-                    <div key={item._id}>
-                    <img className="Picture" src={item.pic} alt="rawan img" />
-                    <br></br>
-                    <br></br> <h2>user name : {user.result.userName}</h2>
-                    <p className="desc"><b>{item.description}</b></p>
-                    </div>
-                  )
-                })}
+
+              <div className="contMap">
+                {userPostss.length &&
+                  userPostss.map((item) => {
+                    return (
+                      <div key={item._id}>
+                        <div className="BestPro rotate_right">
+                          <img
+                            src={item.pic}
+                            alt="BeastProject"
+                            onClick={() => navigate(`/post/${item._id}`)}
+                          />
+                          <br></br>
+                          <br></br> <h2>user name : {user.result.userName}</h2>
+                          <br></br>
+                          <p>{item.description}</p>
+                        </div>
+                      </div>
+                    );
+                  })}
               </div>
-            </div> 
+            </div>
           ) : (
             " "
           )}

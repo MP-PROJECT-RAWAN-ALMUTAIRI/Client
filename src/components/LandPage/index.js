@@ -27,7 +27,7 @@ const Login = () => {
       email: email,
       password: password,
     });
-    console.log(result);
+    //console.log(result);
     dispatch(
       userLogin({
         role: result.data.result.role.role,
@@ -36,12 +36,13 @@ const Login = () => {
       })
     );
     if (result.data.result.role.role === "Admin") {
+     // console.log(result.data.result.role.role, " rawan 9999999999999.!!!!!!!!!!!!!!!!!!!");
       navigate("/users");
     } else {
       navigate("/main");
     }
     if (result.data.result.role.role === "trainer") {
-      navigate("/main");
+      navigate("/veryfiyDiscussion");
     }
   };
 

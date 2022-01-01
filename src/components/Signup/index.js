@@ -22,9 +22,9 @@ const Signin = () => {
         userName: userName,
         role: "61c42cad4b31a32af675468b", // for user
       });
-      navigate("/login");
+      navigate("/");
       console.log(result);
-      navigate("/login");
+      navigate("/");
     } catch (error) {
       console.log(error);
     }

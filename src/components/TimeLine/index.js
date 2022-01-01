@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Nav from "./../Nav";
 // import Footer from "./../Footer";
-import "./style.css";
+//import "./style.css";
 import axios from "axios";
 import { storage } from "../firebase";
 import { useSelector } from "react-redux";
@@ -149,7 +149,7 @@ const Post = () => {
   };
 
   return (
-    <div className="container">
+    <div>
       <Nav />
       <br></br>
       <br></br>
