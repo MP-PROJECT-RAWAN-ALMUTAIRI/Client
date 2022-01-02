@@ -48,7 +48,7 @@ const VerifyDiscussion = () => {
                 <p>Question: 👫 </p>
                 <p>{item.question}</p>
                 <button
-                  className="ProfileBtn"
+                  className="TimeLineButton"
                   onClick={() => navigate(`/reply/${item._id}`)}
                 >
                   <h2> view</h2>

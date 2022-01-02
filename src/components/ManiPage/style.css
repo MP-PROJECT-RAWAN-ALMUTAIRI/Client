@@ -57,7 +57,7 @@ img {
   margin: 20px auto;
   box-shadow: 0 4px 8px 0 rgba(95, 158, 160), 0 6px 20px 0 rgba(95, 158, 160);
   transition: 1s;
-  border-radius: 50%;
+  border-radius: 5px;
 }
 .trainers:hover {
   transform: scale(1.1);

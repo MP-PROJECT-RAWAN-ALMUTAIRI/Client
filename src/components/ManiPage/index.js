@@ -50,26 +50,55 @@ const MainPage = () => {
       console.log(error);
     }
   };
+  const captionStyle = {
+    fontSize: "2em",
+    fontWeight: "bold",
+  };
+  const slideNumberStyle = {
+    fontSize: "20px",
+    fontWeight: "bold",
+  };
   return (
     <div className="mainPage">
       <Nav />
-      <br></br>
-      <br></br>
       <div className="BeastProject">
         <Carousel
-          className="carousel"
-          autoPlay={true}
-          infiniteLoop={true}
-          interval={2000}
-          // showStatus={false}
-          thumbWidth={50}
-          showIndicators={false}
-          showThumbs={false}
-          dynamicHeight={false}
-          labels={true}
-          stopOnHover={false}
+          // className="carousel"
+          // autoPlay={true}
+          // infiniteLoop={true}
+          // interval={2000}
+          // // showStatus={false}
+          // thumbWidth={50}
+          // showIndicators={false}
+          // showThumbs={false}
+          // dynamicHeight={false}
+          // labels={true}
+          // stopOnHover={false}
+          // // data={data}
+          //   time={2000}
+          //   width="1000px"
+          //   height="550px"
+          //   captionStyle={captionStyle}
+          //   radius="10px"
+          //   slideNumber={true}
+          //   slideNumberStyle={slideNumberStyle}
+          //   captionPosition="bottom"
+          //   automatic={true}
+          //   dots={true}
+          //   pauseIconColor="white"
+          //   pauseIconSize="40px"
+          //   slideBackgroundColor="darkgrey"
+          //   slideImageFit="cover"
+          //   thumbnails={true}
+          //   thumbnailWidth="100px"
+          //   showNavBtn={true}
+          //   style={{
+          //     textAlign: "center",
+          //     maxWidth: "1000px",
+          //     margin: "40px auto",
+          //   }}
         >
-          {post.length &&
+          {/* {post.length &&
             post.map((item) => {
               return (
                 <div key={item._id}>
@@ -80,7 +109,7 @@ const MainPage = () => {
                   </div>
                 </div>
               );
-            })}
+            })} */}
         </Carousel>
       </div>
       <br></br>

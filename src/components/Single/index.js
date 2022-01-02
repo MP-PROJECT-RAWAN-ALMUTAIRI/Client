@@ -76,9 +76,8 @@ const Disscation = () => {
   return (
     <>
       <Nav />
+      <br></br>
       <div>
-        <br></br>
-        <br></br>
         <div className="styleDiv">
           {question && <p> Question :{question.question}</p>}
           <br></br>
@@ -86,14 +85,15 @@ const Disscation = () => {
           <div className="textAreaDiv">
             <textarea
               required
-              rows="4"
-              className="inputTextArea"
+              rows="2"
+              className="descTimeLine"
               placeholder="set you description"
               type="text"
               onChange={(e) => setRely(e.target.value)}
+              style={{ color: "black", fontSize: "15px" }}
             />
-            <button className="btn" onClick={addAnswer}>
-              <h2> addAnswer :</h2>
+            <button className="TimeLineButton" onClick={addAnswer}>
+              add Answer :
             </button>
             <br></br>
             <br></br>
@@ -113,14 +113,18 @@ const Disscation = () => {
                   {state.users.role === "trainer" && ( // trainer && Admin
                     <li className="nav-item1">
                       <form>
-                      <input
-                        type="checkbox"
-                        id="The_Best"
-                        name="The_Best"
-                        value="The_Best"
-                      />
-                      <label for="The_Best"> Best ... </label>
-                      <input type="submit"  className="ProfileBtn" value="Submit" />
+                        <input
+                          type="checkbox"
+                          id="The_Best"
+                          name="The_Best"
+                          value="The_Best"
+                        />
+                        <label for="The_Best"> Best ... </label>
+                        <input
+                          type="submit"
+                          className="ProfileBtn"
+                          value="Submit"
+                        />
                       </form>
                       {/* <button
                         className="ProfileBtn"
@@ -130,18 +134,19 @@ const Disscation = () => {
                       </button> */}
                     </li>
                   )}
-                  <button
-                    className="ProfileBtn"
+                  {/* <button
+                    className="TimeLineButton"
                     // onClick={() => updateTask(item._id)}
                   >
                     <h2>Update</h2>
-                  </button>
-                  <button
-                    className="ProfileBtn"
+                  </button> */}
+
+                  {/* <button
+                    className="TimeLineButton"
                     // onClick={() => deleteTask(item._id)}
                   >
                     <h2>Delete</h2>
-                  </button>
+                  </button> */}
                 </div>
               );
             })}

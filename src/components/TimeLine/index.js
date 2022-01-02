@@ -1,23 +1,22 @@
 import React, { useEffect, useState } from "react";
 import Nav from "./../Nav";
 // import Footer from "./../Footer";
-//import "./style.css";
+import "./style.css";
 import axios from "axios";
 import { storage } from "../firebase";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+import { Container } from "react-bootstrap";
 
 const Post = () => {
   const BASE_URL = process.env.REACT_APP_BASE_URL;
   const [posts, setPosts] = useState([]);
   const navigate = useNavigate();
   const [post, setPost] = useState(null); // firebase
-  const [updatePost, setUpdatePost] = useState("");
-  const [updatePic, setUpdatePic] = useState("");
   const [url, setUrl] = useState("");
   const [description, setDescription] = useState("");
   const [progress, setProgress] = useState(0);
-  const { id } = useParams();
+  //const { id } = useParams();
 
   const state = useSelector((state) => {
     return state;
@@ -108,132 +107,70 @@ const Post = () => {
     }
   };
 
-  // edit task
-  const updateTask = async (id) => {
-    console.log(state.users.token);
-    try {
-      await axios.put(
-        `${process.env.REACT_APP_BASE_URL}/post/${id}`,
-        {
-          pic: updatePic,
-          description: updatePost,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${state.users.token}`,
-          },
-        }
-      );
-      getAllPosts(state.users.token);
-    } catch (error) {
-      console.log(error);
-    }
-    window.location.reload(false);
-  };
-
-  // delete post by id
-  const deleteTask = async (_id) => {
-    try {
-      const result = await axios.delete(
-        `${process.env.REACT_APP_BASE_URL}/post/${_id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${state.users.token}`,
-          },
-        }
-      );
-      deleteTask(result.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
     <div>
       <Nav />
-      <br></br>
-      <br></br>
+      <Container>
+        <div className="header">
+          <h1> Upload Your Project Demo </h1>
+          <progress value={progress} max="100" />
+          <hr />
+          <br></br>
+          <div>
+            <h2>Upload Project Image ... </h2>
+            <input type="file" name="post" onChange={handleChange} />
+            <button
+              className="TimeLineButton"
+              onClick={handleUpload}
+              style={{ color: "white", fontSize: "15px" }}
+            >
+              <b> upload </b>
+            </button>
+            <h2>Image Description:</h2>
+            <img className="RawImg" src={url} />
+            <textarea
+              required
+              rows="2"
+              className="descTimeLine"
+              placeholder="set you description"
+              type="text"
+              onChange={(e) => setDescription(e.target.value)}
+              style={{ color: "black", fontSize: "15px" }}
+            />
+            <button className="TimeLineButton" onClick={addNewPost}>
+              <b>Add</b>
+            </button>
 
-      <div>
-        <h1> ADD POST ... </h1>
-        <progress value={progress} max="100" />
-        <br></br>
-        <hr />
-        <br></br>
-        <div>
-          <h2>Upload Photo here ... </h2>
-          <input type="file" name="post" onChange={handleChange} />
-          <button
-            className="ProfileBtn"
-            onClick={handleUpload}
-            style={{ color: "white", fontSize: "15px" }}
-          >
-            <p> upload </p> 
-          </button>
-          <br></br>
-          <br></br>
-          <h2>Image Description:</h2>
-          <br></br>
-          <img className="RawImg" src={url} />
-          <br></br>
-          <textarea
-            required
-            rows="4"
-            className="descTimeLine"
-            placeholder="set you description"
-            type="text"
-            onChange={(e) => setDescription(e.target.value)}
-            style={{ color: "black", fontSize: "15px" }}
-          />
-          <button className="ProfileBtn" onClick={addNewPost}>
-            <h2>Add</h2>
-          </button>
-          <br></br>
-          <br></br>
-          <div className="postMap">
-            {posts.length &&
-              posts.map((item) => (
-                <div key={item._id}>
-                  <div className="imgTimeLine">
-                    <img src={item.pic} alt="firebase" />
+            <div className="row">
+              {posts.length &&
+                posts.map((item) => (
+                  <div key={item._id}>
+                    <div className="column">
+                      <img
+                        src={item.pic}
+                        alt="firebase"
+                        style={{ width: "100%" }}
+                      />
+                    </div>
+                    <div className="TimeLine">
+                      <b>
+                        <h2>{item.description}</h2>
+                      </b>
+                    </div>
+                    <div className="TimeLine">
+                      <button
+                        className="TimeLineButton"
+                        onClick={() => navigate(`/post/${item._id}`)}
+                      >
+                        <b> view</b>
+                      </button>
+                    </div>
                   </div>
-                  <br></br>
-                  <br></br>
-                  <div className="descTimeLine">
-                    <b>
-                      
-                      <h2>{item.description}</h2> 
-                    </b>
-                  </div>
-                  <br></br>
-                  <br></br>
-                  <button
-                    className="ProfileBtn"
-                    onClick={() => updateTask(item._id)}
-                  >
-                    <h2>Update</h2>
-                  </button>
-                  <button
-                    className="ProfileBtn"
-                    onClick={() => deleteTask(item._id)}
-                  >
-                    <h2>Delete</h2>
-                  </button>
-                  <button
-                    className="ProfileBtn"
-                    onClick={() => navigate(`/post/${item._id}`)}
-                  >
-                    <h2> view</h2>
-                  </button>
-                  <br></br>
-                  <br></br> 
-                  <br></br>
-                </div>
-              ))}
-          </div> 
+                ))}
+            </div>
+          </div>
         </div>
-      </div>
-
+      </Container>
       {/* <Footer /> */}
     </div>
   );

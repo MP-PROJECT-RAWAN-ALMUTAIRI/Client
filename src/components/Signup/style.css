@@ -1,23 +1,20 @@
-/* body {
+body {
   padding: 0;
   margin: 0;
-  color: white;
   font-family: Arial, Helvetica, sans-serif;
-} */
+}
 
 .background {
-  background: url('https://media-exp1.licdn.com/dms/image/C4D1BAQEZ7SOAK2bYGg/company-background_10000/0/1636539531932?e=2159024400&v=beta&t=gWrJbJ_WkAB8PMOeQW45rxd4GYN2et2onHg2INYxFck') rgba(0, 0, 0, 0.61);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-blend-mode: darken;
-  position: absolute;
+ color: white;
+   background-color: rgb(192, 192, 214);
+  /* position: absolute; */
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   z-index: -1;
-  filter: blur(3px);
-  min-height: 800px;
+ 
+   
 
 }
 

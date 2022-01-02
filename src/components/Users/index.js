@@ -80,7 +80,7 @@ const Users = () => {
                   className="delButton"
                   onClick={() => deleteUser(ele._id)}
                 >
-                  <b> Delete </b>
+                  <p> Delete </p>
                 </button>
               </div>
             );

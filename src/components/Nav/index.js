@@ -49,10 +49,10 @@ const Nav = () => {
                 <Link to="/discussion">Discussion</Link>
               </li>
               <li class="right">
-                {/* <Link to={logOut}>Logout</Link> */}
-                <button className="delButton" onClick={logOut}>
+                <Link onClick={logOut} to="/">Logout</Link>
+                {/* <button className="delButton" onClick={logOut}>
                   logout
-                </button>
+                </button>  */}
               </li>
 
               {/* {console.log(state.users.role)} */}

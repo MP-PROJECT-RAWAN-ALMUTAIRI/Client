@@ -6,15 +6,16 @@ import Nav from "./../Nav";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-// import { Container } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
 
 const Onepost = () => {
   const BASE_URL = process.env.REACT_APP_BASE_URL;
+  const [user, setUser] = useState(null); 
   const [posts, setPosts] = useState(null);
   const navigate = useNavigate();
-  const [like, setLike] = useState(null);
-  const [comment, setComment] = useState("");
+  const [like, setLike] = useState(false);
+  const [comment, setComment] = useState([]);
   const [ratting, setRatting] = useState("");
   const [newComment, setNewComment] = useState("");
   const { id } = useParams();
@@ -26,8 +27,10 @@ const Onepost = () => {
   useEffect(() => {
     getOnePosts();
     getAllComment();
+    // getUser();
     // console.log(url);
   }, []);
+
 
   const getOnePosts = async () => {
     try {
@@ -36,17 +39,26 @@ const Onepost = () => {
           Authorization: `Bearer ${state.users.token}`,
         },
       });
-      console.log(result.data);
+       console.log(result.data ,"0000000000000000000");
+       console.log(result.data.like);
       // console.log(posts.comment);
-      setPosts(result.data);
-      if (result.data.like.find((like) => like.user === state.users._id)) {
+      setPosts(result.data.result);
+      console.log(state.users);
+      if (result.data.like.find((like) => like.user === state.users.user._id)) {
+        console.log("like............................................");
         setLike(true);
       }
-      // setLike(result.data);
-      // setComment(result.data);
+      console.log(result.data.commnet)
+      console.log(result.data.result.user);
+      // console.log(result.data. ,,,,)
 
-      // getAllComment();
+      // posts.result
+      // setLike(result.data);
+       setComment(result.data);
+
+      getAllComment();
       setNewComment("");
+      setNewComment(result.data); 
       setComment("");
     } catch (error) {
       console.log(error);
@@ -65,6 +77,11 @@ const Onepost = () => {
           },
         }
       );
+      if(like) {
+        setLike(false);
+      }else{
+        setLike(true); 
+      }
       console.log(result.data , ".....like ....................");
     } catch (error) {
       console.log(error);
@@ -86,13 +103,13 @@ const Onepost = () => {
   };
 
   const addNewComment = async () => {
-    console.log(comment);
+    console.log(newComment);
     console.log(state.users.token);
     try {
       const result = await axios.post(
         `${BASE_URL}/comment/${id}`,
         {
-          comment,
+          comment: newComment,
           post: id,
         },
         {
@@ -110,10 +127,13 @@ const Onepost = () => {
   return (
     <div>
       <Nav />
-      {/* <Container> */}
+      <Container> 
+        {/* <h2>{user.result.userName}</h2> */}
       {posts && (
         <div>
-          <img src={posts.result.pic} />
+         
+          <img src={posts.pic} />
+          <b>User Name: {posts.user.userName}</b>
           <div className="decOnePage">
             <button> 
                 {like ? (
@@ -122,34 +142,36 @@ const Onepost = () => {
                   <MdFavoriteBorder className="unLikeIcon" onClick={addLike} />
                 )}
             </button>
-            <p>{posts.result.description}</p> 
+            <p>{posts.description}</p> 
           </div>
           <textarea
             required
-            rows="4"
-            className="inputTextArea"
+            rows="2"
+            className="descTimeLine"
             placeholder="set you description"
             type="text"
-            onChange={(e) => setComment(e.target.value)}
+            onChange={(e) => setNewComment(e.target.value)}
+            style={{ color: "black", fontSize: "15px" }}
           />
-          <button className="btn" onClick={addNewComment}>
+          <button className="TimeLineButton" onClick={addNewComment}>
             <h2>Add Comment</h2>
           </button>
           <div className="content">
-            {posts.commnet.map((ele) => {
-              return (
+            {comment.length &&
+            comment.map((item) => (
+              <div key={item._id}>
                 <div>
-                  <p>user: {ele.userName}</p>
+                  <p>user: {item.user.userName}</p>
                   <br></br>
-                  <p>comment: {ele.comment}</p>
+                  <p>comment: {item.comment}</p> 
                 </div>
-              );
-            })}
+             </div>
+            ))}
           </div>
         </div>
       )}
-      {/* </Container>
-      <Footer /> */}
+      </Container>
+      {/* <Footer /> */}
     </div>
   );
 };

@@ -9,6 +9,8 @@ const Profile = () => {
   const BASE_URL = process.env.REACT_APP_BASE_URL;
   const [user, setuser] = useState(null);
   const [userPostss, setUserPostss] = useState([]);
+  const [updatePost, setUpdatePost] = useState("");
+  const [updatePic, setUpdatePic] = useState("");
   const { id } = useParams();
 
   let navigate = useNavigate();
@@ -33,65 +35,138 @@ const Profile = () => {
     setUserPostss(user.data.post);
   };
 
-  return (
-    <>
-      <Nav />
-      <div>
-        <>
-          {user ? (
-            <div className="contenerImg">
-              <br></br>
-              <br></br>
-              <div className="userInfo">
-                <div className="emailDiv">
-                  <h2>{user.result.email}</h2>
-                  <h2>welcome : {user.result.userName}</h2>
-                  <h2>{user.result.Bio}</h2>
-                </div>
-                <div className="borderImg">
-                  <h2>{user.result.following}</h2>
-                  <h2>{user.result.followers}</h2>
-                  <h2>{user.result.role}</h2>
-                  <br></br>
-                  <br></br>
-                  <img
-                    className="userAvatar"
-                    src={user.result.avatar}
-                    alt="img"
-                  />
-                </div>
-              </div>
-              {/* <---------------------------------------------------------------> */}
-              {/* <---------------------------------------------------------------> */}
-              {/* <---------------------------------------------------------------> */}
+  const getAllPosts = async () => {
+    try {
+      const result = await axios.get(`${BASE_URL}/post`, {
+        headers: {
+          Authorization: `Bearer ${state.users.token}`,
+        },
+      });
+      console.log(result);
+      setUserPostss(state.users.token);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  // edit task
+  const updateTask = async (id) => {
+    console.log(state.users.token);
+    try {
+      await axios.put(
+        `${process.env.REACT_APP_BASE_URL}/post/${id}`,
+        {
+          pic: updatePic,
+          description: updatePost,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${state.users.token}`,
+          },
+        }
+      );
+      getAllPosts(state.users.token);
+    } catch (error) {
+      console.log(error);
+    }
+    window.location.reload(false);
+  };
 
-              <div className="contMap">
-                {userPostss.length &&
-                  userPostss.map((item) => {
-                    return (
-                      <div key={item._id}>
-                        <div className="BestPro rotate_right">
-                          <img
-                            src={item.pic}
-                            alt="BeastProject"
-                            onClick={() => navigate(`/post/${item._id}`)}
-                          />
-                          <br></br>
-                          <br></br> <h2>user name : {user.result.userName}</h2>
-                          <br></br>
-                          <p>{item.description}</p>
-                        </div>
-                      </div>
-                    );
-                  })}
+  // delete post by id
+  const deleteTask = async (_id) => {
+    try {
+      const result = await axios.delete(
+        `${process.env.REACT_APP_BASE_URL}/post/${_id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${state.users.token}`,
+          },
+        }
+      );
+      console.log(result);
+      deleteTask(state.users.token);
+      //deleteTask(result.data);
+    } catch (error) {
+      console.log(error);
+    }
+    window.location.reload(false);
+  };
+
+  return (
+    <div>
+      <Nav />
+      <div className="AllPage">
+        {user ? (
+          <div className="contenerImg">
+            <div className="card">
+              <div className="emailDiv">
+                <br></br>
+                <br></br>
+                <h2>{user.result.email}</h2>
+                <h2> Welcome : {user.result.userName}</h2>
+                <h2>{user.result.Bio}</h2>
+              </div>
+              <div className="borderImg">
+                <h2>{user.result.following}</h2>
+                <h2>{user.result.followers}</h2>
+                <img
+                  className="userAvatar"
+                  src={user.result.avatar}
+                  alt="img"
+                />
               </div>
             </div>
-          ) : (
-            " "
-          )}
-        </>
+            <br></br>
+            <br></br>
+            <hr />
+            <br></br>
+            <div className="trainers">
+              <b> My Projects : </b>
+            </div>
+            <div className="contMap">
+              {userPostss.length &&
+                userPostss.map((item) => {
+                  return (
+                    <div key={item._id}>
+                      <div className="BestPro rotate_right">
+                        <img
+                          src={item.pic}
+                          alt="BeastProject"
+                          onClick={() => navigate(`/post/${item._id}`)}
+                        />
+                        <br></br>
+                        <br></br> <h2>user name : {user.result.userName}</h2>
+                        <br></br>
+                        <p>{item.description}</p>
+                        {state.users.role === "Admin" ||
+                        item.user == state.users.user._id ? (
+                          <div>
+                            <button
+                              className="TimeLineButton"
+                              onClick={() => updateTask(item._id)}
+                            >
+                              <h2>Update</h2>
+                            </button>
+                            <button
+                              className="TimeLineButton"
+                              onClick={() => deleteTask(item._id)}
+                            >
+                              <h2>Delete</h2>
+                            </button>
+                          </div>
+                        ) : (
+                          <></>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+            </div>
+          </div>
+        ) : (
+          " "
+        )}
       </div>
-    </>
+    </div>
   );
 };
 export default Profile;
