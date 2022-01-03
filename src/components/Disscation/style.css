@@ -1,0 +1,41 @@
+.disContainer {
+  padding: 2%;
+  margin: 0 auto;
+}
+.discussionDiv {
+  /* width: 25%; */
+  border: none;
+  padding: 20px;
+  margin: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  transition: 1s;
+}
+.DissButton {
+  border-radius: 5px;
+  background-color: #30869d;
+  padding: 3px;
+  width: 5%;
+  color: white;
+}
+.DissButton:hover {
+  background-color: #69b0c4;
+}
+.sendDiv {
+  border-radius: 5px;
+  background-color: #30869d;
+  padding: 8px;
+  width: 15%;
+  color: white;
+}
+.sendDiv:hover {
+  background-color: #69b0c4;
+}
+.textArea{
+    width: 30%;
+    border: 2px solid #30869d;
+    box-shadow: #30869d;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 10px; 
+}

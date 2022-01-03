@@ -5,8 +5,7 @@ import "./style.css";
 import axios from "axios";
 import { storage } from "../firebase";
 import { useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
-import { Container } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const Post = () => {
   const BASE_URL = process.env.REACT_APP_BASE_URL;
@@ -16,7 +15,6 @@ const Post = () => {
   const [url, setUrl] = useState("");
   const [description, setDescription] = useState("");
   const [progress, setProgress] = useState(0);
-  //const { id } = useParams();
 
   const state = useSelector((state) => {
     return state;
@@ -110,48 +108,52 @@ const Post = () => {
   return (
     <div>
       <Nav />
-      <Container>
-        <div className="header">
-          <h1> Upload Your Project Demo </h1>
-          <progress value={progress} max="100" />
-          <hr />
-          <br></br>
-          <div>
+
+      <div className="header">
+        <h1> Upload Your Project Demo </h1>
+        <progress value={progress} max="100" />
+        <hr />
+        <br></br>
+        <div>
+          <div className="info">
+            <div className="infoDiv">
             <h2>Upload Project Image ... </h2>
             <input type="file" name="post" onChange={handleChange} />
             <button
-              className="TimeLineButton"
+              className="uploadDiv"
               onClick={handleUpload}
               style={{ color: "white", fontSize: "15px" }}
             >
               <b> upload </b>
             </button>
+            </div>
             <h2>Image Description:</h2>
             <img className="RawImg" src={url} />
-            <textarea
-              required
-              rows="2"
-              className="descTimeLine"
-              placeholder="set you description"
-              type="text"
-              onChange={(e) => setDescription(e.target.value)}
-              style={{ color: "black", fontSize: "15px" }}
-            />
-            <button className="TimeLineButton" onClick={addNewPost}>
-              <b>Add</b>
-            </button>
 
-            <div className="row">
-              {posts.length &&
-                posts.map((item) => (
-                  <div key={item._id}>
-                    <div className="column">
-                      <img
-                        src={item.pic}
-                        alt="firebase"
-                        style={{ width: "100%" }}
-                      />
-                    </div>
+            <div className="textDiss">
+              <textarea
+                required
+                rows="3"
+                className="textArea"
+                placeholder="set you description"
+                type="text"
+                onChange={(e) => setDescription(e.target.value)}
+                style={{ color: "black", fontSize: "15px" }}
+              />
+              <br></br>
+              <button className="sendDiv" onClick={addNewPost}>
+                <b>Add</b>
+              </button>
+            </div>
+          </div>
+
+          <div className="DivTimeLine">
+            {posts.length &&
+              posts.map((item) => (
+                <div key={item._id}>
+                  <div className="minDivTimeLine">
+                    <img src={item.pic} alt="project image" />
+
                     <div className="TimeLine">
                       <b>
                         <h2>{item.description}</h2>
@@ -166,11 +168,12 @@ const Post = () => {
                       </button>
                     </div>
                   </div>
-                ))}
-            </div>
+                </div>
+              ))}
           </div>
         </div>
-      </Container>
+      </div>
+
       {/* <Footer /> */}
     </div>
   );

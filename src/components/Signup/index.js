@@ -101,6 +101,8 @@ const Signup = () => {
           <button type="submit" onClick={signup} className="btnlogin">
             Signup
           </button>
+          OR  
+          <Link to="/login"> Login </Link>
         </form>
         <br></br>
       </div>

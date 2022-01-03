@@ -4,7 +4,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Container } from "react-bootstrap";
-import './style.css'; 
+import "./style.css";
 const Disscation = () => {
   const BASE_URL = process.env.REACT_APP_BASE_URL;
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ const Disscation = () => {
       });
       console.log(
         result.data,
-        ".............rawan ............discussion........."
+        ".............rawan ............details........."
       );
       setDesscation(result.data);
     } catch (error) {
@@ -50,7 +50,7 @@ const Disscation = () => {
           },
         }
       );
-      console.log("new question", result.data);
+      console.log("new question......................", result.data);
       getOneComment();
     } catch (error) {
       console.log(error);
@@ -60,48 +60,52 @@ const Disscation = () => {
   return (
     <>
       <Nav />
-      <Container>
-        <div className="header">
-          <h2>Tell Us What is Your Problem : </h2>
-          <hr />
+
+      <br></br>
+      <div className="header">
+        <h2>Tell Us What is Your Problem : </h2>
+        <hr />
+        <br></br>
+        
+        <div className="textDiss">
+          {/* <textarea
+            required
+            rows="3"
+            className="textArea"
+            placeholder="set you description"
+            type="text"
+            onChange={(e) => setQuestion(e.target.value)}
+            style={{ color: "black", fontSize: "15px" }}
+          /> */}
+          <input className="textArea" type="text" name="name" onChange={(e) => setQuestion(e.target.value)} />
           <br></br>
-          <div className="textAreaDiv">
-            <textarea
-              required
-              rows="2"
-              className="descTimeLine"
-              placeholder="set you description"
-              type="text"
-              onChange={(e) => setQuestion(e.target.value)}
-              style={{ color: "black", fontSize: "15px" }}
-            />
-            <button className="TimeLineButton" onClick={addDisscation}>
-              <h2> Send </h2>
-            </button>
-            <br></br>
-          </div>
-          <br></br>
-          <br></br>
-          <br></br>
-          {discussion.length &&
-            discussion.map((item) => {
-              return (
-                <div key={item._id}>
-                  <div className="textAreaDiv">
-                    <p>Question: </p>
-                    <p>{item.question}</p>
-                    <button
-                      className="TimeLineButton"
-                      onClick={() => navigate(`/reply/${item._id}`)}
-                    >
-                      <h2> view</h2>
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
+          <button className="sendDiv" onClick={addDisscation}>
+            <h2> Send </h2>
+          </button>
         </div>
-      </Container>
+        {discussion.length &&
+          discussion.map((item) => {
+            return (
+              <div className="disContainer">
+                <div key={item._id}>
+                    <div className="discussionDiv">
+                      user name :
+                      {item.user.userName}
+                      <p>Question: </p>
+                      <p>{item.question}</p>
+                      <br></br>
+                      <button
+                        className="DissButton"
+                        onClick={() => navigate(`/reply/${item._id}`)}
+                      >
+                        <h2> view</h2>
+                      </button>
+                    </div>
+                </div>
+              </div>
+            );
+          })}
+      </div>
     </>
   );
 };

@@ -63,53 +63,31 @@ const MainPage = () => {
       <Nav />
       <div className="BeastProject">
         <Carousel
-          // className="carousel"
-          // autoPlay={true}
-          // infiniteLoop={true}
-          // interval={2000}
-          // // showStatus={false}
-          // thumbWidth={50}
-          // showIndicators={false}
-          // showThumbs={false}
-          // dynamicHeight={false}
-          // labels={true}
-          // stopOnHover={false}
-          // // data={data}
-          //   time={2000}
-          //   width="1000px"
-          //   height="550px"
-          //   captionStyle={captionStyle}
-          //   radius="10px"
-          //   slideNumber={true}
-          //   slideNumberStyle={slideNumberStyle}
-          //   captionPosition="bottom"
-          //   automatic={true}
-          //   dots={true}
-          //   pauseIconColor="white"
-          //   pauseIconSize="40px"
-          //   slideBackgroundColor="darkgrey"
-          //   slideImageFit="cover"
-          //   thumbnails={true}
-          //   thumbnailWidth="100px"
-          //   showNavBtn={true}
-          //   style={{
-          //     textAlign: "center",
-          //     maxWidth: "1000px",
-          //     margin: "40px auto",
-          //   }}
+          className="carousel"
+          autoPlay={true}
+          infiniteLoop={true}
+          interval={2000}
+          // showStatus={false}
+          thumbWidth={100}
+          showIndicators={false}
+          showThumbs={false}
+          dynamicHeight={false}
+          labels={true}
+          stopOnHover={false}
+         
         >
-          {/* {post.length &&
+          {post.length &&
             post.map((item) => {
               return (
                 <div key={item._id}>
                   <div>
-                    <img src={item.pic} alt="BeastProject" />
+                    <img className="mainPage"src={item.pic} alt="BeastProject" />
                     <br></br>
                     <p>{item.description}</p>
                   </div>
                 </div>
               );
-            })} */}
+            })}
         </Carousel>
       </div>
       <br></br>

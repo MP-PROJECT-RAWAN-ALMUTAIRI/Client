@@ -109,6 +109,7 @@ const Disscation = () => {
 
                   } */}
                   <p>user Name : </p>
+                  {item.user.userName}
                   <p>{item.reply}</p>
                   {state.users.role === "trainer" && ( // trainer && Admin
                     <li className="nav-item1">

@@ -1,6 +1,35 @@
-/* .decOnePage{
+/* /* .decOnePage{
 
 } 
 .inputTextArea{
     
+} */
+
+.allInfo {
+  border: none;
+  padding: 20px;
+  margin: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  transition: 1s;
+}
+.divComment {
+  /* width: 20%;
+border-radius: 50%;
+margin: 20px; */
+  display: flex;
+}
+.divComment img {
+  border-radius: 50%;
+  height: 3rem;
+  width: 3rem;
+}
+.divComment p {
+  font-family: "Poppins", sans-serif;
+  /* text-transform: uppercase; */
+  font-size: 120%;
+  /* font-weight: bold; */
+  margin-left: 0.3rem;
+}
+.paragraph {
+  margin-right: 0.9rem;
 }

@@ -66,7 +66,8 @@ const VeryfiyDiscussion = () => {
             discussion.map((item) => {
               return (
                 <div key={item._id}>
-                  <p>user Name : </p>
+                  <p>user Name  77777777777: </p>
+                  <p>{item.user.userName}</p>
                   <p>{item.reply}</p>
                 </div>
               );

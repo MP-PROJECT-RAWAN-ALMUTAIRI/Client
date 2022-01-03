@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Nav from "./../Nav";
 // import Footer from "./../Footer";
-// import "./style.css";
+import "./style.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +11,7 @@ import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
 
 const Onepost = () => {
   const BASE_URL = process.env.REACT_APP_BASE_URL;
-  const [user, setUser] = useState(null); 
+  const [user, setUser] = useState(null);
   const [posts, setPosts] = useState(null);
   const navigate = useNavigate();
   const [like, setLike] = useState(false);
@@ -31,7 +31,6 @@ const Onepost = () => {
     // console.log(url);
   }, []);
 
-
   const getOnePosts = async () => {
     try {
       const result = await axios.get(`${BASE_URL}/post/${id}`, {
@@ -39,8 +38,8 @@ const Onepost = () => {
           Authorization: `Bearer ${state.users.token}`,
         },
       });
-       console.log(result.data ,"0000000000000000000");
-       console.log(result.data.like);
+      console.log(result.data, "0000000000000000000");
+      console.log(result.data.like);
       // console.log(posts.comment);
       setPosts(result.data.result);
       console.log(state.users);
@@ -48,17 +47,17 @@ const Onepost = () => {
         console.log("like............................................");
         setLike(true);
       }
-      console.log(result.data.commnet)
+      console.log(result.data.commnet);
       console.log(result.data.result.user);
       // console.log(result.data. ,,,,)
 
       // posts.result
       // setLike(result.data);
-       setComment(result.data);
+      setComment(result.data);
 
       getAllComment();
       setNewComment("");
-      setNewComment(result.data); 
+      setNewComment(result.data);
       setComment("");
     } catch (error) {
       console.log(error);
@@ -77,12 +76,12 @@ const Onepost = () => {
           },
         }
       );
-      if(like) {
+      if (like) {
         setLike(false);
-      }else{
-        setLike(true); 
+      } else {
+        setLike(true);
       }
-      console.log(result.data , ".....like ....................");
+      console.log(result.data, ".....like ....................");
     } catch (error) {
       console.log(error);
     }
@@ -96,7 +95,7 @@ const Onepost = () => {
         },
       });
       console.log(result);
-      setComment(result.data); 
+      setComment(result.data);
     } catch (error) {
       console.log(error);
     }
@@ -127,49 +126,51 @@ const Onepost = () => {
   return (
     <div>
       <Nav />
-      <Container> 
+      <Container>
         {/* <h2>{user.result.userName}</h2> */}
-      {posts && (
-        <div>
-         
-          <img src={posts.pic} />
-          <b>User Name: {posts.user.userName}</b>
-          <div className="decOnePage">
-            <button> 
+        {posts && (
+          <div>
+            <img src={posts.pic} />
+            <b>User Name: {posts.user.userName}</b>
+            <div className="decOnePage">
+              <button>
                 {like ? (
                   <MdFavorite className="likeIcon" onClick={addLike} />
                 ) : (
                   <MdFavoriteBorder className="unLikeIcon" onClick={addLike} />
                 )}
+              </button>
+              <p>{posts.description}</p>
+            </div>
+            <textarea
+              required
+              rows="2"
+              className="descTimeLine"
+              placeholder="leave a comment..."
+              type="text"
+              onChange={(e) => setNewComment(e.target.value)}
+              style={{ color: "black", fontSize: "15px" }}
+            />
+            <button className="TimeLineButton" onClick={addNewComment}>
+              <h2>Add Comment</h2>
             </button>
-            <p>{posts.description}</p> 
+            {/* className="content" */}
+            <div>
+              {comment.length &&
+                comment.map((item) => (
+                  <div className="allInfo" key={item._id}>
+                    <div className="divComment">
+                      <img src={item.user.avatar} />
+                      <p>{item.user.userName}</p>
+                    </div>
+                    <div className="paragraph">
+                    <p>{item.comment}</p>
+                    </div>
+                  </div>
+                ))}
+            </div>
           </div>
-          <textarea
-            required
-            rows="2"
-            className="descTimeLine"
-            placeholder="set you description"
-            type="text"
-            onChange={(e) => setNewComment(e.target.value)}
-            style={{ color: "black", fontSize: "15px" }}
-          />
-          <button className="TimeLineButton" onClick={addNewComment}>
-            <h2>Add Comment</h2>
-          </button>
-          <div className="content">
-            {comment.length &&
-            comment.map((item) => (
-              <div key={item._id}>
-                <div>
-                  <p>user: {item.user.userName}</p>
-                  <br></br>
-                  <p>comment: {item.comment}</p> 
-                </div>
-             </div>
-            ))}
-          </div>
-        </div>
-      )}
+        )}
       </Container>
       {/* <Footer /> */}
     </div>

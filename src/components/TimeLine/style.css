@@ -1,54 +1,39 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: Arial;
+}
+.header {
+  text-align: center;
+  padding: 32px;
+}
 .DivTimeLine {
-  /* margin: 20% auto;
-    padding: auto; */
   justify-content: space-between;
   align-items: center;
-  padding: 5%;
-  margin: 5%;
   display: flex;
   flex-wrap: wrap;
   padding: 30px;
 }
 
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: Arial;
-}
-
-.header {
-  text-align: center;
-  padding: 32px;
-}
-.TimeLine{
+.TimeLine {
   margin: 8%;
 }
-.row {
-  display: -ms-flexbox; /* IE10 */
-  display: flex;
-  -ms-flex-wrap: wrap; /* IE10 */
-  flex-wrap: wrap;
-  padding: 0 4px;
-}
-
-/* Create four equal columns that sits next to each other */
-.column {
-  -ms-flex: 25%; /* IE10 */
-  flex: 25%;
-  /* max-width: 25%; */
-  padding: 0 4px;
+.minDivTimeLine {
+  border: none;
+  padding: 20px;
+  margin: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  transition: 1s;
 }
 
 .column img {
   margin-top: 8px;
   vertical-align: middle;
-  width: 100%;
 }
 
-.descTimeLine{
+.descTimeLine {
   width: 100%;
   border: 2px solid #30869d;
   box-shadow: #30869d;
@@ -57,13 +42,22 @@ body {
   margin-top: 6px;
   margin-bottom: 10px;
 }
-.TimeLineButton{
+.TimeLineButton {
   border-radius: 5px;
   background-color: #30869d;
   padding: 2%;
-  color: white; 
+  color: white;
 }
-.TimeLineButton:hover{
+.TimeLineButton:hover {
+  background-color: #69b0c4;
+}
+.uploadDiv{
+  border-radius: 5px;
+  background-color: #30869d;
+  padding: 9px;
+  color: white;
+}
+.uploadDiv:hover{
   background-color: #69b0c4;
 }
 /* Responsive layout - makes a two column-layout instead of four columns */

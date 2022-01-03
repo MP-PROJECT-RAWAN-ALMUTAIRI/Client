@@ -18,12 +18,16 @@
 .mincontainer:hover {
   transform: scale(1.1);
 }
-.usersImage {
+.usersAv {
   border-radius: 50%;
-  padding: 5%;
   align-items: center;
   align-content: center;
-  width: 50%;
+ 
+}
+.users{
+  
+  text-align: center; 
+  align-items: center;
 }
 
 .delButton{

@@ -60,28 +60,32 @@ const Users = () => {
           allUsers.map((ele) => {
             return (
               <div className="mincontainer">
-                <div key={ele._id} className="users">
-                  <h4 className="userName">
-                    {ele.userName}
-                    <br></br>
-                    {ele.email}
-                    <br></br>
-                    {ele.createdAt}
-                    <br></br>
-                    <img
-                      className="usersImage"
-                      src={ele.avatar}
-                      onClick={() => navigate(`/profile/${ele._id}`)}
-                      alt="user Avatar"
-                    />
-                  </h4>
+                <div key={ele._id}>
+                  <img
+                    className="usersAv"
+                    src={ele.avatar}
+                    onClick={() => navigate(`/profile/${ele._id}`)}
+                    alt="user Avatar"
+                  />
+                  <br></br>
+                  <div className="users">
+                    <h4>
+                      {ele.userName}
+                      <br></br>
+                      {ele.email}
+                      <br></br>
+                      {ele.createdAt}
+                      <br></br>
+                    </h4>
+                 <br></br>
+                  <button
+                    className="delButton"
+                    onClick={() => deleteUser(ele._id)}
+                  >
+                    <p> Delete </p>
+                  </button>
+                   </div>
                 </div>
-                <button
-                  className="delButton"
-                  onClick={() => deleteUser(ele._id)}
-                >
-                  <p> Delete </p>
-                </button>
               </div>
             );
           })}
