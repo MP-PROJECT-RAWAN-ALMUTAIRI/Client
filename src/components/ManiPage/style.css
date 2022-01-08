@@ -5,10 +5,13 @@
   margin: 5%;
   display: flex;
   flex-wrap: wrap;
+  gap: 3rem;
+  text-align: center;
 }
 .userAvatar {
   border-radius: 50%;
-  width: 284px;
+  width: 45vh;
+  height: 40vh;
   padding: 10px 10px 20px 10px;
   border: 1px solid #bfbfbf;
   background-color: white;
@@ -19,7 +22,9 @@
 .userAvatar:hover {
   transform: scale(1.1);
 }
+/* .keyDiv{
 
+} */
 div.BestPro img {
   width: 284px;
   padding: 10px 10px 20px 10px;
@@ -46,6 +51,7 @@ img {
   /* padding: 30px; */
 }
 .trainers {
+  background-color: white;
   font-size: 30px;
   align-items: center;
   text-align: center;
@@ -79,7 +85,44 @@ img {
 .descrition {
   align-items: center;
 }
-.mainPage{
+.mainPage {
   width: 100%;
   height: 80vh;
+}
+
+.userManiPage {
+  border-radius: 5px;
+  width: 55vh;
+  border: none;
+  /* padding: 20px; */
+  margin: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  transition: 1s;
+}
+.imgDivMain {
+  width: 100%;
+  height: 50vh;
+  border-radius: 5px;
+}
+.TimeLineMain {
+  padding: 6%;
+}
+.paragMain {
+  height: 13vh;
+  margin-top: 10%;
+  color: #003151;
+}
+.TuwaiqProjectMain{
+  /* justify-content: space-between;
+  align-items: center; */
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  grid-auto-rows: auto;
+  grid-gap: 3rem;
+  /* flex-wrap: wrap; */
+  padding: 3%;
+}
+.TimeLineDecrrepton{
+  text-align: center;
+  padding: 6%;
 }

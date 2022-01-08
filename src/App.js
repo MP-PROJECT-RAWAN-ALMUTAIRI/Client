@@ -1,9 +1,9 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import Landpage from "./components/LandPage";
 // import Login from "./components/Login";
 import Signup from "./components/Signup";                         
 import Nav from "./components/Nav";
+import Footer from "./components/Footer";
 import TimeLine from "./components/TimeLine";
 import Onepost from "./components/OnePost";
 import Profile from "./components/Profile";
@@ -11,24 +11,24 @@ import Users from "./components/Users";
 import ManiPage from "./components/ManiPage";
 import Login from "./components/Login";                       
 import Disscation from "./components/Disscation";
-import Single from "./components/Single";
-import VeryfiyDiscussion from "./components/VeryfiyDiscussion";
+import Replay from "./components/Replay";
+// import VeryfiyDiscussion from "./components/VeryfiyDiscussion";
 import TrainerVerfiy from "./components/TrainerVerfiy";
 import VerifyTheAccount from "./components/VerifyTheAccount";
 import ResetPassword from "./components/ResetPassword";
 import VerifyFromEmail from "./components/VerifyFromEmail";
-// import LoginR from "./components/LoginR"; 
-// import SignupR from "./components/SignupR"; 
+import LoginR from "./components/LoginR"; 
+import SignupR from "./components/SignupR"; 
 //import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
   return (
     <>
       <Routes>
-        <Route exact path="/" element={<Signup />} />
-        <Route exact path="/login" element={<Login />} />
+        {/* <Route exact path="/" element={<Signup />} /> */}
+        {/* <Route exact path="/login" element={<Login />} /> */}
         
-        {/* <Route exact path="/" element={<SignupR />} /> 
-        <Route exact path="/login" element={< LoginR />} />  */}
+        <Route exact path="/" element={<SignupR />} /> 
+        <Route exact path="/login" element={< LoginR />} /> 
 
         <Route exact path="/post/:id" element={<Onepost />} />
         <Route exact path="/profile/:id" element={<Profile />} />
@@ -36,12 +36,12 @@ function App() {
         <Route exact path="/users" element={<Users />} />
         <Route exact path="/timeline" element={<TimeLine />} />
         <Route exact path="/discussion" element={<Disscation />} />
-        <Route exact path="/reply/:id" element={<Single />} />
-        <Route
+        <Route exact path="/reply/:id" element={<Replay />} />
+        {/* <Route
           exact
           path="/veryfiyDiscussion/:id"
           element={<VeryfiyDiscussion />}
-        />
+        /> */}
         <Route exact path="/discussion-verify" element={<TrainerVerfiy />} />
         <Route
           exact

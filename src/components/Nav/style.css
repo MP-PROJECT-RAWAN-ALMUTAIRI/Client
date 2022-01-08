@@ -1,15 +1,20 @@
-body {margin: 0;}
-.navBar{
+body {
+  margin: 0;
+}
+.navBar {
   background-color: #003151;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 ul.topnav {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  overflow: hidden; 
+  overflow: hidden;
 }
 
-ul.topnav li {float: left;}
+ul.topnav li {
+  float: left;
+}
 
 ul.topnav li a {
   display: block;
@@ -19,15 +24,23 @@ ul.topnav li a {
   text-decoration: none;
 }
 
-ul.topnav li a:hover:not(.active) {background-color: #30869d;}
+ul.topnav li a:hover:not(.active) {
+  background-color: #30869d;
+}
 
-ul.topnav li a.active {background-color: #30869d;} 
+ul.topnav li a.active {
+  background-color: #30869d;
+}
 
-ul.topnav li.right {float: right;}
+ul.topnav li.right {
+  float: right;
+}
 
 @media screen and (max-width: 600px) {
-  ul.topnav li.right, 
-  ul.topnav li {float: none;}
+  ul.topnav li.right,
+  ul.topnav li {
+    float: none;
+  }
 }
 
 /* li {
@@ -76,8 +89,8 @@ a {
 .ProfileBtn {
   border-radius: 12px;
   background-color: #4caf50; /* Green */
- 
- /* border: none;
+
+/* border: none;
   color: white;
   padding: 10px;
   text-align: center;
@@ -86,4 +99,3 @@ a {
   font-size: 9px;
   cursor: pointer;
 } */
-

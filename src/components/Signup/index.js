@@ -1,112 +1,104 @@
-import React, { useState } from "react";
+import React from "react";
+import { useState } from "react";
+import { Link ,useNavigate ,useParams} from "react-router-dom";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Container } from "react-bootstrap";
 import "./style.css";
-
-const Signup = () => {
+ 
+const Signin = () => {
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
   const navigate = useNavigate();
-  const [userName, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [userName, setUserName] = useState("");
   const [message, setMessage] = useState("");
 
-  const state = useSelector((state) => {
-    return {
-      users: state.users,
-      token: state.token,
-    };
-  });
 
-  const signup = async () => {
-    setMessage("");
-    const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/signup`, {
-      userName: userName,
-      email: email,
-      password: password,
-      role: "61c42cad4b31a32af675468b", // for user
-    });
-    if (res.status === 201) {
-      // navigate("/verify_from_email");
-      navigate("/login");
-    } else {
-      setMessage(res.data.message);
+  const Sgin = async (e) => {
+   
+    try {
+      e.preventDefault();
+      const result = await axios.post(`${BASE_URL}/signup`, {
+        email: email,
+        userName: userName, 
+        password: password,
+        role:"61c42cad4b31a32af675468b",// for user
+      });
+      console.log(result.data._id, ".............................");
+      if (result.status === 200) {
+         navigate(`/verify_account/${result.data._id}`);
+      } else {
+        setMessage(result.data.message);
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
   return (
-    <div className="signupDiv">
-      <br></br>
-      <br></br>
-      <h2>Tuwaiq Clube ..</h2>
-      <p>We are a Tuwaiq Clube </p>
-      <p>
-        Note that the button and the form is fixed - they will always be
-        positioned to the bottom of the browser window.
-      </p>
-      <br></br>
-      <br></br>
-      <div className="divCon">
-        {/* {message ? <div className="message">{message}</div> : ""} */}
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            signup(e);
-          }}
-          style={{ maxWidth: "500px", margin: "auto" }}
-        >
-          <div className="input-container">
-            <i className="fa fa-envelope icon"></i>
+    <div>
+      <Container>
+        <div className="container">
+          <form>
+            <h1>Signup</h1>
+            <p>Please fill in this form to create an account.</p>
+            <hr />
+            {/* <div className="mesage">{message} </div> */}
+            <label for="e-mail">
+              <b>Enter you e-mail :</b>
+            </label>
             <input
-              className="input-field"
               type="text"
-              placeholder="Email"
-              name="email"
               value={email}
+              placeholder="Enter you e-mail"
+              name="e-mail"
+              id="e-mail"
+              required
               onChange={(e) => {
+                // console.log(e);
                 setEmail(e.target.value);
               }}
             />
-          </div>
-
-          <div className="input-container">
-            <i className="fa fa-user icon"></i>
+            <label for="e-mail">
+              <b>Enter you User Name :</b>
+            </label>
             <input
-              className="input-field"
               type="text"
-              placeholder="User Name"
-              name="email"
               value={userName}
-              onChange={(e) => {
-                setUsername(e.target.value);
-              }}
-            />
-          </div>
-
-          <div className="input-container">
-            <i className="fa fa-key icon"></i>
-            <input
-              className="input-field"
-              type="password"
-              placeholder="Password"
-              name="psw"
-              value={password}
+              placeholder="Enter you e-mail"
+              name="e-mail"
+              id="e-mail"
+              required
               onChange={(e) => {
                 // console.log(e);
+                setUserName(e.target.value);
+              }}
+            />
+            <label for="password">
+              <b>Enter you password :</b>
+            </label>
+            <input
+              type="password"
+              value={password}
+              placeholder="Enter password "
+              name="password"
+              id="password"
+              required
+              onChange={(e) => {
+                // console.log(e.target.value);
                 setPassword(e.target.value);
               }}
             />
-          </div>
-
-          <button type="submit" onClick={signup} className="btnlogin">
-            Signup
-          </button>
-          OR  
-          <Link to="/login"> Login </Link>
-        </form>
-        <br></br>
-      </div>
+            <hr />
+            <button onClick={Sgin} className="registerbtn">
+              Signup
+            </button>
+            <Link to="/login">Login </Link>
+          </form>
+        </div>
+      </Container>
     </div>
   );
 };
-export default Signup;
+export default Signin;
+

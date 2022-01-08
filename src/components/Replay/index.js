@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Nav from "./../Nav";
+import Nav from "../Nav";
+import Footer from "./../Footer";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import "./style.css";
@@ -73,6 +74,8 @@ const Disscation = () => {
     }
   };
 
+  // delete Answer by id
+
   return (
     <>
       <Nav />
@@ -98,18 +101,14 @@ const Disscation = () => {
             <br></br>
             <br></br>
           </div>
-          {discussion.length &&
+          {discussion.length && 
             discussion.map((item) => {
               return (
-                <div key={item._id}>
-                  {/* if(){
-
-                  }
-                  else {
-
-                  } */}
-                  <p>user Name : </p>
-                  {item.user.userName}
+                <div className="allInfo" key={item._id}>
+                  <div className="divComment">
+                    <img src={item.user?.avatar} />
+                    <p>{item.user?.userName}</p>
+                  </div>
                   <p>{item.reply}</p>
                   {state.users.role === "trainer" && ( // trainer && Admin
                     <li className="nav-item1">
@@ -152,6 +151,7 @@ const Disscation = () => {
               );
             })}
         </div>
+        <Footer />
       </div>
     </>
   );

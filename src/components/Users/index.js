@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import Nav from "./../Nav";
+import Footer from "../Footer";
 import "./style.css";
 
 const Users = () => {
@@ -44,12 +45,10 @@ const Users = () => {
           Authorization: `Bearer ${state.users.token}`,
         },
       });
-      deleteUser(state.users.token);
-      // getAllUsers();
+      getAllUsers();
     } catch (error) {
       console.log(error);
     }
-    window.location.reload(false);
   };
 
   return (
@@ -77,14 +76,14 @@ const Users = () => {
                       {ele.createdAt}
                       <br></br>
                     </h4>
-                 <br></br>
-                  <button
-                    className="delButton"
-                    onClick={() => deleteUser(ele._id)}
-                  >
-                    <p> Delete </p>
-                  </button>
-                   </div>
+                    <br></br>
+                    <button
+                      className="delButton"
+                      onClick={() => deleteUser(ele._id)}
+                    >
+                      <p> Delete </p>
+                    </button>
+                  </div>
                 </div>
               </div>
             );
@@ -92,6 +91,7 @@ const Users = () => {
 
         {!allUsers.length && <h2>there is no user OR you are forbidden !!</h2>}
       </div>
+      <Footer />
     </>
   );
 };

@@ -38,7 +38,7 @@ const Login = () => {
           user: res.data.result,
         })
       );
-      navigate("/");
+      navigate("/main");
     } catch (error) {
       setMessage(error.response.data.message);
     }
@@ -99,18 +99,18 @@ const Login = () => {
 
   return (
     <div className="loginWrapper">
-      {state.token ? (
+      {/* {state.token ? ( */}
         <>
-          <div className="centerWrapper">
+          {/* <div className="centerWrapper">
             <div className="homeTitle">
               <p>You already loggedin, you don't need to login</p>
             </div>
             <div className="homeButtons">
               <button onClick={() => navigate("/home")}>home</button>
             </div>
-          </div>
+          </div> */}
         </>
-      ) : (
+      {/* // ) : ( */}
         <main className="panel">
           <div className="panel__half half--first">
             <h2>Login</h2>
@@ -150,12 +150,12 @@ const Login = () => {
           <div className="panel__half half--second">
             <h2>Hello, friend!</h2>
             <p>Enter your personal details and start your journey with us</p>
-            <button id="signupButton" onClick={() => navigate("/signup")}>
+            <button id="signupButton" onClick={() => navigate("/")}>
               Sign up
             </button>
           </div>
         </main>
-      )}
+      {/* // )} */}
     </div>
   );
 };

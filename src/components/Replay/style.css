@@ -1,0 +1,17 @@
+.styleDiv{
+ /* justify-content: space-between;  */
+ align-items: center;
+ padding: 40px;
+ margin: 5px auto;
+ /* display: flex;
+ flex-wrap: wrap; */
+} 
+
+.btn {
+    background-color: DodgerBlue;
+    border: none;
+    color: white;
+    padding: 12px 16px;
+    font-size: 16px;
+    cursor: pointer;
+  }

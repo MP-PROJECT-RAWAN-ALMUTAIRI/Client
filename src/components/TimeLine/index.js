@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Nav from "./../Nav";
-// import Footer from "./../Footer";
+import Footer from "./../Footer";
 import "./style.css";
 import axios from "axios";
 import { storage } from "../firebase";
@@ -14,6 +14,7 @@ const Post = () => {
   const [post, setPost] = useState(null); // firebase
   const [url, setUrl] = useState("");
   const [description, setDescription] = useState("");
+  const [title, settitle] = useState("");
   const [progress, setProgress] = useState(0);
 
   const state = useSelector((state) => {
@@ -86,9 +87,8 @@ const Post = () => {
         `${BASE_URL}/post`,
         {
           pic: url,
+          title,
           description,
-          // file,
-          //   video,
         },
         {
           headers: {
@@ -96,9 +96,9 @@ const Post = () => {
           },
         }
       );
-      // dispatch(addNewTask(result.data));
       setUrl("");
       setDescription("");
+      settitle("");
       getAllPosts(state.users.token);
     } catch (error) {
       console.log(error);
@@ -108,7 +108,7 @@ const Post = () => {
   return (
     <div>
       <Nav />
-
+      <br></br>
       <div className="header">
         <h1> Upload Your Project Demo </h1>
         <progress value={progress} max="100" />
@@ -117,20 +117,33 @@ const Post = () => {
         <div>
           <div className="info">
             <div className="infoDiv">
-            <h2>Upload Project Image ... </h2>
-            <input type="file" name="post" onChange={handleChange} />
-            <button
-              className="uploadDiv"
-              onClick={handleUpload}
-              style={{ color: "white", fontSize: "15px" }}
-            >
-              <b> upload </b>
-            </button>
+              <h2>Upload Project Image ... </h2>
+              <input type="file" name="post" onChange={handleChange} />
+              <button
+                className="uploadDiv"
+                onClick={handleUpload}
+                style={{ color: "white", fontSize: "15px" }}
+              >
+                <b> upload </b>
+              </button>
             </div>
-            <h2>Image Description:</h2>
+          
             <img className="RawImg" src={url} />
 
             <div className="textDiss">
+               <div className="titleDiv">
+               Title
+              <input
+              className="title"
+                type="text"
+                value={title}
+                placeholder="set your project title"
+                onChange={(e) => {
+                  // console.log(e);
+                  settitle(e.target.value);
+                }}
+              />
+              </div>
               <textarea
                 required
                 rows="3"
@@ -152,11 +165,15 @@ const Post = () => {
               posts.map((item) => (
                 <div key={item._id}>
                   <div className="minDivTimeLine">
-                    <img src={item.pic} alt="project image" />
-
-                    <div className="TimeLine">
+                    <img
+                      className="imgDiv"
+                      src={item.pic}
+                      alt="project image"
+                    />
+                     
+                    <div className="TimeLineTitle">
                       <b>
-                        <h2>{item.description}</h2>
+                        <h2 className="parag">{item.title}</h2>
                       </b>
                     </div>
                     <div className="TimeLine">
@@ -173,8 +190,7 @@ const Post = () => {
           </div>
         </div>
       </div>
-
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 };

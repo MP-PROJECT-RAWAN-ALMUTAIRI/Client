@@ -36,12 +36,12 @@ const Nav = () => {
                 <Link to={`/profile/${state.users.user._id}`}>Profile</Link>
               </li>
               <li className="nav-item1">
-                {state.users.role === "Admin" && ( // Admin
+                {state.users.user.role.role === "Admin" && ( // Admin
                   <Link to="/users">Users</Link>
                 )}
               </li>
               <li>
-                {state.users.role === "trainer" && ( // trainer && Admin
+                {state.users.user.role.role === "trainer" && ( // trainer && Admin
                   <Link to="/discussion-verify">Veryfi Discussions </Link>
                 )}
               </li>
@@ -55,7 +55,7 @@ const Nav = () => {
                 </button>  */}
               </li>
 
-              {/* {console.log(state.users.role)} */}
+              {/* {console.log(state.users.user.role.role ,"rawan state users role ?!!")} */}
               {/* <button
                   className="ProfileBtn"
                   type="submit"

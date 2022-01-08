@@ -6,6 +6,7 @@ import axios from "axios";
 import "./style.css";
 
 const Signup = () => {
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
   const navigate = useNavigate();
   const [userName, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -21,33 +22,38 @@ const Signup = () => {
 
   const signup = async () => {
     setMessage("");
-    const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/signup`, {
-      userName: userName,
-      email: email,
-      password: password,
-      role: process.env.REACT_APP_USER_ROLE,
-    });
-    if (res.status === 201) {
-      navigate("/verify_from_email");
-    } else {
-      setMessage(res.data.message);
+    try {
+      const result = await axios.post(`${BASE_URL}/signup`, {
+        email: email,
+        userName: userName, 
+        password: password,
+        role:"61c42cad4b31a32af675468b",// for user
+      });
+      console.log(result.data._id, ".............................");
+      if (result.status === 200) {
+         navigate(`/verify_account/${result.data._id}`);
+      } else {
+        setMessage(result.data.message);
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
   return (
     <div className="signupWrapper">
-      {state.token ? (
-        <h1>
+      {/* {state.token ? ( */}
+        {/* <h1>
           <div className="centerWrapper">
             <div className="homeSignupTitle">
               <p>You already loggedin, you don't need to signup</p>
             </div>
             <div className="homeSignupButtons">
-              <button onClick={() => navigate("/")}>HOME</button>
+              <button onClick={() => navigate("/main")}>HOME</button>
             </div>
           </div>
-        </h1>
-      ) : (
+        </h1> */}
+      {/* // ) : ( */}
         <main className="signupPanel">
           <div className="signupPanel__half signupHalf--first">
             <PasswordChecklist
@@ -111,7 +117,7 @@ const Signup = () => {
             </form>
           </div>
         </main>
-      )}
+       {/* )} */}
     </div>
   );
 };

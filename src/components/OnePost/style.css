@@ -1,15 +1,51 @@
 /* /* .decOnePage{
 
-} 
-.inputTextArea{
-    
 } */
-
+input[type="text"] {
+  width: 100vh;
+  padding: 19px;
+  margin: 6px 0 21px 0;
+  border: 2px solid #30869d;
+  box-shadow: #30869d;
+  border-radius: 4px;
+  box-sizing: border-box;
+  /* margin-top: 6px;
+  margin-bottom: 10px;  */
+}
+.btnOne {
+  border-radius: 5px;
+  background-color: #30869d;
+  padding: 5px;
+  width: 20vh;
+  color: white;
+}
+.imgOne {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* gap: 3rem; */
+}
+.imgOne img {
+  width: 100%;
+  height: 70vh;
+}
+.imgOne {
+  width: 100%;
+}
+.contOne {
+  width: 100%;
+  margin: 9%;
+}
+.inm{
+  width: 100%;
+  height: 100%;
+}
 .allInfo {
-  border: none;
+  border-radius: 5px;
   padding: 20px;
   margin: 20px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.10);
+  background-color: rgb(238, 238, 238);
   transition: 1s;
 }
 .divComment {
@@ -19,6 +55,7 @@ margin: 20px; */
   display: flex;
 }
 .divComment img {
+  box-shadow: rgb(48, 134, 157);
   border-radius: 50%;
   height: 3rem;
   width: 3rem;
@@ -30,6 +67,44 @@ margin: 20px; */
   /* font-weight: bold; */
   margin-left: 0.3rem;
 }
-.paragraph {
+/* .paragraph {
   margin-right: 0.9rem;
+} */
+.paragTitle {
+  margin-right: 40vh;
+  color: #003151;
+  font-size: 120%;
+  margin-bottom: 5vh;
+  /* margin-left: 20vh; */
+  margin-right: 0.9rem;
+}
+.ParaDiss {
+  justify-content: center;
+  /* margin-left: 20vh; */
+  width: 80%;
+  border-bottom:  1px solid #003151 ; 
+  margin-right: 2.7rem;
+}
+.pa{
+color: #003151;
+}
+.nm{
+  border-bottom:  1px solid #003151 ;
+  margin-top: 5%;
+}
+.box {
+  margin-left: 20vh;
+}
+.boxcomments {
+  /* margin-left: 19vh;
+  width: 50vh; */
+  margin-left: 20vh;
+  margin-right: 40vh;
+  width: 114vh;
+  padding: 19px;
+  margin: 6px 0px 22px 80px;
+}
+.likeIcon{
+  width: 4vh;
+  height: 4vh;
 }

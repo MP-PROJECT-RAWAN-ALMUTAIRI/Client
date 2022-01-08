@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Nav from "./../Nav";
+import Footer from "./../Footer";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -9,7 +10,7 @@ const VerifyDiscussion = () => {
   const BASE_URL = process.env.REACT_APP_BASE_URL;
   const navigate = useNavigate();
   const [discussion, setDesscation] = useState([]); // or null ?
-  const { id } = useParams();
+  
 
   const state = useSelector((state) => {
     return state;
@@ -57,6 +58,7 @@ const VerifyDiscussion = () => {
             );
           })}
       </div>
+      <Footer /> 
     </>
   );
 };

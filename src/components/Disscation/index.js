@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from "react";
 import Nav from "./../Nav";
+import Footer from "./../Footer"; 
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Container } from "react-bootstrap";
 import "./style.css";
 const Disscation = () => {
   const BASE_URL = process.env.REACT_APP_BASE_URL;
   const navigate = useNavigate();
   const [discussion, setDesscation] = useState([]); // or null ?
-  const [question, setQuestion] = useState(""); // for Answer the question
+  const [question, setQuestion] = useState(""); //for Answer the question
 
   const state = useSelector((state) => {
     return state;
   });
+  // console.log("State rawan999999......................", state.users.token); موجوده تمااام 
 
   useEffect(() => {
     getOneComment();
@@ -27,10 +28,10 @@ const Disscation = () => {
           Authorization: `Bearer ${state.users.token}`,
         },
       });
-      console.log(
-        result.data,
-        ".............rawan ............details........."
-      );
+      // console.log(
+      //   result.data,
+      //   ".............rawan ............details........."
+      // );
       setDesscation(result.data);
     } catch (error) {
       console.log(error);
@@ -50,7 +51,7 @@ const Disscation = () => {
           },
         }
       );
-      console.log("new question......................", result.data);
+      console.log(result.data ,"Add Disscation |||||||||||")
       getOneComment();
     } catch (error) {
       console.log(error);
@@ -77,7 +78,7 @@ const Disscation = () => {
             onChange={(e) => setQuestion(e.target.value)}
             style={{ color: "black", fontSize: "15px" }}
           /> */}
-          <input className="textArea" type="text" name="name" onChange={(e) => setQuestion(e.target.value)} />
+          <input className="textArea" type="text" name="name" onChange={(e) => setQuestion(e.target.value)} /> 
           <br></br>
           <button className="sendDiv" onClick={addDisscation}>
             <h2> Send </h2>
@@ -89,8 +90,8 @@ const Disscation = () => {
               <div className="disContainer">
                 <div key={item._id}>
                     <div className="discussionDiv">
-                      user name :
-                      {item.user.userName}
+                      {console.log(item.user , "rawan problem !!!")}
+                      {/* {item.userName} */}
                       <p>Question: </p>
                       <p>{item.question}</p>
                       <br></br>
@@ -106,6 +107,7 @@ const Disscation = () => {
             );
           })}
       </div>
+      <Footer />
     </>
   );
 };

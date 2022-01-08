@@ -3,8 +3,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import Nav from "./../Nav";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Carousel } from "react-responsive-carousel";
+import Footer from "./../Footer";
 import "./style.css";
 
 const MainPage = () => {
@@ -50,46 +49,11 @@ const MainPage = () => {
       console.log(error);
     }
   };
-  const captionStyle = {
-    fontSize: "2em",
-    fontWeight: "bold",
-  };
-  const slideNumberStyle = {
-    fontSize: "20px",
-    fontWeight: "bold",
-  };
+
   return (
     <div className="mainPage">
       <Nav />
-      <div className="BeastProject">
-        <Carousel
-          className="carousel"
-          autoPlay={true}
-          infiniteLoop={true}
-          interval={2000}
-          // showStatus={false}
-          thumbWidth={100}
-          showIndicators={false}
-          showThumbs={false}
-          dynamicHeight={false}
-          labels={true}
-          stopOnHover={false}
-         
-        >
-          {post.length &&
-            post.map((item) => {
-              return (
-                <div key={item._id}>
-                  <div>
-                    <img className="mainPage"src={item.pic} alt="BeastProject" />
-                    <br></br>
-                    <p>{item.description}</p>
-                  </div>
-                </div>
-              );
-            })}
-        </Carousel>
-      </div>
+      <div className="BeastProject"></div>
       <br></br>
       <br></br>
       <div className="trainers">
@@ -98,54 +62,67 @@ const MainPage = () => {
       <div className="TuwaiqTrainers">
         {/* <div className="minTuwaiq"> */}
         {user.length &&
-          user.map((item) => {
-            return (
-              <div key={item._id}>
-                <img
-                  className="userAvatar"
-                  src={item.avatar}
-                  alt="img"
-                  onClick={() => navigate(`/profile/${item._id}`)}
-                />
-                <br></br>
-                <br></br>
-                <div className="userNameStyle">
-                  <b> {item.userName} </b>
+          user
+            .filter((ele) => {
+              console.log(ele.role);
+              if (ele.role === "61c42d094b31a32af675468e") {
+                return ele;
+              }
+            })
+            .map((item) => {
+              return (
+                <div key={item._id}>
+                  <div className="minDivTimeLine">
+                    <img
+                      className="imgDiv"
+                      src={item.avatar}
+                      alt="img"
+                      onClick={() => navigate(`/profile/${item._id}`)}
+                    />
+                    <br></br>
+                    <br></br>
+                    <div className="TimeLine">
+                      <b>
+                        <h2 className="parag">
+                          <b> {item.userName} </b>
+                        </h2>
+                      </b>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
-        {/* {console.log(state.users.user._id, "state")} */}
-        {/* </div> */}
+              );
+            })}
       </div>
-      <br></br>
-      <br></br>
+     <hr />
+    <br></br>
       <div className="trainers">
         <b>Best Project</b>
       </div>
       <br></br>
       <br></br>
-      <div className="TuwaiqTrainers">
+      <div className="TuwaiqProjectMain">
         {post.length &&
           post.map((item) => {
             return (
               <div key={item._id}>
-                <img
-                  className="userAvatar"
-                  src={item.pic}
-                  alt="BeastProject"
-                  onClick={() => navigate(`/post/${item._id}`)}
-                />
-                <br></br>
-                {/* <br></br> <h4>user name :{item.userName}</h4> */}
-                <div className="userNameStyle">
-                  <b>{item.description}</b>
+                <div className="userManiPage">
+                  <img
+                    className="imgDivMain"
+                    src={item.pic}
+                    alt="BeastProject"
+                    onClick={() => navigate(`/post/${item._id}`)}
+                  />
+                  <br></br>
+                  {/* <br></br> <h4>user name :{item.userName}</h4> */}
+                  <div className="TimeLineDecrrepton">
+                    <b className="paragMain">{item.title}</b>
+                  </div>
                 </div>
               </div>
             );
           })}
       </div>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Nav from "./../Nav";
-// import Footer from "./../Footer";
+import Footer from "./../Footer";
 import "./style.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
@@ -16,13 +16,13 @@ const Onepost = () => {
   const navigate = useNavigate();
   const [like, setLike] = useState(false);
   const [comment, setComment] = useState([]);
-  const [ratting, setRatting] = useState("");
   const [newComment, setNewComment] = useState("");
   const { id } = useParams();
 
   const state = useSelector((state) => {
     return state;
   });
+  console.log(state, "//////////////////////////////");
 
   useEffect(() => {
     getOnePosts();
@@ -48,7 +48,7 @@ const Onepost = () => {
         setLike(true);
       }
       console.log(result.data.commnet);
-      console.log(result.data.result.user);
+      console.log(result, "WOW USER IS NULL HOW ?? !!");
       // console.log(result.data. ,,,,)
 
       // posts.result
@@ -126,23 +126,42 @@ const Onepost = () => {
   return (
     <div>
       <Nav />
-      <Container>
+      {/* <Container> */}
         {/* <h2>{user.result.userName}</h2> */}
         {posts && (
           <div>
-            <img src={posts.pic} />
-            <b>User Name: {posts.user.userName}</b>
-            <div className="decOnePage">
-              <button>
-                {like ? (
-                  <MdFavorite className="likeIcon" onClick={addLike} />
-                ) : (
-                  <MdFavoriteBorder className="unLikeIcon" onClick={addLike} />
-                )}
-              </button>
-              <p>{posts.description}</p>
+            <div className="imgOne">
+              <div className="contOne">
+                <div className="inm">
+                  <img src={posts.pic} />
+                </div>
+                {/* <div className="userNameDiv">
+                  <b>User Name: {posts.user.userName}</b>
+                </div> */}
+                <div className="decOnePage">
+                  <button>
+                    {like ? (
+                      <MdFavorite className="likeIcon" onClick={addLike} />
+                    ) : (
+                      <MdFavoriteBorder
+                        className="likeIcon"
+                        onClick={addLike}
+                      />
+                    )}
+                  </button>
+                </div>
+              </div>
+              <div className="details">
+              <div className="paragTitle">
+              <b>{posts.title}</b>
+              </div>
+              <div className="ParaDiss">
+              <p><div>{posts.description}</div></p>
+              <div className="nm"></div>
+              </div>
             </div>
-            <textarea
+            </div>
+            {/* <textarea
               required
               rows="2"
               className="descTimeLine"
@@ -150,12 +169,18 @@ const Onepost = () => {
               type="text"
               onChange={(e) => setNewComment(e.target.value)}
               style={{ color: "black", fontSize: "15px" }}
-            />
-            <button className="TimeLineButton" onClick={addNewComment}>
+            /> */} 
+            <div className="box"> 
+            <p className="pa"><b>Write your comments:</b></p>
+             <input className="input" type="text" name="name" onChange={(e) => setNewComment(e.target.value)} /> 
+             <br></br>
+            
+            <button className="btnOne" onClick={addNewComment}>
               <h2>Add Comment</h2>
             </button>
+            </div>
             {/* className="content" */}
-            <div>
+            <div className="boxcomments">
               {comment.length &&
                 comment.map((item) => (
                   <div className="allInfo" key={item._id}>
@@ -164,15 +189,24 @@ const Onepost = () => {
                       <p>{item.user.userName}</p>
                     </div>
                     <div className="paragraph">
-                    <p>{item.comment}</p>
+                      <p>{item.comment}</p>
+                      {state.users.role._id === "Admin" ? (
+                        <div>
+                          <button className="btn">
+                            Delete {/* <i class="fa fa-trash"></i> */}
+                          </button>
+                        </div>
+                      ) : (
+                        <></>
+                      )}
                     </div>
                   </div>
                 ))}
             </div>
           </div>
         )}
-      </Container>
-      {/* <Footer /> */}
+      {/* </Container> */}
+      <Footer />
     </div>
   );
 };

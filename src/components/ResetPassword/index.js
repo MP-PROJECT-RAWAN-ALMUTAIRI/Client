@@ -18,7 +18,7 @@ const ResetPassword = () => {
   const resetPassword = async () => {
     if (code.length > 0) {
       try {
-        await axios.post(`${process.env.REACT_APP_BASE_URL}/reset_password`, {
+        await axios.post(`${process.env.REACT_APP_BASE_URL}/reset_password${id}`, {
           id,
           code,
           password,
