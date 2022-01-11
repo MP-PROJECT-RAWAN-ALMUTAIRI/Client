@@ -44,7 +44,7 @@ const MainPage = () => {
         },
       });
       console.log(result.data, "post .....................2022");
-      setPost(result.data);
+      setPost(result.data.slice(-3)); // display last 3 post
     } catch (error) {
       console.log(error);
     }
@@ -84,7 +84,7 @@ const MainPage = () => {
                     <div className="TimeLine">
                       <b>
                         <h2 className="parag">
-                          <b> {item.userName} </b>
+                          <b>Teacher:  {item.userName} </b>
                         </h2>
                       </b>
                     </div>
@@ -96,7 +96,7 @@ const MainPage = () => {
      <hr />
     <br></br>
       <div className="trainers">
-        <b>Best Project</b>
+        <b>Latest Project</b>
       </div>
       <br></br>
       <br></br>

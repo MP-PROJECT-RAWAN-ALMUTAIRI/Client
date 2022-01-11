@@ -6,9 +6,12 @@
   display: flex;
   flex-wrap: wrap;
   padding: 30px;
+  /* width: 50%;
+  height: 50%; */
 }
 .mincontainer {
   width: 25%;
+  height: 25%;
   border: none;
   padding: 20px;
   margin: 20px;
@@ -20,8 +23,10 @@
 }
 .usersAv {
   border-radius: 50%;
-  align-items: center;
-  align-content: center;
+  width: 50%;
+  height: 50%;
+  /* align-items: center;
+  align-content: center; */
  
 }
 .users{

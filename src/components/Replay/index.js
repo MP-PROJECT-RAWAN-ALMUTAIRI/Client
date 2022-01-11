@@ -45,8 +45,6 @@ const Disscation = () => {
           Authorization: `Bearer ${state.users.token}`,
         },
       });
-      console.log(result.data, "....rawan ...reply....");
-      //console.log(result.data.result);
       setDesscation(result.data);
     } catch (error) {
       console.log(error);
@@ -75,7 +73,20 @@ const Disscation = () => {
   };
 
   // delete Answer by id
-
+  const deleteAnswer = async (_id) => {
+    try {
+      await axios.delete(`${process.env.REACT_APP_BASE_URL}/reply/${_id}`, {
+        headers: {
+          Authorization: `Bearer ${state.users.token}`,
+        },
+      });
+      //getAllComment(state.users.token);
+      getOneComment();
+      //deleteComment();
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
       <Nav />
@@ -85,23 +96,24 @@ const Disscation = () => {
           {question && <p> Question :{question.question}</p>}
           <br></br>
           Answer :
-          <div className="textAreaDiv">
+          <div className="textAreaDivR">
             <textarea
               required
               rows="2"
               className="descTimeLine"
               placeholder="set you description"
               type="text"
+              resize="none"
               onChange={(e) => setRely(e.target.value)}
               style={{ color: "black", fontSize: "15px" }}
             />
-            <button className="TimeLineButton" onClick={addAnswer}>
-              add Answer :
+            <button className="addAnswer" onClick={addAnswer}>
+              Add Answer :
             </button>
             <br></br>
             <br></br>
           </div>
-          {discussion.length && 
+          {discussion.length &&
             discussion.map((item) => {
               return (
                 <div className="allInfo" key={item._id}>
@@ -110,6 +122,17 @@ const Disscation = () => {
                     <p>{item.user?.userName}</p>
                   </div>
                   <p>{item.reply}</p>
+                  {state.users.role === "Admin" ||
+                  item.user._id == state.users.user._id ? (
+                    <div className="del">
+                      <button
+                        className="fa fa-trash"
+                        onClick={() => deleteAnswer(item._id)}
+                      ></button>
+                    </div>
+                  ) : (
+                    <></>
+                  )}
                   {state.users.role === "trainer" && ( // trainer && Admin
                     <li className="nav-item1">
                       <form>

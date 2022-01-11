@@ -7,11 +7,16 @@
  flex-wrap: wrap; */
 } 
 
-.btn {
-    background-color: DodgerBlue;
-    border: none;
-    color: white;
-    padding: 12px 16px;
-    font-size: 16px;
-    cursor: pointer;
-  }
+.addAnswer {
+  border-radius: 5px;
+  background-color: #30869d;
+  padding: 1%;
+  color: white;
+  width: 22vh;
+}
+textarea{
+    resize: none;
+}
+.textAreaDivR{
+  resize: none;
+}

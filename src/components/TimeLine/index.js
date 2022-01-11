@@ -144,12 +144,13 @@ const Post = () => {
                 }}
               />
               </div>
-              <textarea
+              <textarea 
                 required
                 rows="3"
                 className="textArea"
                 placeholder="set you description"
                 type="text"
+                resize="none"
                 onChange={(e) => setDescription(e.target.value)}
                 style={{ color: "black", fontSize: "15px" }}
               />

@@ -2,10 +2,10 @@
   justify-content: space-between;
   align-items: center;
   padding: 5%;
-  margin: 5%;
+  /* margin: 5%; */
   display: flex;
   flex-wrap: wrap;
-  gap: 3rem;
+  gap: 1rem;
   text-align: center;
 }
 .userAvatar {
@@ -55,7 +55,7 @@ img {
   font-size: 30px;
   align-items: center;
   text-align: center;
-  color: #003151;
+  color: #005870;
   /* text-decoration: cadetblue; */
   width: 25%;
   border: none;
@@ -63,13 +63,13 @@ img {
   margin: 20px auto;
   box-shadow: 0 2px 4px 0 rgb(151, 171, 172), 0 3px 10px 0 rgb(151, 171, 172);
   transition: 1s;
-  border-radius: 5px;
+  /* border-radius: 5px; */
 }
 .trainers:hover {
   transform: scale(1.1);
 }
 .userNameStyle {
-  color: #003151;
+  color: #005870;
 }
 
 .cont {
@@ -78,7 +78,6 @@ img {
   padding: 5%;
   margin: 5%;
   display: grid;
-
   padding: 30px;
 }
 
@@ -98,6 +97,8 @@ img {
   margin: 20px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   transition: 1s;
+  /* border-top-left-radius: 50px;
+  border-top-right-radius: 50px; */
 }
 .imgDivMain {
   width: 100%;
@@ -110,7 +111,7 @@ img {
 .paragMain {
   height: 13vh;
   margin-top: 10%;
-  color: #003151;
+  color: #005870;
 }
 .TuwaiqProjectMain{
   /* justify-content: space-between;
@@ -125,4 +126,7 @@ img {
 .TimeLineDecrrepton{
   text-align: center;
   padding: 6%;
+}
+.parag{
+  color: #005870;
 }
