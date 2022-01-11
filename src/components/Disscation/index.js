@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from "react";
 import Nav from "./../Nav";
+import Footer from "./../Footer"; 
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
+import "./style.css";
 const Disscation = () => {
   const BASE_URL = process.env.REACT_APP_BASE_URL;
   const navigate = useNavigate();
   const [discussion, setDesscation] = useState([]); // or null ?
-  const [question, setQuestion] = useState(""); // for Answer the question
+  const [question, setQuestion] = useState(""); //for Answer the question
 
   const state = useSelector((state) => {
     return state;
   });
+  // console.log("State rawan999999......................", state.users.token); موجوده تمااام 
 
   useEffect(() => {
     getOneComment();
@@ -26,10 +28,10 @@ const Disscation = () => {
           Authorization: `Bearer ${state.users.token}`,
         },
       });
-      console.log(
-        result.data,
-        ".............rawan ............discussion........."
-      );
+      // console.log(
+      //   result.data,
+      //   ".............rawan ............details........."
+      // );
       setDesscation(result.data);
     } catch (error) {
       console.log(error);
@@ -49,7 +51,7 @@ const Disscation = () => {
           },
         }
       );
-      console.log("new question", result.data);
+      console.log(result.data ,"Add Disscation |||||||||||")
       getOneComment();
     } catch (error) {
       console.log(error);
@@ -59,43 +61,53 @@ const Disscation = () => {
   return (
     <>
       <Nav />
-      <div className="contMap">
-      <h2>Tell Us What is Your Problem : </h2>
-        <div className="textAreaDiv">
-          <textarea
+
+      <br></br>
+      <div className="header">
+        <h2>Tell Us What is Your Problem : </h2>
+        <hr />
+        <br></br>
+        
+        <div className="textDiss">
+          {/* <textarea
             required
-            rows="4"
-            className="inputTextArea"
+            rows="3"
+            className="textArea"
             placeholder="set you description"
             type="text"
             onChange={(e) => setQuestion(e.target.value)}
-          />
-          <button className="btn" onClick={addDisscation}>
-            <h2> Send :</h2>
-          </button>
+            style={{ color: "black", fontSize: "15px" }}
+          /> */}
+          <input className="textArea" type="text" name="name" onChange={(e) => setQuestion(e.target.value)} /> 
           <br></br>
+          <button className="sendDiv" onClick={addDisscation}>
+            <h2> Send </h2>
+          </button>
         </div>
-        <br></br>
-        <br></br>
-        <br></br>
         {discussion.length &&
           discussion.map((item) => {
             return (
-              <div key={item._id}>
-                <div className="textAreaDiv">
-                  <p>Question: </p>
-                  <p>{item.question}</p>
-                  <button
-                    className="ProfileBtn"
-                    onClick={() => navigate(`/reply/${item._id}`)}
-                  >
-                    <h2> view</h2>
-                  </button>
+              <div className="disContainer">
+                <div key={item._id}>
+                    <div className="discussionDiv">
+                      {console.log(item.user , "rawan problem !!!")}
+                      {/* {item.userName} */}
+                      <p>Question: </p>
+                      <p>{item.question}</p>
+                      <br></br>
+                      <button
+                        className="DissButton"
+                        onClick={() => navigate(`/reply/${item._id}`)}
+                      >
+                        <h2> view</h2>
+                      </button>
+                    </div>
                 </div>
               </div>
             );
           })}
       </div>
+      <Footer />
     </>
   );
 };

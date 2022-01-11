@@ -6,9 +6,12 @@
   display: flex;
   flex-wrap: wrap;
   padding: 30px;
+  /* width: 50%;
+  height: 50%; */
 }
 .mincontainer {
   width: 25%;
+  height: 25%;
   border: none;
   padding: 20px;
   margin: 20px;
@@ -18,17 +21,24 @@
 .mincontainer:hover {
   transform: scale(1.1);
 }
-.usersImage {
+.usersAv {
   border-radius: 50%;
-  padding: 5%;
-  align-items: center;
-  align-content: center;
   width: 50%;
+  height: 50%;
+  /* align-items: center;
+  align-content: center; */
+ 
+}
+.users{
+  
+  text-align: center; 
+  align-items: center;
 }
 
 .delButton{
  color: aliceblue;
- border-radius: 30px;
+ border-radius: 5px;
+ padding :2%;
  background-color: #003151;
 }
 

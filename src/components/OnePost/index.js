@@ -1,31 +1,33 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Nav from "./../Nav";
-// import Footer from "./../Footer";
-// import "./style.css";
+import Footer from "./../Footer";
+import "./style.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-// import { Container } from "react-bootstrap";
-import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
+import { MdFavorite, MdFavoriteBorder, MdCreate } from "react-icons/md";
 
 const Onepost = () => {
   const BASE_URL = process.env.REACT_APP_BASE_URL;
+  const [user, setUser] = useState(null);
   const [posts, setPosts] = useState(null);
   const navigate = useNavigate();
-  const [like, setLike] = useState(null);
-  const [comment, setComment] = useState("");
-  const [ratting, setRatting] = useState("");
+  const [like, setLike] = useState(false);
+  const [comment, setComment] = useState([]);
   const [newComment, setNewComment] = useState("");
+  const [cont , setCont] = useState(0); 
   const { id } = useParams();
 
   const state = useSelector((state) => {
     return state;
   });
+  console.log(state, "//////////////////////////////");
 
   useEffect(() => {
     getOnePosts();
     getAllComment();
+    // getUser();
     // console.log(url);
   }, []);
 
@@ -36,17 +38,26 @@ const Onepost = () => {
           Authorization: `Bearer ${state.users.token}`,
         },
       });
-      console.log(result.data);
+      console.log(result.data, "0000000000000000000");
+      console.log(result.data.like);
       // console.log(posts.comment);
-      setPosts(result.data);
-      if (result.data.like.find((like) => like.user === state.users._id)) {
+      setPosts(result.data.result);
+      console.log(state.users);
+      if (result.data.like.find((like) => like.user === state.users.user._id)) {
+        console.log("like............................................");
         setLike(true);
       }
-      // setLike(result.data);
-      // setComment(result.data);
+      console.log(result.data.commnet);
+      console.log(result, "WOW USER IS NULL HOW ?? !!");
+      // console.log(result.data. ,,,,)
 
-      // getAllComment();
+      // posts.result
+      // setLike(result.data);
+      setComment(result.data);
+
+      getAllComment();
       setNewComment("");
+      setNewComment(result.data);
       setComment("");
     } catch (error) {
       console.log(error);
@@ -54,7 +65,6 @@ const Onepost = () => {
   };
   //
   const addLike = async () => {
-    console.log(state.users.token);
     try {
       const result = await axios.post(
         `${BASE_URL}/Likeposts/${id}`,
@@ -65,7 +75,13 @@ const Onepost = () => {
           },
         }
       );
-      console.log(result.data , ".....like ....................");
+      if (like) {
+        setLike(false);
+      } else {
+        setLike(true);
+        setCont(cont + 1 );
+      }
+      console.log(result.data, ".....like ....................");
     } catch (error) {
       console.log(error);
     }
@@ -79,20 +95,20 @@ const Onepost = () => {
         },
       });
       console.log(result);
-      setComment(result.data); 
+      setComment(result.data);
     } catch (error) {
       console.log(error);
     }
   };
 
   const addNewComment = async () => {
-    console.log(comment);
+    console.log(newComment);
     console.log(state.users.token);
     try {
       const result = await axios.post(
         `${BASE_URL}/comment/${id}`,
         {
-          comment,
+          comment: newComment,
           post: id,
         },
         {
@@ -107,49 +123,161 @@ const Onepost = () => {
       console.log(error);
     }
   };
+
+  const deleteCommentByAdmin = async (_id) => {
+    try {
+      await axios.delete(`${process.env.REACT_APP_BASE_URL}/deleteCommentByAdmin/${_id}`, {
+        headers: {
+          Authorization: `Bearer ${state.users.token}`,
+        },
+      });
+      //getAllComment(state.users.token);
+      getAllComment();
+      //deleteComment();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const deleteComment = async (_id) => {
+    try {
+      await axios.delete(`${process.env.REACT_APP_BASE_URL}/comment/${_id}`, {
+        headers: {
+          Authorization: `Bearer ${state.users.token}`,
+        },
+      });
+      //getAllComment(state.users.token);
+      getAllComment();
+      //deleteComment();
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div>
       <Nav />
-      {/* <Container> */}
+      {/* <h2>{user.result.userName}</h2> */}
       {posts && (
         <div>
-          <img src={posts.result.pic} />
-          <div className="decOnePage">
-            <button> 
-                {like ? (
-                  <MdFavorite className="likeIcon" onClick={addLike} />
-                ) : (
-                  <MdFavoriteBorder className="unLikeIcon" onClick={addLike} />
-                )}
-            </button>
-            <p>{posts.result.description}</p> 
+          <div className="imgOne">
+            <div className="contOne">
+              <div className="inm">
+                <img src={posts.pic} />
+              </div>
+              {/* <div className="userNameDiv">
+                  <b>User Name: {posts.user.userName}</b>
+                </div> */}
+              <div className="decOnePage">
+                <button>
+                  {like ? (
+                    <MdFavorite className="likeIcon" onClick={addLike} />
+                  ) : (
+                    <MdFavoriteBorder className="likeIcon" onClick={addLike} />
+                  )}
+                  {cont}
+                </button>
+              </div>
+            </div>
+            <div className="details">
+              <div className="paragTitle">
+                <b>{posts.title}</b>
+              </div>
+              <div className="ParaDiss">
+                <p>
+                  <div>{posts.description}</div>
+                </p>
+                <div className="nm"></div>
+              </div>
+            </div>
           </div>
-          <textarea
-            required
-            rows="4"
-            className="inputTextArea"
-            placeholder="set you description"
-            type="text"
-            onChange={(e) => setComment(e.target.value)}
-          />
-          <button className="btn" onClick={addNewComment}>
-            <h2>Add Comment</h2>
-          </button>
-          <div className="content">
-            {posts.commnet.map((ele) => {
-              return (
-                <div>
-                  <p>user: {ele.userName}</p>
-                  <br></br>
-                  <p>comment: {ele.comment}</p>
+          {/* <textarea
+              required
+              rows="2"
+              className="descTimeLine"
+              placeholder="leave a comment..."
+              type="text"
+               resize: none;
+              onChange={(e) => setNewComment(e.target.value)}
+              style={{ color: "black", fontSize: "15px" }}
+            /> */}
+          <div className="box">
+            <p className="pa">
+              <b>Write your comments:</b>
+            </p>
+            <input
+              className="input"
+              type="text"
+              name="name"
+              onChange={(e) => setNewComment(e.target.value)}
+            />
+            <br></br>
+
+            <button className="btnOne" onClick={addNewComment}>
+              <h2>Add Comment</h2>
+            </button>
+          </div>
+          {/* className="content" */}
+          <div className="boxcomments">
+            {comment.length &&
+              comment.map((item) => (
+                <div className="allInfo" key={item._id}>
+                  <div className="divComment">
+                    <img src={item.user?.avatar} />
+                    <p>{item.user?.userName}</p>
+                  </div>
+                  {/* <div className="divComment">
+                    <img src={item.user.avatar} />
+                    <p>{item.user.userName}</p>
+                  </div> */}
+                  <div className="paragraph">
+                    <p>{item.comment}</p>
+                    <div className="up">
+                      {/* <button>
+                        <MdCreate onClick={updateComment} />
+                      </button> */}
+                      {/* <button
+                        className="fa fa-trash"
+                        onClick={deleteComment}
+                      ></button> */}
+                    </div>
+                    <div className="del">
+                    {state.users.role === "Admin" ||
+                    item.user._id == state.users.user._id ? (
+                        <button
+                          className="fa fa-trash"
+                          onClick={() => deleteComment(item._id)}
+                        ></button>
+                     
+                    ) : (
+                      <></>
+                    )}
+                     {state.users.role === "Admin" ||
+                    item.user == state.users.user._id ? (
+                        <button id="ad"
+                          className="fa fa-trash"
+                          onClick={() => deleteCommentByAdmin(item._id)}
+                        ></button>
+                     
+                    ) : (
+                      <></>
+                    )}
+                     </div>
+                    {state.users.role._id === "Admin" ? (
+                      <div>
+                        <button className="btn">
+                          Delete {/* <i class="fa fa-trash"></i> */}
+                        </button>
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                  </div>
                 </div>
-              );
-            })}
+              ))}
           </div>
         </div>
       )}
-      {/* </Container>
-      <Footer /> */}
+      <Footer />
     </div>
   );
 };

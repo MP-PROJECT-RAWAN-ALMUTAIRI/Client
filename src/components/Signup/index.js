@@ -1,8 +1,9 @@
 import React from "react";
 import { useState } from "react";
-import { useNavigate , Link } from "react-router-dom";
+import { Link ,useNavigate ,useParams} from "react-router-dom";
 import axios from "axios";
-import "./style.css";  
+import { Container } from "react-bootstrap";
+import "./style.css";
  
 const Signin = () => {
   const BASE_URL = process.env.REACT_APP_BASE_URL;
@@ -10,102 +11,94 @@ const Signin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [userName, setUserName] = useState("");
-  const [Avatar, setAvatar] = useState("");
-  //const [message, setMessage] = useState("");
+  const [message, setMessage] = useState("");
+
 
   const Sgin = async (e) => {
+   
     try {
       e.preventDefault();
       const result = await axios.post(`${BASE_URL}/signup`, {
         email: email,
+        userName: userName, 
         password: password,
-        userName: userName,
-        role: "61c42cad4b31a32af675468b", // for user
+        role:"61c42cad4b31a32af675468b",// for user
       });
-      navigate("/");
-      console.log(result);
-      navigate("/");
+      console.log(result.data._id, ".............................");
+      if (result.status === 200) {
+         navigate(`/verify_account/${result.data._id}`);
+      } else {
+        setMessage(result.data.message);
+      }
     } catch (error) {
       console.log(error);
     }
   };
 
   return (
-      <> 
-    <div class="background"></div>
-      <div class="container">
-        <h2>Login Form</h2>
-        <form action="">
-          <div class="form-item">
-            <span class="material-icons-outlined">account_circle</span>
+    <div>
+      <Container>
+        <div className="container">
+          <form>
+            <h1>Signup</h1>
+            <p>Please fill in this form to create an account.</p>
+            <hr />
+            {/* <div className="mesage">{message} </div> */}
+            <label for="e-mail">
+              <b>Enter you e-mail :</b>
+            </label>
             <input
               type="text"
               value={email}
+              placeholder="Enter you e-mail"
               name="e-mail"
-              id="text"
-              placeholder="Enter your email"
+              id="e-mail"
+              required
               onChange={(e) => {
                 // console.log(e);
                 setEmail(e.target.value);
               }}
             />
-          </div>
-
-          <div class="form-item">
-            <span class="material-icons-outlined">lock</span>
+            <label for="e-mail">
+              <b>Enter you User Name :</b>
+            </label>
             <input
               type="text"
-              name="text"
               value={userName}
-              id="text"
-              placeholder="user Name"
+              placeholder="Enter you e-mail"
+              name="e-mail"
+              id="e-mail"
+              required
               onChange={(e) => {
                 // console.log(e);
                 setUserName(e.target.value);
               }}
             />
-          </div>
-
-          <div class="form-item">
-            <span class="material-icons-outlined">account_circle</span>
+            <label for="password">
+              <b>Enter you password :</b>
+            </label>
             <input
               type="password"
               value={password}
+              placeholder="Enter password "
               name="password"
-              id="text"
-              placeholder="Enter your password"
+              id="password"
+              required
               onChange={(e) => {
-                // console.log(e);
+                // console.log(e.target.value);
                 setPassword(e.target.value);
               }}
             />
-          </div>
-
-          <div class="form-item">
-            <span class="material-icons-outlined">account_circle</span>
-            <input
-              type="text"
-              value={Avatar}
-              name="password"
-              id="text"
-              placeholder="Enter your Avatar"
-              onChange={(e) => {
-                // console.log(e);
-                setAvatar(e.target.value);
-              }}
-            />
-          </div>
-          
-
-          <button onClick={Sgin} type="submit"> LOGIN </button>
-          <p> Or Login Using</p>
-          <Link to="/login">login</Link>
-           <div class="options">
-            <button class="gl">GitHup</button>
-          </div>
-        </form> 
-      </div>
-    </>
+            <hr />
+            <button onClick={Sgin} className="registerbtn">
+              Signup
+            </button>
+            <Link to="/login">Login </Link>
+          </form>
+        </div>
+      </Container>
+    </div>
   );
 };
 export default Signin;
+

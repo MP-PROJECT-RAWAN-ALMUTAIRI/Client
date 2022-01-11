@@ -1,0 +1,22 @@
+.styleDiv{
+ /* justify-content: space-between;  */
+ align-items: center;
+ padding: 40px;
+ margin: 5px auto;
+ /* display: flex;
+ flex-wrap: wrap; */
+} 
+
+.addAnswer {
+  border-radius: 5px;
+  background-color: #30869d;
+  padding: 1%;
+  color: white;
+  width: 22vh;
+}
+textarea{
+    resize: none;
+}
+.textAreaDivR{
+  resize: none;
+}

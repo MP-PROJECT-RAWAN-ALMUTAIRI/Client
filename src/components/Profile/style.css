@@ -1,45 +1,81 @@
-.contenerImg{
-    margin: 5%;
-    padding: 5%;
+*{
+    padding: 0%;
+    margin: 0%;  
 }
-.userInfo{
-    padding-top: 5%;
-    font-size: 1rem;
-    font-style: italic; 
-    font-family: 'Times New Roman', Times, serif;
+.AllPage{
+    margin-top: -5%;
+    /* background-color: #ecf8fc; */
 }
+.contenerImg {
+  margin: 5%;
+  padding: 5%;
+}
+.mainCard {
+  background-color: rgb(245, 244, 244);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 678px;
+  margin: 37px auto;
+   /*margin: 26px 86px auto; */
+  /* text-align: center;
+  font-family: arial; */
+}
+.emailDiv{
+  margin-bottom: 2em;
+}
+.userImg {
+  /* margin: 35px; */
+  /* padding: 5%;  */
+  border-radius: 50%;
+  margin-left: 43px;
+  width: 30%;
+}
+.profileInfo {
+  text-decoration: double;
+  padding-top: 5%;
+  margin-left: 43px;
+  font-size: 1rem;
+   /*font-style: italic; */
+  font-family: "Times New Roman", Times, serif;
+}
+
+
+/*<--------------------------------------------------------------->
+ */
+
+ 
 /* h1{
     margin: 9%;
     padding-left: 5%;
-    
     align-items: center;
 } */
-.userAvatar{
-    border-radius: 50%;
-    padding: 5%;
-    align-items: center;
-    width: 50%;
-}
 
-.Picture{
-    border-radius: 15%;
-    align-items: center;
-    width: 80%; 
-    /* margin: 10%;
+.Picture {
+  border-radius: 15%;
+  align-items: center;
+  width: 80%;
+  /* margin: 10%;
     padding: 10%;  */
 }
 
-.postDiv{
-    margin: 10%;
-    padding: 10%; 
-    align-items: center;
-    display: inline-block;
-
+.postDiv {
+  margin: 10%;
+  padding: 10%;
+  align-items: center;
+  display: inline-block;
 }
-.desc{
-    margin: 4%;
-    padding: 4%; 
-    text-align: center;
-    color: black;
-    text-decoration: double;  
+.desc {
+  margin: 4%;
+  padding: 4%;
+  text-align: center;
+  color: black;
+  text-decoration: double;
+}
+.borderImg{
+  width: 100%;
+  height: 100%;
+}
+.userImg{
+  width: 30%;
+  height: 30%;
+  border-radius: 50%;
 }

@@ -23,28 +23,34 @@ const Login = () => {
 
   const getUser = async (e) => {
     e.preventDefault();
-    const result = await axios.post(`${BASE_URL}/login`, {
-      email: email,
-      password: password,
-    });
-    console.log(result);
-    dispatch(
-      userLogin({
-        role: result.data.result.role.role,
-        token: result.data.token,
-        user: result.data.result,
-      })
-    );
-    if (result.data.result.role.role === "Admin") {
-      navigate("/users");
-    } else {
-      navigate("/main");
+    try {
+      const result = await axios.post(`${BASE_URL}/login`, {
+        email: email,
+        password: password,
+      });
+      console.log(result);
+      console.log(result.data.result.role);
+      dispatch(
+        userLogin({
+          role: result.data.result.role.role,
+          token: result.data.token,
+          user: result.data.result,
+        })
+      );
+      if (result.data.result.role.role === "Admin") {
+        navigate("/users");
+      } else {
+        navigate("/main");
+      }
+      if (result.data.result.role.role === "trainer") {
+        navigate("/discussion-verify");
+      }
+    } catch (error) {
+      console.log(error ,"///////////////////////////");
     }
-    if (result.data.result.role.role === "trainer") {
-      navigate("/main");
-    }
+ 
   };
-
+ 
   return (
     <>
       <br></br>
@@ -103,6 +109,13 @@ const Login = () => {
           <button type="submit" onClick={getUser} class="btnlogin">
             login
           </button>
+          <Link to={`/reset_password/`}> forget password</Link>
+
+          {/* ${state.users.user._id} */}
+
+          {/* ${result.data._id} */}
+
+
         </form>
         <br></br>
       </div>
