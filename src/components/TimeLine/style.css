@@ -1,7 +1,7 @@
-* {
+/* * {
   box-sizing: border-box;
-}
-textarea{
+} */
+textarea {
   resize: none;
 }
 body {
@@ -12,26 +12,45 @@ body {
   text-align: center;
   padding: 32px;
 }
+.prog{
+ width: 23rem;
+}
+.textArea {
+  width: 23rem;
+  /* display: flex;
+  flex-direction: column; */
+  border: 2px solid #30869d;
+  box-shadow: #30869d;
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+  margin-top: 0rem;
+  margin-bottom: 1rem;
+}
+.btnT{
+  margin: 6%;
+}
 .DivTimeLine {
   justify-content: space-between;
   align-items: center;
   display: flex;
   flex-wrap: wrap;
-  padding: 30px;
+  padding: 15px;
 }
-.imgDiv{
+.imgDiv {
   width: 100%;
-  height: 40vh; 
+  height: 40vh;
   border-radius: 5px;
 }
 .TimeLine {
   padding: 6%;
+  display: flex;
+  justify-content: space-around;
 }
-.TimeLineTitle{
+.TimeLineTitle {
   padding: 6%;
   margin: 2%;
 }
-.parag{
+.parag {
   height: 10vh;
   color: #30869d;
   margin-top: 10%;
@@ -63,43 +82,34 @@ body {
 .TimeLineButton {
   border-radius: 5px;
   background-color: #30869d;
-  padding: 2%;
+  padding: 1em;
+  width: 8em;
   color: white;
-  width: 15vh;
 }
 .TimeLineButton:hover {
   background-color: #69b0c4;
 }
-.uploadDiv{
+.uploadDiv {
   border-radius: 5px;
   background-color: #30869d;
-  padding: 9px;
+  padding: 1em;
   color: white;
 }
-.uploadDiv:hover{
+.uploadDiv:hover {
   background-color: #69b0c4;
 }
-.titleDiv{
+.titleInput{
+   width: 33vh;
+}
+.titleDiv {
   display: flex;
   flex-direction: column;
-  gap: 3vh;
+  /* gap: 3vh; */
   align-items: center;
-  /* font-size: 2rem; */
 }
-/* Responsive layout - makes a two column-layout instead of four columns */
-@media screen and (max-width: 800px) {
-  .column {
-    -ms-flex: 50%;
-    flex: 50%;
-    max-width: 50%;
-  }
-}
-
-/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 600px) {
-  .column {
-    -ms-flex: 100%;
-    flex: 100%;
-    max-width: 100%;
-  }
+.Repo{
+  display: flex;
+  flex-direction: column;
+  /* gap: 3vh; */
+  align-items: center;
 }

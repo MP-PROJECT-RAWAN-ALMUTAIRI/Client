@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Nav from "./../Nav";
 import Footer from "./../Footer";
 import "./style.css";
@@ -11,18 +11,14 @@ const MainPage = () => {
   const navigate = useNavigate();
   const [post, setPost] = useState([]); // trainer avatar...
   const [user, setUser] = useState([]);
-  const { id } = useParams();
   const state = useSelector((state) => {
     return state;
   });
-
-  //console.log(post, "......post ....................");
 
   useEffect(() => {
     getAllPosts();
     getUser();
     // eslint-disable-next-line
-    // console.log(url);
   }, []);
 
   const getUser = async () => {
@@ -31,9 +27,7 @@ const MainPage = () => {
         Authorization: `Bearer ${state.users.token}`,
       },
     });
-    console.log("user rawan .............", user.data);
-    // console.log("post", user.data.post);
-    setUser(user.data);
+    setUser(user.data.slice(0,-1));
   };
 
   const getAllPosts = async () => {
@@ -43,7 +37,6 @@ const MainPage = () => {
           Authorization: `Bearer ${state.users.token}`,
         },
       });
-      console.log(result.data, "post .....................2022");
       setPost(result.data.slice(-3)); // display last 3 post
     } catch (error) {
       console.log(error);
@@ -53,16 +46,18 @@ const MainPage = () => {
   return (
     <div className="mainPage">
       <Nav />
-      <div className="BeastProject"></div>
+      <div className="mainPic">
+      </div>
       <br></br>
       <br></br>
+      <img className="done" src="/done.jpg" alt="done"/>
       <div className="trainers">
         <b>Tuwaiq Trainers</b>
       </div>
       <div className="TuwaiqTrainers">
-        {/* <div className="minTuwaiq"> */}
         {user.length &&
           user
+          // eslint-disable-next-line
             .filter((ele) => {
               console.log(ele.role);
               if (ele.role === "61c42d094b31a32af675468e") {
@@ -113,7 +108,6 @@ const MainPage = () => {
                     onClick={() => navigate(`/post/${item._id}`)}
                   />
                   <br></br>
-                  {/* <br></br> <h4>user name :{item.userName}</h4> */}
                   <div className="TimeLineDecrrepton">
                     <b className="paragMain">{item.title}</b>
                   </div>

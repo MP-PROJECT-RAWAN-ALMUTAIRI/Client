@@ -6,24 +6,18 @@ import Nav from "../../components/Nav";
 import Footer from "./../Footer";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-// import Swal from "sweetalert2";
-// import withReactContent from "sweetalert2-react-content";
-// import { MdModeEditOutline } from "react-icons/md";
-// import TextField from "@mui/material/TextField";
-
-//const MySwal = withReactContent(Swal);
+import Swal from "sweetalert2";
+//import withReactContent from "sweetalert2-react-content";
+import { MdModeEditOutline } from "react-icons/md";
 
 const Profile = () => {
   const BASE_URL = process.env.REACT_APP_BASE_URL;
   const [user, setuser] = useState(null);
   const [userPostss, setUserPostss] = useState([]);
-  const [url, setUrl] = useState("");
+  const [url, setUrl] = useState(""); 
   const [post, setPost] = useState(null); // firebase
   const [progress, setProgress] = useState(0);
   const { id } = useParams();
-
-  // const [updateavatar, setUpdateavatar] = useState("");
-  // const [updatePic, setUpdatePic] = useState("");
 
   let navigate = useNavigate();
   const state = useSelector((state) => {
@@ -76,15 +70,12 @@ const Profile = () => {
         Authorization: `Bearer ${state.users.token}`,
       },
     });
-    // console.log("...", user.data.post[0].pic);
-    console.log("user........", user.data.result);
+    console.log("user... setGitHubLink.....", user.data.result);
     console.log("post.........", user.data.post);
     setuser(user.data);
     setUserPostss(user.data.post);
   };
-
   // update avatar
-
   const editAvatar = async () => {
     try {
       await axios.put(
@@ -99,6 +90,79 @@ const Profile = () => {
         }
       );
       getUser();
+      Swal.fire("Avatar Updated Successfuly", "", "success");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const editGitHub = async() => {
+    const GitHubLink = prompt("update your GitHubLink ... ");
+    try {
+      await axios.put(
+        `${process.env.REACT_APP_BASE_URL}/updateGitHubLink/${id}`,
+        {
+           GitHubLink: GitHubLink,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${state.users.token}`,
+          },
+        }
+      );
+      getUser();
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      
+      Toast.fire({
+        icon: 'success',
+        title: 'GitHub Updated successfully'
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
+  const updateBio = async() => {
+    const Bio = prompt("update your Bio ... ");
+    try {
+      await axios.put(
+        `${process.env.REACT_APP_BASE_URL}/updateBio/${id}`,
+        {
+          Bio: Bio,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${state.users.token}`,
+          },
+        }
+      );
+      getUser();
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      
+      Toast.fire({
+        icon: 'success',
+        title: 'Bio Updated successfully'
+      })
     } catch (error) {
       console.log(error);
     }
@@ -113,6 +177,7 @@ const Profile = () => {
         },
       });
       getUser();
+      Swal.fire("Project is deleted successfuly", "", "success");
     } catch (error) {
       console.log(error);
     }
@@ -131,13 +196,9 @@ const Profile = () => {
                 <br></br>
                 <div className="borderImg">
                   <img className="userImg" src={user.result.avatar} alt="img" />
-                  {/* <MdModeEditOutline
-                    className="editUserIcon"
-                    onClick={editAvatar}
-                  /> */}
                   <>
-                    {/* {state.users.role === "Admin" ||
-                    user[0]?._id == state.users.user._id ? ( */}
+                  {console.log(state.users.user._id,  user.result._id ,"  user[0]?._id")}
+                    {state.users.user._id === user.result._id ? (
                     <div>
                       <progress value={progress} max="100" />
                       <input type="file" name="post" onChange={handleChange} />
@@ -149,20 +210,46 @@ const Profile = () => {
                         <b> upload </b>
                       </button>
 
-                      <img className="RawImg" src={url} />
+                      <img className="RawImg" src={url}alt={url}/>
                       <button className="sendDiv" onClick={editAvatar}>
                         <b>Add</b>
                       </button>
                     </div>
-                     {/* ) : (
+                     ) : (
                       <></>
-                    )}  */}
+                    )}  
                   </>
                 </div>
                 <div className="profileInfo">
                   <p>User Name :{user.result.userName}</p>
+                  <hr />
                   <p>E-mail :{user.result.email}</p>
+                  <hr />
+                  {state.users.user._id === user.result._id ? (
+                    <div>
+                  <MdModeEditOutline
+                    className="editIcon"
+                     onClick={updateBio}
+                  />
+                    </div>
+                  ) : (
+                    <></>
+                  )} 
                   <p>Bio :{user.result.Bio}</p>
+                  <hr /> 
+                  <p>GitHubLink: </p> <a href={user.result.GitHubLink}>{user.result.GitHubLink}</a>
+                  {state.users.user._id === user.result._id ? (
+                    <div>
+                  <MdModeEditOutline
+                    className="editIcon"
+                    onClick={editGitHub}
+                  />
+                   </div>
+                  ) : (
+                    <></>
+                  )} 
+                  <hr />
+                  
                   <br></br>
                   <br></br>
                 </div>
@@ -175,24 +262,26 @@ const Profile = () => {
             <div className="trainers">
               <b> My Projects : </b>
             </div>
-            <div className="contMap">
+            <div className="contener">
               {userPostss.length &&
                 userPostss.map((item) => {
                   return (
+                    <div className="mincontainer">
                     <div key={item._id}>
-                      <div className="BestPro rotate_right">
-                        <img
+                      <div>
+                        <img 
                           src={item.pic}
                           alt="BeastProject"
                           onClick={() => navigate(`/post/${item._id}`)}
                         />
                         <br></br>
-                        <br></br> <h2>user name : {user.result.userName}</h2>
+                        <br></br> <b><div className="userName">{user.result.userName}</div></b>
                         <br></br>
                         {state.users.role === "Admin" ||
+                        // eslint-disable-next-line
                         item.user == state.users.user._id ? (
                           <button
-                            className="TimeLineButton"
+                            className="TimeLineBtn"
                             onClick={() => deleteTask(item._id)}
                           >
                             <h2>Delete</h2>
@@ -201,6 +290,7 @@ const Profile = () => {
                           <></>
                         )}
                       </div>
+                    </div>
                     </div>
                   );
                 })}

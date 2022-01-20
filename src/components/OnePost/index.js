@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 import Nav from "./../Nav";
 import Footer from "./../Footer";
 import "./style.css";
@@ -10,7 +11,6 @@ import { MdFavorite, MdFavoriteBorder, MdCreate } from "react-icons/md";
 
 const Onepost = () => {
   const BASE_URL = process.env.REACT_APP_BASE_URL;
-  const [user, setUser] = useState(null);
   const [posts, setPosts] = useState(null);
   const navigate = useNavigate();
   const [like, setLike] = useState(false);
@@ -27,9 +27,7 @@ const Onepost = () => {
   useEffect(() => {
     getOnePosts();
     getAllComment();
-    // getUser();
-    // console.log(url);
-  }, []);
+  },);
 
   const getOnePosts = async () => {
     try {
@@ -38,9 +36,8 @@ const Onepost = () => {
           Authorization: `Bearer ${state.users.token}`,
         },
       });
-      console.log(result.data, "0000000000000000000");
+      console.log(result.data, "getOnePosts");
       console.log(result.data.like);
-      // console.log(posts.comment);
       setPosts(result.data.result);
       console.log(state.users);
       if (result.data.like.find((like) => like.user === state.users.user._id)) {
@@ -49,21 +46,15 @@ const Onepost = () => {
       }
       console.log(result.data.commnet);
       console.log(result, "WOW USER IS NULL HOW ?? !!");
-      // console.log(result.data. ,,,,)
-
-      // posts.result
-      // setLike(result.data);
       setComment(result.data);
-
       getAllComment();
-      setNewComment("");
       setNewComment(result.data);
-      setComment("");
+      // setComment("");
     } catch (error) {
       console.log(error);
     }
   };
-  //
+  
   const addLike = async () => {
     try {
       const result = await axios.post(
@@ -77,9 +68,41 @@ const Onepost = () => {
       );
       if (like) {
         setLike(false);
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+        })
+        
+        Toast.fire({
+          icon: 'success',
+          title: 'Like Removed Successfully'
+        })
       } else {
         setLike(true);
-        setCont(cont + 1 );
+        setCont(cont + 1 ); // error ! like conuter is not saved
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+        })
+        
+        Toast.fire({
+          icon: 'success',
+          title: 'Like Add Successfully'
+        })
       }
       console.log(result.data, ".....like ....................");
     } catch (error) {
@@ -118,9 +141,62 @@ const Onepost = () => {
         }
       );
       console.log("new comment", result.data);
+      setNewComment("");
       getOnePosts();
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      
+      Toast.fire({
+        icon: 'success',
+        title: 'Comment Add Successfully'
+      })
     } catch (error) {
       console.log(error);
+    }
+  };
+ 
+  const updatecomment = async (_id) => {
+    const comment = prompt("update your comment ... ");
+    try {
+      const result = await axios.put(`${BASE_URL}/comment/${_id}`,
+        {
+          comment: comment,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${state.users.token}`,
+          },
+        }
+      );
+      getAllComment();
+      console.log(result, "resultresultresult");
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      
+      Toast.fire({
+        icon: 'success',
+        title: 'Comment Updated Successfully'
+      })
+    } catch (error) {
+      console.log(error ," update comment");
     }
   };
 
@@ -131,9 +207,23 @@ const Onepost = () => {
           Authorization: `Bearer ${state.users.token}`,
         },
       });
-      //getAllComment(state.users.token);
       getAllComment();
-      //deleteComment();
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      
+      Toast.fire({
+        icon: 'success',
+        title: 'Comment Deleted Successfully'
+      })
     } catch (error) {
       console.log(error);
     }
@@ -146,9 +236,23 @@ const Onepost = () => {
           Authorization: `Bearer ${state.users.token}`,
         },
       });
-      //getAllComment(state.users.token);
       getAllComment();
-      //deleteComment();
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      
+      Toast.fire({
+        icon: 'success',
+        title: 'Comment Deleted Successfully'
+      })
     } catch (error) {
       console.log(error);
     }
@@ -162,11 +266,21 @@ const Onepost = () => {
           <div className="imgOne">
             <div className="contOne">
               <div className="inm">
-                <img src={posts.pic} />
+                <img className="imgPost"src={posts.pic} alt={posts.pic} />
               </div>
-              {/* <div className="userNameDiv">
-                  <b>User Name: {posts.user.userName}</b>
-                </div> */}
+              <br></br>
+              <br></br>
+              <div className="userNameDiv">
+              <img
+                      className="ava"
+                      src={posts.user.avatar}
+                      alt="img"
+                      onClick={() => navigate(`/profile/${posts.user._id}`)}
+                    />
+                    </div>
+                    <div>
+                  <b>{posts.user.userName}</b> 
+                </div>
               <div className="decOnePage">
                 <button>
                   {like ? (
@@ -186,6 +300,9 @@ const Onepost = () => {
                 <p>
                   <div>{posts.description}</div>
                 </p>
+                <div className="git">
+                <a href={posts.GitHubLink}>{posts.GitHubLink}</a>
+                </div>
                 <div className="nm"></div>
               </div>
             </div>
@@ -222,26 +339,22 @@ const Onepost = () => {
               comment.map((item) => (
                 <div className="allInfo" key={item._id}>
                   <div className="divComment">
-                    <img src={item.user?.avatar} />
+                    <img src={item.user?.avatar} alt={item.user?.avatar}
+                    onClick={() => navigate(`/profile/${item.user._id}`)}/>
                     <p>{item.user?.userName}</p>
-                  </div>
-                  {/* <div className="divComment">
-                    <img src={item.user.avatar} />
-                    <p>{item.user.userName}</p>
-                  </div> */}
+                  </div> 
                   <div className="paragraph">
                     <p>{item.comment}</p>
                     <div className="up">
-                      {/* <button>
-                        <MdCreate onClick={updateComment} />
-                      </button> */}
-                      {/* <button
-                        className="fa fa-trash"
-                        onClick={deleteComment}
-                      ></button> */}
+                      <button>
+                        <MdCreate 
+                        onClick={() => updatecomment(item._id)}>
+                          </MdCreate>
+                      </button>
                     </div>
                     <div className="del">
                     {state.users.role === "Admin" ||
+                    // eslint-disable-next-line
                     item.user._id == state.users.user._id ? (
                         <button
                           className="fa fa-trash"
@@ -252,6 +365,7 @@ const Onepost = () => {
                       <></>
                     )}
                      {state.users.role === "Admin" ||
+                     // eslint-disable-next-line
                     item.user == state.users.user._id ? (
                         <button id="ad"
                           className="fa fa-trash"
@@ -262,15 +376,6 @@ const Onepost = () => {
                       <></>
                     )}
                      </div>
-                    {state.users.role._id === "Admin" ? (
-                      <div>
-                        <button className="btn">
-                          Delete {/* <i class="fa fa-trash"></i> */}
-                        </button>
-                      </div>
-                    ) : (
-                      <></>
-                    )}
                   </div>
                 </div>
               ))}

@@ -12,7 +12,7 @@ const Users = () => {
 
   useEffect(() => {
     getAllUsers();
-  }, []);
+  },);
 
   const state = useSelector((state) => {
     return state;

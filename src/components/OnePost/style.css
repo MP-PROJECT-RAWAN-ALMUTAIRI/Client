@@ -1,16 +1,23 @@
 /* /* .decOnePage{
 
 } */
+.git{
+  background-color: #30869d;
+}
+.ava{
+  width: 10vh;
+  height: 10vh;
+  background-color: #30869d;
+  border-radius: 50%; 
+}
 input[type="text"] {
-  width: 100vh;
+  width: 60vh;
   padding: 19px;
   margin: 6px 0 21px 0;
   border: 2px solid #30869d;
   box-shadow: #30869d;
   border-radius: 4px;
   box-sizing: border-box;
-  /* margin-top: 6px;
-  margin-bottom: 10px;  */
 }
 .btnOne {
   border-radius: 5px;
@@ -23,9 +30,8 @@ input[type="text"] {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* gap: 3rem; */
 }
-.imgOne img {
+.imgPost{
   width: 100%;
   height: 70vh;
 }
@@ -121,6 +127,8 @@ display: flex;
 .fa{
   margin: 22px 0px -27px -12px
 }
-/* .fa{
-  margin: 15px 0px -33px 33px;
-} */
+.userNameDiv{
+  margin: 12px; 
+  display: flex;
+  justify-content: flex-start;
+}

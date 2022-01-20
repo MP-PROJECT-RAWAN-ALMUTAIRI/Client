@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import Nav from "./../Nav";
 import Footer from "./../Footer";
 import axios from "axios";
@@ -18,6 +17,7 @@ const VerifyDiscussion = () => {
 
   useEffect(() => {
     getOneComment();
+    // eslint-disable-next-line
   }, []);
 
   const getOneComment = async () => {

@@ -24,7 +24,6 @@ const Nav = () => {
     <div>
       <header className="headerNav">
         <nav className="navBar">
-          {state.users.token.length !== 0 ? (
             <ul className="topnav">
               <li className="active">
                 <Link to="/main">Home</Link>{" "}
@@ -50,80 +49,8 @@ const Nav = () => {
               </li>
               <li class="right">
                 <Link onClick={logOut} to="/">Logout</Link>
-                {/* <button className="delButton" onClick={logOut}>
-                  logout
-                </button>  */}
               </li>
-
-              {/* {console.log(state.users.user.role.role ,"rawan state users role ?!!")} */}
-              {/* <button
-                  className="ProfileBtn"
-                  type="submit"
-                  onClick={() => navigate(`/main`)}
-                >
-                  Main Page
-                </button> */}
-
-              {/* <li className="nav-item1">
-                <button
-                  className="ProfileBtn"
-                  type="submit"
-                  onClick={() => navigate(`/timeline`)}
-                >
-                  Posts
-                </button>
-              </li> */}
-              {/* {console.log(state.users.user._id, "state")} */}
-              {/* {console.log(state.users.role, "role ..............")} */}
-              {/* <li className="nav-item1">
-                <button
-                  className="ProfileBtn"
-                  type="submit"
-                  onClick={() => navigate(`/profile/${state.users.user._id}`)}
-                >
-                  Profile
-                </button>
-              </li> */}
-              {/* {state.users.role === "Admin" && ( // Admin
-                <li className="nav-item1">
-                  <button
-                    className="ProfileBtn"
-                    type="submit"
-                    onClick={() => navigate(`/users`)}
-                  >
-                    Users
-                  </button>
-                </li>
-              )}
-              {state.users.role === "trainer" && ( // trainer && Admin
-                <li className="nav-item1">
-                  <button
-                    className="ProfileBtn"
-                    type="submit"
-                    onClick={() => navigate(`/discussion-verify`)}
-                  >
-                    Veryfi Discussions
-                  </button>
-                </li>
-              )}
-              <li className="nav-item1">
-                <button
-                  className="ProfileBtn"
-                  type="submit"
-                  onClick={() => navigate(`/discussion`)}
-                >
-                  Discussion
-                </button>
-              </li>
-              <li className="nav-item1">
-                <button className="ProfileBtn" type="submit" onClick={logOut}>
-                  Log out
-                </button>
-              </li> */}
             </ul>
-          ) : (
-            console.log("RAWAN ...")
-          )}
         </nav>
       </header>
     </div>

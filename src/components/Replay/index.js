@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 import Nav from "../Nav";
 import Footer from "./../Footer";
 import axios from "axios";
@@ -22,6 +23,7 @@ const Disscation = () => {
     getOneQuestion();
     getOneComment();
     addAnswer();
+    // eslint-disable-next-line
   }, []);
 
   const getOneQuestion = async () => {
@@ -66,7 +68,24 @@ const Disscation = () => {
         }
       );
       console.log("new answer ||||||| 888888888", result.data);
+      setRely("");
       getOneComment();
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      
+      Toast.fire({
+        icon: 'success',
+        title: 'Answer Add successfully'
+      })
     } catch (error) {
       console.log(error);
     }
@@ -80,9 +99,23 @@ const Disscation = () => {
           Authorization: `Bearer ${state.users.token}`,
         },
       });
-      //getAllComment(state.users.token);
       getOneComment();
-      //deleteComment();
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      
+      Toast.fire({
+        icon: 'success',
+        title: 'Answer Delelted successfully'
+      })
     } catch (error) {
       console.log(error);
     }
@@ -118,11 +151,12 @@ const Disscation = () => {
               return (
                 <div className="allInfo" key={item._id}>
                   <div className="divComment">
-                    <img src={item.user?.avatar} />
+                    <img src={item.user?.avatar} alt={item.user?.avatar}/>
                     <p>{item.user?.userName}</p>
                   </div>
                   <p>{item.reply}</p>
                   {state.users.role === "Admin" ||
+                  // eslint-disable-next-line
                   item.user._id == state.users.user._id ? (
                     <div className="del">
                       <button

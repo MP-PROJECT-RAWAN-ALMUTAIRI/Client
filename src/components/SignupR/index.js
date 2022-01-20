@@ -10,10 +10,10 @@ const Signup = () => {
   const navigate = useNavigate();
   const [userName, setUsername] = useState("");
   const [email, setEmail] = useState("");
-  const [role, setRole] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
+  // eslint-disable-next-line
   const state = useSelector((state) => {
     return {
       users: state.users,
