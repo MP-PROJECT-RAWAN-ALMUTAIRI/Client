@@ -16,13 +16,10 @@ const MainPage = () => {
     return state;
   });
 
-  //console.log(post, "......post ....................");
-
   useEffect(() => {
     getAllPosts();
     getUser();
     // eslint-disable-next-line
-    // console.log(url);
   }, []);
 
   const getUser = async () => {
@@ -31,8 +28,6 @@ const MainPage = () => {
         Authorization: `Bearer ${state.users.token}`,
       },
     });
-    console.log("user rawan .............", user.data);
-    // console.log("post", user.data.post);
     setUser(user.data);
   };
 
@@ -43,7 +38,6 @@ const MainPage = () => {
           Authorization: `Bearer ${state.users.token}`,
         },
       });
-      console.log(result.data, "post .....................2022");
       setPost(result.data.slice(-3)); // display last 3 post
     } catch (error) {
       console.log(error);
@@ -53,14 +47,15 @@ const MainPage = () => {
   return (
     <div className="mainPage">
       <Nav />
-      <div className="BeastProject"></div>
+      <div className="mainPic">
+      </div>
       <br></br>
       <br></br>
+      <img className="done" src="/done.jpg"/>
       <div className="trainers">
         <b>Tuwaiq Trainers</b>
       </div>
       <div className="TuwaiqTrainers">
-        {/* <div className="minTuwaiq"> */}
         {user.length &&
           user
             .filter((ele) => {
@@ -113,7 +108,6 @@ const MainPage = () => {
                     onClick={() => navigate(`/post/${item._id}`)}
                   />
                   <br></br>
-                  {/* <br></br> <h4>user name :{item.userName}</h4> */}
                   <div className="TimeLineDecrrepton">
                     <b className="paragMain">{item.title}</b>
                   </div>

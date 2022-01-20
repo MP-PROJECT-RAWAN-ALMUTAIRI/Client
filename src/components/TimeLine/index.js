@@ -3,9 +3,11 @@ import Nav from "./../Nav";
 import Footer from "./../Footer";
 import "./style.css";
 import axios from "axios";
+import Swal from "sweetalert2";
 import { storage } from "../firebase";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const Post = () => {
   const BASE_URL = process.env.REACT_APP_BASE_URL;
@@ -15,7 +17,9 @@ const Post = () => {
   const [url, setUrl] = useState("");
   const [description, setDescription] = useState("");
   const [title, settitle] = useState("");
+  const [GitHubLink , setGithub] = useState(""); 
   const [progress, setProgress] = useState(0);
+  const { id } = useParams();
 
   const state = useSelector((state) => {
     return state;
@@ -70,14 +74,14 @@ const Post = () => {
           Authorization: `Bearer ${state.users.token}`,
         },
       });
-      console.log(result);
+      // console.log(result);
       setPosts(result.data);
     } catch (error) {
       console.log(error);
     }
   };
 
-  // //add new post
+  ////add new post
   const addNewPost = async () => {
     console.log(description);
     console.log(url);
@@ -88,6 +92,7 @@ const Post = () => {
         {
           pic: url,
           title,
+          GitHubLink,
           description,
         },
         {
@@ -99,9 +104,29 @@ const Post = () => {
       setUrl("");
       setDescription("");
       settitle("");
-      getAllPosts(state.users.token);
+      getAllPosts();
+      Swal.fire("Done", "", "success");
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const deletePostByAdmin = async (id) => {
+    console.log(id);
+    try {
+      const result = await axios.delete(
+        `${process.env.REACT_APP_BASE_URL}/deletePostByAdmin/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${state.users.token}`,
+          },
+        }
+      );
+      getAllPosts();
+      Swal.fire("Done", "", "success");
+      console.log(result.data,"Delete post");
+    } catch (error) {
+      console.log(error ,"error ");
     }
   };
 
@@ -111,7 +136,7 @@ const Post = () => {
       <br></br>
       <div className="header">
         <h1> Upload Your Project Demo </h1>
-        <progress value={progress} max="100" />
+        <progress className="prog" value={progress} width="33rem"/>
         <hr />
         <br></br>
         <div>
@@ -127,24 +152,39 @@ const Post = () => {
                 <b> upload </b>
               </button>
             </div>
-          
+
             <img className="RawImg" src={url} />
 
             <div className="textDiss">
-               <div className="titleDiv">
-               Title
-              <input
-              className="title"
-                type="text"
-                value={title}
-                placeholder="set your project title"
-                onChange={(e) => {
-                  // console.log(e);
-                  settitle(e.target.value);
-                }}
-              />
+              <div className="titleDiv">
+                Title
+                <input 
+                  required
+                  className="titleInput"
+                  type="text"
+                  value={title}
+                  placeholder="set your project title"
+                  onChange={(e) => {
+                    settitle(e.target.value);
+                  }}
+                 
+                />
               </div>
-              <textarea 
+              <div className="Repo">
+              Repository Link:
+              <input 
+                  required
+                  className="titleInput"
+                  type="text"
+                  value={GitHubLink}
+                  placeholder="set your project Repository Link"
+                  onChange={(e) => {
+                    setGithub(e.target.value);
+                  }}
+                 
+                />
+              </div>
+              <textarea
                 required
                 rows="3"
                 className="textArea"
@@ -152,7 +192,6 @@ const Post = () => {
                 type="text"
                 resize="none"
                 onChange={(e) => setDescription(e.target.value)}
-                style={{ color: "black", fontSize: "15px" }}
               />
               <br></br>
               <button className="sendDiv" onClick={addNewPost}>
@@ -160,6 +199,7 @@ const Post = () => {
               </button>
             </div>
           </div>
+          <br></br>
 
           <div className="DivTimeLine">
             {posts.length &&
@@ -171,19 +211,32 @@ const Post = () => {
                       src={item.pic}
                       alt="project image"
                     />
-                     
+
                     <div className="TimeLineTitle">
                       <b>
                         <h2 className="parag">{item.title}</h2>
                       </b>
                     </div>
                     <div className="TimeLine">
+                      {state.users.role === "Admin" ||
+                      item.user._id == state.users.user._id ? (
+                        <button
+                          className="TimeLineButton"
+                          onClick={() => deletePostByAdmin(item._id)}
+                        >
+                          <b>Delete</b>
+                        </button>
+                      ) : (
+                        <></>
+                      )}
+                      <div>
                       <button
                         className="TimeLineButton"
                         onClick={() => navigate(`/post/${item._id}`)}
                       >
                         <b> view</b>
                       </button>
+                      </div>
                     </div>
                   </div>
                 </div>

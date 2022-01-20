@@ -4,7 +4,6 @@
 }
 .AllPage{
     margin-top: -5%;
-    /* background-color: #ecf8fc; */
 }
 .contenerImg {
   margin: 5%;
@@ -15,16 +14,11 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   max-width: 678px;
   margin: 37px auto;
-   /*margin: 26px 86px auto; */
-  /* text-align: center;
-  font-family: arial; */
 }
 .emailDiv{
   margin-bottom: 2em;
 }
 .userImg {
-  /* margin: 35px; */
-  /* padding: 5%;  */
   border-radius: 50%;
   margin-left: 43px;
   width: 30%;
@@ -34,27 +28,15 @@
   padding-top: 5%;
   margin-left: 43px;
   font-size: 1rem;
-   /*font-style: italic; */
   font-family: "Times New Roman", Times, serif;
 }
 
-
-/*<--------------------------------------------------------------->
- */
-
- 
-/* h1{
-    margin: 9%;
-    padding-left: 5%;
-    align-items: center;
-} */
+/*<---------------------------------------------------------------> */
 
 .Picture {
   border-radius: 15%;
   align-items: center;
   width: 80%;
-  /* margin: 10%;
-    padding: 10%;  */
 }
 
 .postDiv {
@@ -78,4 +60,18 @@
   width: 30%;
   height: 30%;
   border-radius: 50%;
+}
+.TimeLineBtn{
+background-color: #30869d;
+color: aliceblue;
+border-radius: 5px;
+padding :2%;
+}
+.userName{
+  color: #30869d;
+  /* text-align: center; 
+  align-items: center; */
+}
+.editIcon{
+  margin-left: 34rem;;
 }

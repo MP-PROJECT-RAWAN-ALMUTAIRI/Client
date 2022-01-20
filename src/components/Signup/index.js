@@ -1,32 +1,39 @@
-import React from "react";
-import { useState } from "react";
-import { Link ,useNavigate ,useParams} from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import PasswordChecklist from "react-password-checklist";
 import axios from "axios";
-import { Container } from "react-bootstrap";
 import "./style.css";
- 
-const Signin = () => {
+
+const Signup = () => {
   const BASE_URL = process.env.REACT_APP_BASE_URL;
   const navigate = useNavigate();
+  const [userName, setUsername] = useState("");
   const [email, setEmail] = useState("");
+  const [role, setRole] = useState("");
   const [password, setPassword] = useState("");
-  const [userName, setUserName] = useState("");
   const [message, setMessage] = useState("");
 
+  const state = useSelector((state) => {
+    return {
+      users: state.users,
+      token: state.token,
+    };
+  });
 
-  const Sgin = async (e) => {
-   
+  const signup = async () => {
+    setMessage("");
     try {
-      e.preventDefault();
       const result = await axios.post(`${BASE_URL}/signup`, {
         email: email,
-        userName: userName, 
+        userName: userName,
         password: password,
-        role:"61c42cad4b31a32af675468b",// for user
+        // role: "61c42cad4b31a32af675468b",
+        role: "61c42d094b31a32af675468e",
       });
       console.log(result.data._id, ".............................");
       if (result.status === 200) {
-         navigate(`/verify_account/${result.data._id}`);
+        navigate(`/verify_account/${result.data._id}`);
       } else {
         setMessage(result.data.message);
       }
@@ -36,69 +43,80 @@ const Signin = () => {
   };
 
   return (
-    <div>
-      <Container>
-        <div className="container">
-          <form>
-            <h1>Signup</h1>
-            <p>Please fill in this form to create an account.</p>
-            <hr />
-            {/* <div className="mesage">{message} </div> */}
-            <label for="e-mail">
-              <b>Enter you e-mail :</b>
-            </label>
-            <input
-              type="text"
-              value={email}
-              placeholder="Enter you e-mail"
-              name="e-mail"
-              id="e-mail"
-              required
-              onChange={(e) => {
-                // console.log(e);
-                setEmail(e.target.value);
-              }}
-            />
-            <label for="e-mail">
-              <b>Enter you User Name :</b>
-            </label>
-            <input
-              type="text"
-              value={userName}
-              placeholder="Enter you e-mail"
-              name="e-mail"
-              id="e-mail"
-              required
-              onChange={(e) => {
-                // console.log(e);
-                setUserName(e.target.value);
-              }}
-            />
-            <label for="password">
-              <b>Enter you password :</b>
-            </label>
-            <input
-              type="password"
-              value={password}
-              placeholder="Enter password "
-              name="password"
-              id="password"
-              required
-              onChange={(e) => {
-                // console.log(e.target.value);
-                setPassword(e.target.value);
-              }}
-            />
-            <hr />
-            <button onClick={Sgin} className="registerbtn">
-              Signup
-            </button>
-            <Link to="/login">Login </Link>
-          </form>
+    
+      <div class="login">
+        <div class="image">
+          <img
+            src="https://images.unsplash.com/photo-1625321643039-ed4aa7f9ceeb?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTYzMjgxMjM5OQ&ixlib=rb-1.2.1&q=85"
+            alt=""
+          />
         </div>
-      </Container>
-    </div>
+        <div class="details">
+          <h1 class="title">Log in</h1>
+          {message ? <div className="message">{message}</div> : ""}
+          <form
+            className="signupInput"
+            onSubmit={(e) => {
+              e.preventDefault();
+              signup(e);
+            }}
+          >
+            <div class="input">
+              <label for="">User Name</label>
+              <input
+                type="text"
+                placeholder="Enter your User Name"
+                onChange={(e) => setUsername(e.target.value)}
+                required
+              />
+            </div>
+            <div class="input">
+              <label for="">Email</label>
+              <input
+                type="text"
+                placeholder="Enter your email address"
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+            <div class="input">
+              <label for="">Password</label>
+              <input
+                type="password"
+                placeholder="Enter your password"
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+            <div className="selector">
+              <label
+                style={{
+                  fontSize: "18px",
+                  color: "rgb(255,255,255)",
+                  fontWeight: "bold",
+                  fontFamily: "Outfit sans-serif",
+                  // fontSize: "1.9rem" ,
+                  textTransform: "capitalize",
+                }}
+              >
+                Are you Student OR Teacher ?
+              </label>
+              <select className="select" name="role">
+                <option value="61c42d094b31a32af675468e">Teacher</option>
+                <option value="61c42cad4b31a32af675468b">Student</option>
+              </select>
+            </div>
+            <input
+              id="signupSubmitButton"
+              type="submit"
+              value="Submit"
+              disabled
+            />
+          </form>
+          <button class="login-button">Log in</button>
+          <span class="signup">Can't log in? ∙ Sign up for an account</span>
+        </div>
+      </div>
   );
 };
-export default Signin;
-
+export default Signup;

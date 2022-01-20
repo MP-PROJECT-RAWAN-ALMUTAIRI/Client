@@ -2,11 +2,14 @@
   justify-content: space-between;
   align-items: center;
   padding: 5%;
-  /* margin: 5%; */
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 0.7rem;
   text-align: center;
+}
+.done{
+  width: 100%;
+  /* height: 100%; */
 }
 .userAvatar {
   border-radius: 50%;
@@ -114,14 +117,21 @@ img {
   color: #005870;
 }
 .TuwaiqProjectMain{
+  justify-content: space-between;
+  align-items: center;
+  padding: 5%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  text-align: center;
   /* justify-content: space-between;
   align-items: center; */
-  display: grid;
+  /* display: grid;
   grid-template-columns: repeat(3,1fr);
   grid-auto-rows: auto;
   grid-gap: 3rem;
-  /* flex-wrap: wrap; */
-  padding: 3%;
+  flex-wrap: wrap; 
+  padding: 3%; */
 }
 .TimeLineDecrrepton{
   text-align: center;
