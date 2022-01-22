@@ -1,9 +1,49 @@
 
+<<<<<<< HEAD
 .imgOne {
   display: flex;
   justify-content: center;
   align-items: center; 
   width: 90vw;
+=======
+} */
+.git{
+  background-color: #30869d;
+}
+.ava{
+  width: 10vh;
+  height: 10vh;
+  background-color: #30869d;
+  border-radius: 50%; 
+}
+input[type="text"] {
+  width: 60vh;
+  padding: 19px;
+  margin: 6px 0 21px 0;
+  border: 2px solid #30869d;
+  box-shadow: #30869d;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.btnOne {
+  border-radius: 5px;
+  background-color: #30869d;
+  padding: 5px;
+  width: 20vh;
+  color: white;
+}
+.imgOne {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.imgPost{
+  width: 100%;
+  height: 70vh;
+}
+.imgOne {
+  width: 100%;
+>>>>>>> 1a186e43f253f872297fd47a65e38e39aa136225
 }
 .contOne {
   width: 90vw;
@@ -112,3 +152,11 @@ display: flex;
 .fa{
   margin: 22px 0px -27px -12px
 }
+<<<<<<< HEAD
+=======
+.userNameDiv{
+  margin: 12px; 
+  display: flex;
+  justify-content: flex-start;
+}
+>>>>>>> 1a186e43f253f872297fd47a65e38e39aa136225

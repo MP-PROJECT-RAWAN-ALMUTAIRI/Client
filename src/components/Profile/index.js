@@ -7,13 +7,22 @@ import Footer from "./../Footer";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
+<<<<<<< HEAD
+=======
+//import withReactContent from "sweetalert2-react-content";
+>>>>>>> 1a186e43f253f872297fd47a65e38e39aa136225
 import { MdModeEditOutline } from "react-icons/md";
 
 const Profile = () => {
   const BASE_URL = process.env.REACT_APP_BASE_URL;
   const [user, setuser] = useState(null);
   const [userPostss, setUserPostss] = useState([]);
+<<<<<<< HEAD
   const [url, setUrl] = useState(""); 
+=======
+  const [url, setUrl] = useState("");
+  const [GitHubLink, setGitHubLink] = useState(""); 
+>>>>>>> 1a186e43f253f872297fd47a65e38e39aa136225
   const [post, setPost] = useState(null); // firebase
   const [progress, setProgress] = useState(0);
   const { id } = useParams();
@@ -67,11 +76,22 @@ const Profile = () => {
         Authorization: `Bearer ${state.users.token}`,
       },
     });
+<<<<<<< HEAD
+=======
+    console.log("user... setGitHubLink.....", user.data.result);
+    console.log("post.........", user.data.post);
+>>>>>>> 1a186e43f253f872297fd47a65e38e39aa136225
     setuser(user.data);
+    setGitHubLink(user.data);
     setUserPostss(user.data.post);
   };
+<<<<<<< HEAD
 
   const editAvatar = async (_id) => {
+=======
+  // update avatar
+  const editAvatar = async () => {
+>>>>>>> 1a186e43f253f872297fd47a65e38e39aa136225
     try {
       await axios.put(
         `${process.env.REACT_APP_BASE_URL}/update/${_id}`,
@@ -86,6 +106,81 @@ const Profile = () => {
       );
       getUser();
       Swal.fire("Avatar Updated Successfuly", "", "success");
+<<<<<<< HEAD
+=======
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const editGitHub = async() => {
+    const GitHubLink = prompt("update your GitHubLink ... ");
+    try {
+      await axios.put(
+        `${process.env.REACT_APP_BASE_URL}/updateGitHubLink/${id}`,
+        {
+           GitHubLink: GitHubLink,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${state.users.token}`,
+          },
+        }
+      );
+      getUser();
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      
+      Toast.fire({
+        icon: 'success',
+        title: 'Login in successfully'
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
+  const updateBio = async() => {
+    const Bio = prompt("update your Bio ... ");
+    try {
+      await axios.put(
+        `${process.env.REACT_APP_BASE_URL}/updateBio/${id}`,
+        {
+          Bio: Bio,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${state.users.token}`,
+          },
+        }
+      );
+      getUser();
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      
+      Toast.fire({
+        icon: 'success',
+        title: 'Login in successfully'
+      })
+>>>>>>> 1a186e43f253f872297fd47a65e38e39aa136225
     } catch (error) {
       console.log(error);
     }
@@ -142,6 +237,7 @@ const Profile = () => {
         }
       );
       getUser();
+<<<<<<< HEAD
       const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
@@ -158,6 +254,9 @@ const Profile = () => {
         icon: 'success',
         title: 'Bio Updated successfully'
       })
+=======
+      Swal.fire("Project is deleted successfuly", "", "success");
+>>>>>>> 1a186e43f253f872297fd47a65e38e39aa136225
     } catch (error) {
       console.log(error);
     }
@@ -223,6 +322,10 @@ const Profile = () => {
                 <div className="borderImg">
                   <img className="userImg" src={user.result.avatar} alt="img" />
                   <>
+<<<<<<< HEAD
+=======
+                  {console.log(state.users.user._id,  user.result._id ,"  user[0]?._id")}
+>>>>>>> 1a186e43f253f872297fd47a65e38e39aa136225
                     {state.users.user._id === user.result._id ? (
                     <div>
                       <progress value={progress} max="100" />

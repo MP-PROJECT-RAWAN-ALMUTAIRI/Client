@@ -50,7 +50,11 @@ const MainPage = () => {
       </div>
       <br></br>
       <br></br>
+<<<<<<< HEAD
       <img className="done" src="/done.jpg" alt="done"/>
+=======
+      <img className="done" src="/done.jpg"/>
+>>>>>>> 1a186e43f253f872297fd47a65e38e39aa136225
       <div className="trainers">
         <b>Tuwaiq Trainers</b>
       </div>
@@ -106,6 +110,7 @@ const MainPage = () => {
                     onClick={() => navigate(`/post/${item._id}`)}
                   />
                   <br></br>
+<<<<<<< HEAD
                   <div className="TimeLine">
                       <b>
                         <h2 className="parag">
@@ -113,6 +118,11 @@ const MainPage = () => {
                         </h2>
                       </b>
                     </div>
+=======
+                  <div className="TimeLineDecrrepton">
+                    <b className="paragMain">{item.title}</b>
+                  </div>
+>>>>>>> 1a186e43f253f872297fd47a65e38e39aa136225
                 </div>
               </div>
             );

@@ -16,6 +16,7 @@
 .TuwaiqTrainers {
   justify-content: space-between;
   align-items: center;
+<<<<<<< HEAD
   padding: 1rem;
   display: flex;
   flex-wrap: wrap;
@@ -29,6 +30,25 @@
   width: 24vw;
   margin: 1.8rem;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+=======
+  padding: 5%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  text-align: center;
+}
+.done{
+  width: 100%;
+  /* height: 100%; */
+}
+.userAvatar {
+  border-radius: 50%;
+  width: 45vh;
+  height: 40vh;
+  padding: 10px 10px 20px 10px;
+  border: 1px solid #bfbfbf;
+  background-color: white;
+>>>>>>> 1a186e43f253f872297fd47a65e38e39aa136225
   transition: 1s;
 }
 
@@ -120,7 +140,28 @@ img {
   margin-top: 10%;
   color: #005870;
 }
+<<<<<<< HEAD
 .TimeLineDecrrepton {
+=======
+.TuwaiqProjectMain{
+  justify-content: space-between;
+  align-items: center;
+  padding: 5%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  text-align: center;
+  /* justify-content: space-between;
+  align-items: center; */
+  /* display: grid;
+  grid-template-columns: repeat(3,1fr);
+  grid-auto-rows: auto;
+  grid-gap: 3rem;
+  flex-wrap: wrap; 
+  padding: 3%; */
+}
+.TimeLineDecrrepton{
+>>>>>>> 1a186e43f253f872297fd47a65e38e39aa136225
   text-align: center;
   padding: 6%;
 }

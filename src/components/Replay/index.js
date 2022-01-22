@@ -66,6 +66,10 @@ const Disscation = () => {
           },
         }
       );
+<<<<<<< HEAD
+=======
+      console.log("new answer ||||||| 888888888", result.data);
+>>>>>>> 1a186e43f253f872297fd47a65e38e39aa136225
       setRely("");
       getOneComment();
       const Toast = Swal.mixin({
@@ -90,6 +94,7 @@ const Disscation = () => {
   };
 
   const deleteAnswer = async (_id) => {
+<<<<<<< HEAD
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: 'btn btn-success',
@@ -130,6 +135,33 @@ const Disscation = () => {
         'Your imaginary file is safe :)',
         'error'
       )
+=======
+    try {
+      await axios.delete(`${process.env.REACT_APP_BASE_URL}/reply/${_id}`, {
+        headers: {
+          Authorization: `Bearer ${state.users.token}`,
+        },
+      });
+      getOneComment();
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      
+      Toast.fire({
+        icon: 'success',
+        title: 'Answer Delelted successfully'
+      })
+    } catch (error) {
+      console.log(error);
+>>>>>>> 1a186e43f253f872297fd47a65e38e39aa136225
     }
   })
   };

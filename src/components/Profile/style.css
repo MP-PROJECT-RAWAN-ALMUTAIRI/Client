@@ -2,8 +2,13 @@
   padding: 0%;
   margin: 0%;
 }
+<<<<<<< HEAD
 .AllPage {
   margin-top: -5%;
+=======
+.AllPage{
+    margin-top: -5%;
+>>>>>>> 1a186e43f253f872297fd47a65e38e39aa136225
 }
 .contenerImg {
   margin: 5%;
@@ -19,8 +24,13 @@
   margin-bottom: 2em;
 }
 .userImg {
+<<<<<<< HEAD
   width: 16vw;
   height: 16vw;
+=======
+  border-radius: 50%;
+  margin-left: 43px;
+>>>>>>> 1a186e43f253f872297fd47a65e38e39aa136225
   width: 30%;
 }
 .profileInfo {
@@ -73,6 +83,7 @@
   height: 30%;
   border-radius: 50%;
 }
+<<<<<<< HEAD
 .TimeLineBtn {
   background-color: #30869d;
   color: aliceblue;
@@ -80,11 +91,26 @@
   padding: 2%;
 }
 .userName {
+=======
+.TimeLineBtn{
+background-color: #30869d;
+color: aliceblue;
+border-radius: 5px;
+padding :2%;
+}
+.userName{
+>>>>>>> 1a186e43f253f872297fd47a65e38e39aa136225
   color: #30869d;
   /* text-align: center; 
   align-items: center; */
 }
+<<<<<<< HEAD
 
 
 /* <-----------------------------------------------------> */
 
+=======
+.editIcon{
+  margin-left: 34rem;;
+}
+>>>>>>> 1a186e43f253f872297fd47a65e38e39aa136225
