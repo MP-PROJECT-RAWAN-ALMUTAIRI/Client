@@ -1,6 +1,6 @@
 # Client
 
-## Tuwaiq Clube  
+## Tuwaiq Club  
 
 ### Description
 
@@ -10,17 +10,17 @@ Tuwaiq Club is a platform that will save the projects for Tuwaiq members.
 
 ### User Stories
 
-* As a user I want to be able to Register/login OR Login with GitHub.
+* As a user I want to be able to Register/login.
 
 * As a user I want to be able to have a Profile page that has an image, user name, and email and be able to update my information also have my own project.
 
 * As a user I want to be able to Reset Passwords.
 
-* As a user I want to be able to share my Project demo that my be Video, image, pdf, and share it on social media.
+* As a user I want to be able to share my Project demo that my be image.
 
-* As a user I want to be able to write comments, add like ratings in another project.
+* As a user I want to be able to write comments, add like in another project.
 
-* As a user, I want to be able to follow other members to see their profiles.
+* As a user, I want to be able to see other members' profiles.
 
 * As a user, I want to be able to have discussions with other members.
 
@@ -30,7 +30,9 @@ Tuwaiq Club is a platform that will save the projects for Tuwaiq members.
 
 ### Admin Story
 - Delete users:  admin be able to spam any user if the rating is low with convincing reason.
-- Delete posts:  admin be able to delete the posts if they are inappropriate
+- Delete posts:  admin be able to delete the posts if they are inappropriate.
+- Delete comments:  admin is able to delete the comments if they are inappropriate.
+- Delete discussion:  admin be able to delete the discussion if they are inappropriate.
 
 <br/>
 
@@ -64,12 +66,14 @@ Slides Link
 |  /signup  |   signup   | anon only <AnonRoute>    | Signup form, link to login, navigate to homepage after signup. | 
 |  /login   |   login    | anon only <AnonRoute>    | Login form, link to signup, navigate to homepage after login. |
 | /mainPage |   MainPage | user only <PrivateRoute> | The main page has the ability to show all pages of the website.|  
+| /timeLine |   TimeLine | user only <PrivateRoute> | The timeLine page has the ability to show all projects in the website.|    
 |  /Nav     |   Nav      | user only <PrivateRoute> | The navbar has a logout button and displays it on all user pages. | 
+|  /Footer     |   Footer      | user only <PrivateRoute> | The Footer has a copyright  and displays it on all user pages. |   
 |  /Post    |   Post     | user only <PrivateRoute> |The post page Shows all posts and add post.|   
-| /Post/:id |  OpnePost  | user only <PrivateRoute> |The One post page Shows one post and like button with comments related to the post.|
+| /Post/:id |  OnePost  | user only <PrivateRoute> |The One post page Shows one post and like button with comments related to the post.|
 | /Profile  |  Profile   | user only <PrivateRoute> |The profile page will allow users to display information with  the ability to edit profile.|
 | /Descussion | Descussion | user only <PrivateRoute>| The discussions page allows users to make discussions together.|
-| /Direct_message/:id | Direct_message |user only <PrivateRoute>| The direct message allows users to make private chats together.| 
+
 
 
   
@@ -82,18 +86,19 @@ Slides Link
 * login page 
   
 * Main page 
+  
+* TimeLine page
 
 * Navbar 
 
 * Post page 
 
-* OpnePost page 
+* OnePost page 
 
 * Profile page 
 
 * Descussion page 
-
-* DirectMessage page 
+ 
 
 
 ## UML Diagram 
