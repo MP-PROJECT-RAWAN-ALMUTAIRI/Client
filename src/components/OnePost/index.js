@@ -11,10 +11,6 @@ import { MdFavorite, MdFavoriteBorder, MdCreate } from "react-icons/md";
 
 const Onepost = () => {
   const BASE_URL = process.env.REACT_APP_BASE_URL;
-<<<<<<< HEAD
-=======
-  //const [user, setUser] = useState(null);
->>>>>>> 1a186e43f253f872297fd47a65e38e39aa136225
   const [posts, setPosts] = useState(null);
   const navigate = useNavigate();
   const [like, setLike] = useState(false);
@@ -30,12 +26,8 @@ const Onepost = () => {
   useEffect(() => {
     getOnePosts();
     getAllComment();
-<<<<<<< HEAD
     // eslint-disable-next-line
   },[]);
-=======
-  }, []);
->>>>>>> 1a186e43f253f872297fd47a65e38e39aa136225
 
   const getOnePosts = async () => {
     try {
@@ -44,27 +36,13 @@ const Onepost = () => {
           Authorization: `Bearer ${state.users.token}`,
         },
       });
-<<<<<<< HEAD
-=======
-      console.log(result.data, "getOnePosts");
-      console.log(result.data.like);
->>>>>>> 1a186e43f253f872297fd47a65e38e39aa136225
       setPosts(result.data.result);
       if (result.data.like.find((like) => like.user === state.users.user._id)) {
         setLike(true);
       }
-<<<<<<< HEAD
       setComment(result.data);
       getAllComment();
       setNewComment(result.data);
-=======
-      console.log(result.data.commnet);
-      console.log(result, "WOW USER IS NULL HOW ?? !!");
-      setComment(result.data);
-      getAllComment();
-      setNewComment(result.data);
-      // setComment("");
->>>>>>> 1a186e43f253f872297fd47a65e38e39aa136225
     } catch (error) {
       console.log(error);
     }
@@ -153,10 +131,6 @@ const Onepost = () => {
           },
         }
       );
-<<<<<<< HEAD
-=======
-      console.log("new comment", result.data);
->>>>>>> 1a186e43f253f872297fd47a65e38e39aa136225
       setNewComment("");
       getOnePosts();
       const Toast = Swal.mixin({
@@ -182,59 +156,17 @@ const Onepost = () => {
  
   const updatecomment = async (_id) => {
     const comment = prompt("update your comment ... ");
-<<<<<<< HEAD
-=======
-    try {
-      const result = await axios.put(`${BASE_URL}/comment/${_id}`,
-        {
-          comment: comment,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${state.users.token}`,
-          },
-        }
-      );
-      getAllComment();
-      console.log(result, "resultresultresult");
-      const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.addEventListener('mouseenter', Swal.stopTimer)
-          toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
-      })
-      
-      Toast.fire({
-        icon: 'success',
-        title: 'Comment Updated Successfully'
-      })
-    } catch (error) {
-      console.log(error ," update comment");
-    }
-  };
-
-  const deleteCommentByAdmin = async (_id) => {
->>>>>>> 1a186e43f253f872297fd47a65e38e39aa136225
     try {
     await axios.put(`${BASE_URL}/comment/${_id}`,
         {
           comment: comment,
         },
-<<<<<<< HEAD
         {
           headers: {
             Authorization: `Bearer ${state.users.token}`,
           },
         }
       );
-=======
-      });
->>>>>>> 1a186e43f253f872297fd47a65e38e39aa136225
       getAllComment();
       const Toast = Swal.mixin({
         toast: true,
@@ -250,11 +182,7 @@ const Onepost = () => {
       
       Toast.fire({
         icon: 'success',
-<<<<<<< HEAD
         title: 'Comment Updated Successfully'
-=======
-        title: 'Comment Deleted Successfully'
->>>>>>> 1a186e43f253f872297fd47a65e38e39aa136225
       })
     } catch (error) {
       console.log(error);
@@ -307,7 +235,6 @@ const Onepost = () => {
   };
 
   const deleteComment = async (_id) => {
-<<<<<<< HEAD
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: 'btn btn-success',
@@ -348,33 +275,6 @@ const Onepost = () => {
         'Your imaginary file is safe :)',
         'error'
       )
-=======
-    try {
-      await axios.delete(`${process.env.REACT_APP_BASE_URL}/comment/${_id}`, {
-        headers: {
-          Authorization: `Bearer ${state.users.token}`,
-        },
-      });
-      getAllComment();
-      const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.addEventListener('mouseenter', Swal.stopTimer)
-          toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
-      })
-      
-      Toast.fire({
-        icon: 'success',
-        title: 'Comment Deleted Successfully'
-      })
-    } catch (error) {
-      console.log(error);
->>>>>>> 1a186e43f253f872297fd47a65e38e39aa136225
     }
   })
   };
@@ -387,11 +287,7 @@ const Onepost = () => {
           <div className="imgOne">
             <div className="contOne">
               <div className="inm">
-<<<<<<< HEAD
                 <img className="imgPost"src={posts.pic} alt={posts.pic} />
-=======
-                <img className="imgPost"src={posts.pic} />
->>>>>>> 1a186e43f253f872297fd47a65e38e39aa136225
               </div>
               <br></br>
               <br></br>
@@ -425,10 +321,7 @@ const Onepost = () => {
                 <p>
                   <div>{posts.description}</div>
                 </p>
-<<<<<<< HEAD
                 <br></br>
-=======
->>>>>>> 1a186e43f253f872297fd47a65e38e39aa136225
                 <div className="git">
                 <a href={posts.GitHubLink}>{posts.GitHubLink}</a>
                 </div>
@@ -457,18 +350,13 @@ const Onepost = () => {
               comment.map((item) => (
                 <div className="allInfo" key={item._id}>
                   <div className="divComment">
-<<<<<<< HEAD
                     <img src={item.user?.avatar} alt={item.user?.avatar}
-=======
-                    <img src={item.user?.avatar}
->>>>>>> 1a186e43f253f872297fd47a65e38e39aa136225
                     onClick={() => navigate(`/profile/${item.user._id}`)}/>
                     <p>{item.user?.userName}</p>
                   </div> 
                   <div className="paragraph">
                     <p>{item.comment}</p>
                     <div className="up">
-<<<<<<< HEAD
                     {state.users.role === "Admin" &&
                     // eslint-disable-next-line
                     item.user._id == state.users.user._id ? (
@@ -481,13 +369,6 @@ const Onepost = () => {
                     ) : (
                       <></>
                     )}
-=======
-                      <button>
-                        <MdCreate 
-                        onClick={() => updatecomment(item._id)}>
-                          </MdCreate>
-                      </button>
->>>>>>> 1a186e43f253f872297fd47a65e38e39aa136225
                     </div>
                     <div className="del">
                     {state.users.role === "Admin" ||

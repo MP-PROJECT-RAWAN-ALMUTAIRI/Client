@@ -10,7 +10,6 @@ import Replay from "./components/Replay";
 import LandPage from "./components/LandPage";
 import TrainerVerfiy from "./components/TrainerVerfiy";
 import VerifyTheAccount from "./components/VerifyTheAccount";
-import ResetPassword from "./components/ResetPassword";
 import VerifyFromEmail from "./components/VerifyFromEmail";
 import LoginR from "./components/LoginR";
 import SignupR from "./components/SignupR";
@@ -35,7 +34,6 @@ function App() {
           path="/verify_account/:id"
           element={<VerifyTheAccount />}
         />
-        <Route exact path="/reset_password/:id" element={<ResetPassword />} />
         <Route exact path="/verify_from_email" element={<VerifyFromEmail />} />
       </Routes>
     </>
