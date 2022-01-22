@@ -72,17 +72,6 @@ const Users = () => {
     }
   })
   };
-  //   try {
-  //     await axios.delete(`${process.env.REACT_APP_BASE_URL}/user/${id}`, {
-  //       headers: {
-  //         Authorization: `Bearer ${state.users.token}`,
-  //       },
-  //     });
-  //     getAllUsers();
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   return (
     <>

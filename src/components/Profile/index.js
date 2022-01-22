@@ -74,7 +74,7 @@ const Profile = () => {
   const editAvatar = async (_id) => {
     try {
       await axios.put(
-        `${process.env.REACT_APP_BASE_URL}/update/${_id}`,
+        `${process.env.REACT_APP_BASE_URL}/updateAvatar/${_id}`,
         {
           avatar: url,
         },
@@ -188,7 +188,7 @@ const Profile = () => {
           'success'
         )
       await axios.delete(
-        `${process.env.REACT_APP_BASE_URL}/post/${id}`,
+        `${process.env.REACT_APP_BASE_URL}/post/${_id}`,
         {
           headers: {
             Authorization: `Bearer ${state.users.token}`,
@@ -302,7 +302,7 @@ const Profile = () => {
                         <br></br>
                         <br></br> <b><div className="userName">{user.result.userName}</div></b>
                         <br></br>
-                        {state.users.role === "Admin" &&
+                        {state.users.role === "Admin" ||
                         // eslint-disable-next-line
                         item.user == state.users.user._id ? (
                           <button
