@@ -50,7 +50,9 @@ const MainPage = () => {
       </div>
       <br></br>
       <br></br>
-      <img className="done" src="/done.jpg" alt="done"/>
+      <b className="clube">Tuwaiq Club </b>
+      <b className="clube-tuwaiq">We are a platform that has been structured in the English Language by Saudi spirit who is a skilled programmer from the Tuwaiq academy team, leading its execution. The goal of its establishment is to collect the projects and tasks for the students who are in the academy and to help local ambitious programmers to broaden their knowledge in the projects.</b>
+      <br></br>
       <div className="trainers">
         <b>Tuwaiq Trainers</b>
       </div>

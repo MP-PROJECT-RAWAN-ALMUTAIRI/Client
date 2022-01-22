@@ -1,4 +1,28 @@
-
+.clube {
+  padding: 1rem;
+  margin: 1rem;
+  display: grid;
+  color: #005870;
+  align-content: center;
+  justify-items: center;
+  color: 005870;
+  font-size: 1.6rem;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.clube-tuwaiq {
+  display: grid;
+  color: #005870;
+  align-content: center;
+  justify-items: center;
+  color: 005870;
+  font-size: 1.2rem;
+  font-family: Arial, Helvetica, sans-serif;
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 139px;
+  margin-inline-end: 71px;
+}
 .trainers {
   background-color: white;
   font-size: 1.4rem;
@@ -110,7 +134,6 @@ img {
 .descrition {
   align-items: center;
 }
-
 
 .TimeLineMain {
   padding: 6%;

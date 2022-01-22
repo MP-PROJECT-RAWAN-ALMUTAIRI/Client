@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams,useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import Nav from "../Nav";
 import Footer from "./../Footer";
@@ -9,6 +9,7 @@ import "./style.css";
 
 const Disscation = () => {
   const BASE_URL = process.env.REACT_APP_BASE_URL;
+  const navigate = useNavigate();
   const [discussion, setDesscation] = useState([]); // or null ?
   const [question, setQuestion] = useState(null);
   const [reply, setRely] = useState(""); // for answer .....
@@ -166,7 +167,8 @@ const Disscation = () => {
               return (
                 <div className="allInfo" key={item._id}>
                   <div className="divComment">
-                    <img src={item.user?.avatar} alt={item.user?.avatar}/>
+                    <img src={item.user?.avatar} alt={item.user?.avatar} 
+                    onClick={() => navigate(`/profile/${item.user._id}`)}/>
                     <p>{item.user?.userName}</p>
                   </div>
                   <p>{item.reply}</p>

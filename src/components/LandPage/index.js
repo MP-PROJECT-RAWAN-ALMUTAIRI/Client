@@ -14,7 +14,7 @@ const LandPage = () => {
       </p>
       <div>
         <br></br>
-        <Link to="/Singip" className="landbtn" onClick={() => navigate(`/main`)}>
+        <Link to="/signup" className="landbtn" onClick={() => navigate(`/main`)}>
           Sign up
         </Link>
         <Link to="/login" className="landbtn" onClick={() => navigate(`/main`)}>
