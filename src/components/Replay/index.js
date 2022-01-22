@@ -33,7 +33,6 @@ const Disscation = () => {
           Authorization: `Bearer ${state.users.token}`,
         },
       });
-      console.log(result.data, ".............rawan....question....");
       setQuestion(result.data);
     } catch (error) {
       console.log(error);
@@ -55,7 +54,7 @@ const Disscation = () => {
 
   const addAnswer = async () => {
     try {
-      const result = await axios.post(
+      await axios.post(
         `${BASE_URL}/reply/${id}`,
         {
           reply,
@@ -67,7 +66,6 @@ const Disscation = () => {
           },
         }
       );
-      console.log("new answer ||||||| 888888888", result.data);
       setRely("");
       getOneComment();
       const Toast = Swal.mixin({
@@ -91,35 +89,51 @@ const Disscation = () => {
     }
   };
 
-  // delete Answer by id
   const deleteAnswer = async (_id) => {
-    try {
-      await axios.delete(`${process.env.REACT_APP_BASE_URL}/reply/${_id}`, {
-        headers: {
-          Authorization: `Bearer ${state.users.token}`,
-        },
-      });
-      getOneComment();
-      const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.addEventListener('mouseenter', Swal.stopTimer)
-          toast.addEventListener('mouseleave', Swal.resumeTimer)
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+    })
+    
+    swalWithBootstrapButtons.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+    }).then(async(result) => {
+      if (result.isConfirmed) {
+        swalWithBootstrapButtons.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
+      await axios.delete(
+        `${process.env.REACT_APP_BASE_URL}/reply/${_id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${state.users.token}`,
+          },
         }
-      })
-      
-      Toast.fire({
-        icon: 'success',
-        title: 'Answer Delelted successfully'
-      })
-    } catch (error) {
-      console.log(error);
+      );
+      getOneComment();
+    } else if (
+      result.dismiss === Swal.DismissReason.cancel
+    ) {
+      swalWithBootstrapButtons.fire(
+        'Cancelled',
+        'Your imaginary file is safe :)',
+        'error'
+      )
     }
+  })
   };
+ 
   return (
     <>
       <Nav />
@@ -140,6 +154,7 @@ const Disscation = () => {
               onChange={(e) => setRely(e.target.value)}
               style={{ color: "black", fontSize: "15px" }}
             />
+            <br></br>
             <button className="addAnswer" onClick={addAnswer}>
               Add Answer :
             </button>
@@ -155,7 +170,7 @@ const Disscation = () => {
                     <p>{item.user?.userName}</p>
                   </div>
                   <p>{item.reply}</p>
-                  {state.users.role === "Admin" ||
+                  {
                   // eslint-disable-next-line
                   item.user._id == state.users.user._id ? (
                     <div className="del">
@@ -183,27 +198,8 @@ const Disscation = () => {
                           value="Submit"
                         />
                       </form>
-                      {/* <button
-                        className="ProfileBtn"
-                        // onClick={() => deleteTask(item._id)}
-                      >
-                        <h2>Remove : </h2>
-                      </button> */}
                     </li>
                   )}
-                  {/* <button
-                    className="TimeLineButton"
-                    // onClick={() => updateTask(item._id)}
-                  >
-                    <h2>Update</h2>
-                  </button> */}
-
-                  {/* <button
-                    className="TimeLineButton"
-                    // onClick={() => deleteTask(item._id)}
-                  >
-                    <h2>Delete</h2>
-                  </button> */}
                 </div>
               );
             })}

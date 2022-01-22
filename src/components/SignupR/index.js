@@ -28,34 +28,21 @@ const Signup = () => {
         email: email,
         userName: userName,
         password: password,
-        // role: "61c42cad4b31a32af675468b",
-        role: "61c42d094b31a32af675468e",
+        role: "61c42cad4b31a32af675468b",
       });
-      console.log(result.data._id, ".............................");
       if (result.status === 200) {
         navigate(`/verify_account/${result.data._id}`);
       } else {
         setMessage(result.data.message);
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
+      setMessage(error.response.data.message);
     }
   };
 
   return (
     <div className="signupWrapper">
-      {/* {state.token ? ( */}
-      {/* <h1>
-          <div className="centerWrapper">
-            <div className="homeSignupTitle">
-              <p>You already loggedin, you don't need to signup</p>
-            </div>
-            <div className="homeSignupButtons">
-              <button onClick={() => navigate("/main")}>HOME</button>
-            </div>
-          </div>
-        </h1> */}
-      {/* // ) : ( */}
       <main className="signupPanel">
         <div className="signupPanel__half signupHalf--first">
           <PasswordChecklist
@@ -117,7 +104,6 @@ const Signup = () => {
                   color: "rgb(255,255,255)",
                   fontWeight: "bold",
                   fontFamily: "Outfit sans-serif" ,
-                  // fontSize: "1.9rem" ,
                   textTransform: "capitalize" ,
                 }}
               >
@@ -137,7 +123,6 @@ const Signup = () => {
           </form>
         </div>
       </main>
-      {/* )} */}
     </div>
   );
 };

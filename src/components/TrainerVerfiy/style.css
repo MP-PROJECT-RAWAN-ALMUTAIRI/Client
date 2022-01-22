@@ -1,0 +1,6 @@
+.verify{
+    display: grid;
+    justify-content: center;
+    margin: 1vw;
+    padding-inline: 20vw;
+}

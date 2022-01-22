@@ -7,7 +7,6 @@ import Footer from "./../Footer";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
-//import withReactContent from "sweetalert2-react-content";
 import { MdModeEditOutline } from "react-icons/md";
 
 const Profile = () => {
@@ -29,14 +28,12 @@ const Profile = () => {
   }, []);
 
   const handleChange = (e) => {
-    console.log(e.target.files[0]);
     if (e.target.files[0]) {
       setPost(e.target.files[0]);
     }
   };
 
   const handleUpload = () => {
-    console.log("post ///////////", post);
     const uploadTask = storage.ref(`image/${post.name}`).put(post);
     uploadTask.on(
       "state_changed",
@@ -70,16 +67,14 @@ const Profile = () => {
         Authorization: `Bearer ${state.users.token}`,
       },
     });
-    console.log("user... setGitHubLink.....", user.data.result);
-    console.log("post.........", user.data.post);
     setuser(user.data);
     setUserPostss(user.data.post);
   };
-  // update avatar
-  const editAvatar = async () => {
+
+  const editAvatar = async (_id) => {
     try {
       await axios.put(
-        `${process.env.REACT_APP_BASE_URL}/update/${id}`,
+        `${process.env.REACT_APP_BASE_URL}/update/${_id}`,
         {
           avatar: url,
         },
@@ -168,20 +163,51 @@ const Profile = () => {
     }
   };
 
-  // delete post by id
   const deleteTask = async (_id) => {
-    try {
-      await axios.delete(`${process.env.REACT_APP_BASE_URL}/post/${_id}`, {
-        headers: {
-          Authorization: `Bearer ${state.users.token}`,
-        },
-      });
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+    })
+    
+    swalWithBootstrapButtons.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+    }).then(async(result) => {
+      if (result.isConfirmed) {
+        swalWithBootstrapButtons.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
+      await axios.delete(
+        `${process.env.REACT_APP_BASE_URL}/post/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${state.users.token}`,
+          },
+        }
+      );
       getUser();
-      Swal.fire("Project is deleted successfuly", "", "success");
-    } catch (error) {
-      console.log(error);
+    } else if (
+      result.dismiss === Swal.DismissReason.cancel
+    ) {
+      swalWithBootstrapButtons.fire(
+        'Cancelled',
+        'Your imaginary file is safe :)',
+        'error'
+      )
     }
+  })
   };
+
 
   return (
     <div>
@@ -197,7 +223,6 @@ const Profile = () => {
                 <div className="borderImg">
                   <img className="userImg" src={user.result.avatar} alt="img" />
                   <>
-                  {console.log(state.users.user._id,  user.result._id ,"  user[0]?._id")}
                     {state.users.user._id === user.result._id ? (
                     <div>
                       <progress value={progress} max="100" />
@@ -211,7 +236,7 @@ const Profile = () => {
                       </button>
 
                       <img className="RawImg" src={url}alt={url}/>
-                      <button className="sendDiv" onClick={editAvatar}>
+                      <button className="addDiv2" onClick={editAvatar}>
                         <b>Add</b>
                       </button>
                     </div>
@@ -277,7 +302,7 @@ const Profile = () => {
                         <br></br>
                         <br></br> <b><div className="userName">{user.result.userName}</div></b>
                         <br></br>
-                        {state.users.role === "Admin" ||
+                        {state.users.role === "Admin" &&
                         // eslint-disable-next-line
                         item.user == state.users.user._id ? (
                           <button

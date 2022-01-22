@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Nav from "./../Nav";
 import Footer from "./../Footer";
+import "./style.css"; 
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -27,10 +28,6 @@ const VerifyDiscussion = () => {
           Authorization: `Bearer ${state.users.token}`,
         },
       });
-      console.log(
-        result.data,
-        ".............rawan ............discussion........."
-      );
       setDesscation(result.data);
     } catch (error) {
       console.log(error);
@@ -45,7 +42,7 @@ const VerifyDiscussion = () => {
         {discussion.length &&
           discussion.map((item) => {
             return (
-              <div key={item._id}>
+              <div key={item._id} className="verify">
                 <p>Question: 👫 </p>
                 <p>{item.question}</p>
                 <button

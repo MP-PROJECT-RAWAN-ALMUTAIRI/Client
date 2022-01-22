@@ -22,12 +22,12 @@ const Onepost = () => {
   const state = useSelector((state) => {
     return state;
   });
-  console.log(state, "//////////////////////////////");
 
   useEffect(() => {
     getOnePosts();
     getAllComment();
-  },);
+    // eslint-disable-next-line
+  },[]);
 
   const getOnePosts = async () => {
     try {
@@ -36,20 +36,13 @@ const Onepost = () => {
           Authorization: `Bearer ${state.users.token}`,
         },
       });
-      console.log(result.data, "getOnePosts");
-      console.log(result.data.like);
       setPosts(result.data.result);
-      console.log(state.users);
       if (result.data.like.find((like) => like.user === state.users.user._id)) {
-        console.log("like............................................");
         setLike(true);
       }
-      console.log(result.data.commnet);
-      console.log(result, "WOW USER IS NULL HOW ?? !!");
       setComment(result.data);
       getAllComment();
       setNewComment(result.data);
-      // setComment("");
     } catch (error) {
       console.log(error);
     }
@@ -57,7 +50,7 @@ const Onepost = () => {
   
   const addLike = async () => {
     try {
-      const result = await axios.post(
+       await axios.post(
         `${BASE_URL}/Likeposts/${id}`,
         {},
         {
@@ -104,7 +97,7 @@ const Onepost = () => {
           title: 'Like Add Successfully'
         })
       }
-      console.log(result.data, ".....like ....................");
+   
     } catch (error) {
       console.log(error);
     }
@@ -117,7 +110,7 @@ const Onepost = () => {
           Authorization: `Bearer ${state.users.token}`,
         },
       });
-      console.log(result);
+     
       setComment(result.data);
     } catch (error) {
       console.log(error);
@@ -125,10 +118,8 @@ const Onepost = () => {
   };
 
   const addNewComment = async () => {
-    console.log(newComment);
-    console.log(state.users.token);
     try {
-      const result = await axios.post(
+    await axios.post(
         `${BASE_URL}/comment/${id}`,
         {
           comment: newComment,
@@ -140,7 +131,6 @@ const Onepost = () => {
           },
         }
       );
-      console.log("new comment", result.data);
       setNewComment("");
       getOnePosts();
       const Toast = Swal.mixin({
@@ -167,7 +157,7 @@ const Onepost = () => {
   const updatecomment = async (_id) => {
     const comment = prompt("update your comment ... ");
     try {
-      const result = await axios.put(`${BASE_URL}/comment/${_id}`,
+    await axios.put(`${BASE_URL}/comment/${_id}`,
         {
           comment: comment,
         },
@@ -178,7 +168,6 @@ const Onepost = () => {
         }
       );
       getAllComment();
-      console.log(result, "resultresultresult");
       const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
@@ -196,71 +185,103 @@ const Onepost = () => {
         title: 'Comment Updated Successfully'
       })
     } catch (error) {
-      console.log(error ," update comment");
+      console.log(error);
     }
   };
 
   const deleteCommentByAdmin = async (_id) => {
-    try {
-      await axios.delete(`${process.env.REACT_APP_BASE_URL}/deleteCommentByAdmin/${_id}`, {
-        headers: {
-          Authorization: `Bearer ${state.users.token}`,
-        },
-      });
-      getAllComment();
-      const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.addEventListener('mouseenter', Swal.stopTimer)
-          toast.addEventListener('mouseleave', Swal.resumeTimer)
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+    })
+    
+    swalWithBootstrapButtons.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+    }).then(async(result) => {
+      if (result.isConfirmed) {
+        swalWithBootstrapButtons.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
+      await axios.delete(
+        `${process.env.REACT_APP_BASE_URL}/deleteCommentByAdmin/${_id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${state.users.token}`,
+          },
         }
-      })
-      
-      Toast.fire({
-        icon: 'success',
-        title: 'Comment Deleted Successfully'
-      })
-    } catch (error) {
-      console.log(error);
+      );
+      getAllComment();
+    } else if (
+      result.dismiss === Swal.DismissReason.cancel
+    ) {
+      swalWithBootstrapButtons.fire(
+        'Cancelled',
+        'Your imaginary file is safe :)',
+        'error'
+      )
     }
+  })
   };
 
   const deleteComment = async (_id) => {
-    try {
-      await axios.delete(`${process.env.REACT_APP_BASE_URL}/comment/${_id}`, {
-        headers: {
-          Authorization: `Bearer ${state.users.token}`,
-        },
-      });
-      getAllComment();
-      const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.addEventListener('mouseenter', Swal.stopTimer)
-          toast.addEventListener('mouseleave', Swal.resumeTimer)
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+    })
+    
+    swalWithBootstrapButtons.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+    }).then(async(result) => {
+      if (result.isConfirmed) {
+        swalWithBootstrapButtons.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
+      await axios.delete(
+        `${process.env.REACT_APP_BASE_URL}/comment/${_id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${state.users.token}`,
+          },
         }
-      })
-      
-      Toast.fire({
-        icon: 'success',
-        title: 'Comment Deleted Successfully'
-      })
-    } catch (error) {
-      console.log(error);
+      );
+      getAllComment();
+    } else if (
+      result.dismiss === Swal.DismissReason.cancel
+    ) {
+      swalWithBootstrapButtons.fire(
+        'Cancelled',
+        'Your imaginary file is safe :)',
+        'error'
+      )
     }
+  })
   };
+    
   return (
     <div>
       <Nav />
-      {/* <h2>{user.result.userName}</h2> */}
       {posts && (
         <div>
           <div className="imgOne">
@@ -300,6 +321,7 @@ const Onepost = () => {
                 <p>
                   <div>{posts.description}</div>
                 </p>
+                <br></br>
                 <div className="git">
                 <a href={posts.GitHubLink}>{posts.GitHubLink}</a>
                 </div>
@@ -307,16 +329,6 @@ const Onepost = () => {
               </div>
             </div>
           </div>
-          {/* <textarea
-              required
-              rows="2"
-              className="descTimeLine"
-              placeholder="leave a comment..."
-              type="text"
-               resize: none;
-              onChange={(e) => setNewComment(e.target.value)}
-              style={{ color: "black", fontSize: "15px" }}
-            /> */}
           <div className="box">
             <p className="pa">
               <b>Write your comments:</b>
@@ -333,7 +345,6 @@ const Onepost = () => {
               <h2>Add Comment</h2>
             </button>
           </div>
-          {/* className="content" */}
           <div className="boxcomments">
             {comment.length &&
               comment.map((item) => (
@@ -346,11 +357,18 @@ const Onepost = () => {
                   <div className="paragraph">
                     <p>{item.comment}</p>
                     <div className="up">
+                    {state.users.role === "Admin" &&
+                    // eslint-disable-next-line
+                    item.user._id == state.users.user._id ? (
                       <button>
-                        <MdCreate 
-                        onClick={() => updatecomment(item._id)}>
-                          </MdCreate>
-                      </button>
+                      <MdCreate 
+                      onClick={() => updatecomment(item._id)}>
+                        </MdCreate>
+                    </button>
+                     
+                    ) : (
+                      <></>
+                    )}
                     </div>
                     <div className="del">
                     {state.users.role === "Admin" ||

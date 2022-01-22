@@ -1,21 +1,22 @@
 .styleDiv{
- /* justify-content: space-between;  */
  align-items: center;
  padding: 40px;
  margin: 5px auto;
- /* display: flex;
- flex-wrap: wrap; */
 } 
 .addAnswer {
-  border-radius: 5px;
+  border-radius: 1rem;
   background-color: #30869d;
-  padding: 1%;
+  padding: 0.7rem;
   color: white;
-  width: 22vh;
+  width: 15vw;
 }
-textarea{
-    resize: none;
-}
-.textAreaDivR{
+.descTimeLine{
+  width: 45rem;
+  border: 0.2em solid #30869d;
+  box-shadow: #30869d;
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+  margin-top: 0rem;
+  margin-bottom: 1rem;
   resize: none;
 }

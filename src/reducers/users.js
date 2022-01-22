@@ -10,7 +10,6 @@ const initialState = {
     switch (type) {
       case "LOGIN":
         const { role, token, user } = payload;
-        console.log(payload , ";OGIN ///////////payload");
         localStorage.setItem("token", token);
         localStorage.setItem("role", role);
         localStorage.setItem("user", JSON.stringify(user));

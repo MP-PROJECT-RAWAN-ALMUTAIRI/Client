@@ -18,7 +18,7 @@ const Nav = () => {
   const logOut = () => {
     navigate(`/`);
     dispatch(userLogout({ token: "" }));
-    console.log("log out");
+   
   };
   return (
     <div>

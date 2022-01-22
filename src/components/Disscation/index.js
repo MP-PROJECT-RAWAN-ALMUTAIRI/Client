@@ -31,22 +31,18 @@ const Disscation = () => {
           Authorization: `Bearer ${state.users.token}`,
         },
       });
-      console.log(
-        result.data,
-        ".............rawan ............details........."
-      );
       setDesscation(result.data);
     } catch (error) {
-      console.log(error, "error .....");
+      console.log(error);
     }
   };
 
   const addDisscation = async () => {
     try {
-      const result = await axios.post(
+        await axios.post(
         `${BASE_URL}/questions`,
         {
-          question,
+          question ,
         },
         {
           headers: {
@@ -54,7 +50,6 @@ const Disscation = () => {
           },
         }
       );
-      console.log(result.data, "Add Disscation |||||||||||");
       getOneComment();
       const Toast = Swal.mixin({
         toast: true,
@@ -79,7 +74,7 @@ const Disscation = () => {
   const updateQuestion = async (_id) => {
     const question = prompt("update your question ... ");
     try {
-      const result = await axios.put(
+          await axios.put(
         `${BASE_URL}/updQuestion/${_id}`,
         {
           question: question,
@@ -91,7 +86,6 @@ const Disscation = () => {
         }
       );
       getOneComment();
-      console.log(result, "resultresultresult");
       const Toast = Swal.mixin({
         toast: true,
         position: "top-end",
@@ -113,7 +107,29 @@ const Disscation = () => {
     }
   };
   const deleteQuestionByAdmin = async (_id) => {
-    try {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+    })
+    
+    swalWithBootstrapButtons.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+    }).then(async(result) => {
+      if (result.isConfirmed) {
+        swalWithBootstrapButtons.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
       await axios.delete(
         `${process.env.REACT_APP_BASE_URL}/deleteQuestionByAdmin/${_id}`,
         {
@@ -123,58 +139,66 @@ const Disscation = () => {
         }
       );
       getOneComment();
-      const Toast = Swal.mixin({
-        toast: true,
-        position: "top-end",
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.addEventListener("mouseenter", Swal.stopTimer);
-          toast.addEventListener("mouseleave", Swal.resumeTimer);
-        },
-      });
-
-      Toast.fire({
-        icon: "success",
-        title: "Question Deleted successfully",
-      });
-    } catch (error) {
-      console.log(error);
+    } else if (
+      result.dismiss === Swal.DismissReason.cancel
+    ) {
+      swalWithBootstrapButtons.fire(
+        'Cancelled',
+        'Your imaginary file is safe :)',
+        'error'
+      )
     }
+  })
   };
-
+ 
   const deleteQuestions = async (_id) => {
-    try {
-      await axios.delete(`${process.env.REACT_APP_BASE_URL}/questions/${_id}`, {
-        headers: {
-          Authorization: `Bearer ${state.users.token}`,
-        },
-      });
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+    })
+    
+    swalWithBootstrapButtons.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+    }).then(async(result) => {
+      if (result.isConfirmed) {
+        swalWithBootstrapButtons.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
+      await axios.delete(
+        `${process.env.REACT_APP_BASE_URL}/questions/${_id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${state.users.token}`,
+          },
+        }
+      );
       getOneComment();
-      const Toast = Swal.mixin({
-        toast: true,
-        position: "top-end",
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.addEventListener("mouseenter", Swal.stopTimer);
-          toast.addEventListener("mouseleave", Swal.resumeTimer);
-        },
-      });
-
-      Toast.fire({
-        icon: "success",
-        title: "Question Deleted successfully",
-      });
-    } catch (error) {
-      console.log(error);
+    } else if (
+      /* Read more about handling dismissals below */
+      result.dismiss === Swal.DismissReason.cancel
+    ) {
+      swalWithBootstrapButtons.fire(
+        'Cancelled',
+        'Your imaginary file is safe :)',
+        'error'
+      )
     }
+  })
   };
-
+ 
   return (
-    <>
+    <div>
       <Nav />
 
       <br></br>
@@ -184,15 +208,6 @@ const Disscation = () => {
         <br></br>
 
         <div className="textDiss">
-          {/* <textarea
-            required
-            rows="3"
-            className="textArea"
-            placeholder="set you description"
-            type="text"
-            onChange={(e) => setQuestion(e.target.value)}
-            style={{ color: "black", fontSize: "15px" }}
-          /> */}
           <input
             className="textArea"
             type="text"
@@ -200,7 +215,7 @@ const Disscation = () => {
             onChange={(e) => setQuestion(e.target.value)}
           />
           <br></br>
-          <button className="sendDiv" onClick={addDisscation}>
+          <button className="addDivbtn" onClick={addDisscation}>
             <h2> Send </h2>
           </button>
         </div>
@@ -212,7 +227,7 @@ const Disscation = () => {
                   <div className="discussionDiv">
                     {item.user.userName}
                     <p>Question: </p>
-                    {state.users.role === "Admin" ||
+                    {
                     // eslint-disable-next-line
                     item.user._id == state.users.user._id ? (
                       <MdModeEditOutline
@@ -225,13 +240,13 @@ const Disscation = () => {
                     <p>{item.question}</p>
                     <br></br>
                     <button
-                      className="DissButton"
+                      className="addDivbtn"
                       onClick={() => navigate(`/reply/${item._id}`)}
                     >
                       <h2> view</h2>
                     </button>
                     <div className="del">
-                      {state.users.role === "Admin" ||
+                      { 
                       // eslint-disable-next-line
                       item.user._id == state.users.user._id ? (
                         <button
@@ -260,7 +275,7 @@ const Disscation = () => {
           })}
       </div>
       <Footer />
-    </>
+    </div>
   );
 };
 

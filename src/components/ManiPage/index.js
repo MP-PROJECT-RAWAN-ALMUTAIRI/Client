@@ -27,7 +27,7 @@ const MainPage = () => {
         Authorization: `Bearer ${state.users.token}`,
       },
     });
-    setUser(user.data.slice(0,-1));
+    setUser(user.data);
   };
 
   const getAllPosts = async () => {
@@ -59,7 +59,6 @@ const MainPage = () => {
           user
           // eslint-disable-next-line
             .filter((ele) => {
-              console.log(ele.role);
               if (ele.role === "61c42d094b31a32af675468e") {
                 return ele;
               }
@@ -69,7 +68,7 @@ const MainPage = () => {
                 <div key={item._id}>
                   <div className="minDivTimeLine">
                     <img
-                      className="imgDiv"
+                      className="imgDivMain"
                       src={item.avatar}
                       alt="img"
                       onClick={() => navigate(`/profile/${item._id}`)}
@@ -88,7 +87,6 @@ const MainPage = () => {
               );
             })}
       </div>
-     <hr />
     <br></br>
       <div className="trainers">
         <b>Latest Project</b>
@@ -108,14 +106,19 @@ const MainPage = () => {
                     onClick={() => navigate(`/post/${item._id}`)}
                   />
                   <br></br>
-                  <div className="TimeLineDecrrepton">
-                    <b className="paragMain">{item.title}</b>
-                  </div>
+                  <div className="TimeLine">
+                      <b>
+                        <h2 className="parag">
+                          <b>{item.title}</b>
+                        </h2>
+                      </b>
+                    </div>
                 </div>
               </div>
             );
           })}
       </div>
+      <br></br>
       <Footer />
     </div>
   );

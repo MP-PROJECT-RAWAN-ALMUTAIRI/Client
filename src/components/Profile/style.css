@@ -1,9 +1,9 @@
-*{
-    padding: 0%;
-    margin: 0%;  
+* {
+  padding: 0%;
+  margin: 0%;
 }
-.AllPage{
-    margin-top: -5%;
+.AllPage {
+  margin-top: -5%;
 }
 .contenerImg {
   margin: 5%;
@@ -15,20 +15,32 @@
   max-width: 678px;
   margin: 37px auto;
 }
-.emailDiv{
+.emailDiv {
   margin-bottom: 2em;
 }
 .userImg {
-  border-radius: 50%;
-  margin-left: 43px;
+  width: 16vw;
+  height: 16vw;
   width: 30%;
 }
 .profileInfo {
-  text-decoration: double;
-  padding-top: 5%;
-  margin-left: 43px;
+  padding-top: 2rem;
+  margin-left: 3rem;
   font-size: 1rem;
   font-family: "Times New Roman", Times, serif;
+}
+.addDiv2 {
+  border-radius: 1rem;
+  background-color: #30869d;
+  padding: 1rem;
+  width: 8vw;
+  color: white;
+}
+.addDiv2:hover {
+  background-color: #69b0c4;
+}
+.editIcon {
+  margin-left: 34rem;
 }
 
 /*<---------------------------------------------------------------> */
@@ -52,26 +64,27 @@
   color: black;
   text-decoration: double;
 }
-.borderImg{
+.borderImg {
   width: 100%;
   height: 100%;
 }
-.userImg{
+.userImg {
   width: 30%;
   height: 30%;
   border-radius: 50%;
 }
-.TimeLineBtn{
-background-color: #30869d;
-color: aliceblue;
-border-radius: 5px;
-padding :2%;
+.TimeLineBtn {
+  background-color: #30869d;
+  color: aliceblue;
+  border-radius: 5px;
+  padding: 2%;
 }
-.userName{
+.userName {
   color: #30869d;
   /* text-align: center; 
   align-items: center; */
 }
-.editIcon{
-  margin-left: 34rem;;
-}
+
+
+/* <-----------------------------------------------------> */
+

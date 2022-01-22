@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import Swal from "sweetalert2";
 import axios from "axios";
 import Nav from "./../Nav";
 import Footer from "../Footer";
@@ -24,32 +25,64 @@ const Users = () => {
         Authorization: `Bearer ${state.users.token}`,
       },
     });
-    //console.log(state.users.token);
     setAllUsers(result.data);
   };
-  // const deleteUser = async (_id) => {
-  //    await axios.delete(
-  //     `${process.env.REACT_APP_BASE_URL}/user/${_id}`,
-  //     {
+  
+  const deleteUser = async (id) => {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+    })
+    
+    swalWithBootstrapButtons.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+    }).then(async(result) => {
+      if (result.isConfirmed) {
+        swalWithBootstrapButtons.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
+      await axios.delete(
+        `${process.env.REACT_APP_BASE_URL}/user/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${state.users.token}`,
+          },
+        }
+      );
+      getAllUsers();
+    } else if (
+      result.dismiss === Swal.DismissReason.cancel
+    ) {
+      swalWithBootstrapButtons.fire(
+        'Cancelled',
+        'Your imaginary file is safe :)',
+        'error'
+      )
+    }
+  })
+  };
+  //   try {
+  //     await axios.delete(`${process.env.REACT_APP_BASE_URL}/user/${id}`, {
   //       headers: {
   //         Authorization: `Bearer ${state.users.token}`,
   //       },
-  //     }
-  //   );
-  //    getAllUsers();
+  //     });
+  //     getAllUsers();
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
   // };
-  const deleteUser = async (id) => {
-    try {
-      await axios.delete(`${process.env.REACT_APP_BASE_URL}/user/${id}`, {
-        headers: {
-          Authorization: `Bearer ${state.users.token}`,
-        },
-      });
-      getAllUsers();
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   return (
     <>

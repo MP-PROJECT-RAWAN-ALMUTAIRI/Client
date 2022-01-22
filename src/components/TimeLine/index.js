@@ -16,7 +16,7 @@ const Post = () => {
   const [url, setUrl] = useState("");
   const [description, setDescription] = useState("");
   const [title, settitle] = useState("");
-  const [GitHubLink , setGithub] = useState(""); 
+  const [GitHubLink, setGithub] = useState("");
   const [progress, setProgress] = useState(0);
 
   const state = useSelector((state) => {
@@ -29,14 +29,12 @@ const Post = () => {
   }, []);
 
   const handleChange = (e) => {
-    console.log(e.target.files[0]);
     if (e.target.files[0]) {
       setPost(e.target.files[0]);
     }
   };
 
   const handleUpload = () => {
-    console.log("post", post);
     const uploadTask = storage.ref(`image/${post.name}`).put(post);
     uploadTask.on(
       "state_changed",
@@ -55,7 +53,6 @@ const Post = () => {
           .child(post.name)
           .getDownloadURL()
           .then((url) => {
-            console.log(url);
             setUrl(url);
           })
           .catch((error) => {
@@ -72,7 +69,6 @@ const Post = () => {
           Authorization: `Bearer ${state.users.token}`,
         },
       });
-      // console.log(result);
       setPosts(result.data);
     } catch (error) {
       console.log(error);
@@ -81,9 +77,6 @@ const Post = () => {
 
   ////add new post
   const addNewPost = async () => {
-    console.log(description);
-    console.log(url);
-    console.log(state.users.token);
     try {
       await axios.post(
         `${BASE_URL}/post`,
@@ -110,22 +103,48 @@ const Post = () => {
   };
 
   const deletePostByAdmin = async (id) => {
-    console.log(id);
-    try {
-      const result = await axios.delete(
-        `${process.env.REACT_APP_BASE_URL}/deletePostByAdmin/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${state.users.token}`,
-          },
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: "btn btn-success",
+        cancelButton: "btn btn-danger",
+      },
+      buttonsStyling: false,
+    });
+
+    swalWithBootstrapButtons
+      .fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel!",
+        reverseButtons: true,
+      })
+      .then(async (result) => {
+        if (result.isConfirmed) {
+          swalWithBootstrapButtons.fire(
+            "Deleted!",
+            "Your file has been deleted.",
+            "success"
+          );
+          await axios.delete(
+            `${process.env.REACT_APP_BASE_URL}/deletePostByAdmin/${id}`,
+            {
+              headers: {
+                Authorization: `Bearer ${state.users.token}`,
+              },
+            }
+          );
+          getAllPosts();
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          swalWithBootstrapButtons.fire(
+            "Cancelled",
+            "Your imaginary file is safe :)",
+            "error"
+          );
         }
-      );
-      getAllPosts();
-      Swal.fire("Done", "", "success");
-      console.log(result.data,"Delete post");
-    } catch (error) {
-      console.log(error ,"error ");
-    }
+      });
   };
 
   return (
@@ -134,7 +153,7 @@ const Post = () => {
       <br></br>
       <div className="header">
         <h1> Upload Your Project Demo </h1>
-        <progress className="prog" value={progress} width="33rem"/>
+        <progress className="prog" value={progress} />
         <hr />
         <br></br>
         <div>
@@ -147,16 +166,16 @@ const Post = () => {
                 onClick={handleUpload}
                 style={{ color: "white", fontSize: "15px" }}
               >
-                <b> upload </b>
+                <b> Upload </b>
               </button>
             </div>
 
-            <img className="RawImg" src={url} alt={url}/>
+            <img className="RawImg" src={url} alt={url} />
 
             <div className="textDiss">
               <div className="titleDiv">
-                Title
-                <input 
+                Title:
+                <input
                   required
                   className="titleInput"
                   type="text"
@@ -165,12 +184,9 @@ const Post = () => {
                   onChange={(e) => {
                     settitle(e.target.value);
                   }}
-                 
                 />
-              </div>
-              <div className="Repo">
-              Repository Link:
-              <input 
+                Repository Link:
+                <input
                   required
                   className="titleInput"
                   type="text"
@@ -179,20 +195,20 @@ const Post = () => {
                   onChange={(e) => {
                     setGithub(e.target.value);
                   }}
-                 
+                />
+                Description:
+                <textarea
+                  required
+                  rows="3"
+                  className="textArea"
+                  placeholder="set you description"
+                  type="text"
+                  resize="none"
+                  onChange={(e) => setDescription(e.target.value)}
                 />
               </div>
-              <textarea
-                required
-                rows="3"
-                className="textArea"
-                placeholder="set you description"
-                type="text"
-                resize="none"
-                onChange={(e) => setDescription(e.target.value)}
-              />
               <br></br>
-              <button className="sendDiv" onClick={addNewPost}>
+              <button className="addDiv" onClick={addNewPost}>
                 <b>Add</b>
               </button>
             </div>
@@ -204,18 +220,16 @@ const Post = () => {
               posts.map((item) => (
                 <div key={item._id}>
                   <div className="minDivTimeLine">
-                    <img
-                      className="imgDiv"
-                      src={item.pic}
-                      alt="project"
-                    />
+                    <img className="imgDiv" src={item.pic} alt="project" />
 
-                    <div className="TimeLineTitle">
+                    <div className="TimeLine">
                       <b>
-                        <h2 className="parag">{item.title}</h2>
+                        <h2 className="paragtitle">
+                          <b>{item.title}</b>
+                        </h2>
                       </b>
                     </div>
-                    <div className="TimeLine">
+                    <div className="TimeLinebtn">
                       {state.users.role === "Admin" ||
                       item.user._id === state.users.user._id ? (
                         <button
@@ -228,12 +242,12 @@ const Post = () => {
                         <></>
                       )}
                       <div>
-                      <button
-                        className="TimeLineButton"
-                        onClick={() => navigate(`/post/${item._id}`)}
-                      >
-                        <b> view</b>
-                      </button>
+                        <button
+                          className="TimeLineButton"
+                          onClick={() => navigate(`/post/${item._id}`)}
+                        >
+                          <b> view</b>
+                        </button>
                       </div>
                     </div>
                   </div>
