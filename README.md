@@ -129,12 +129,7 @@ Slides Link
  ### Best project page 
   
   ![‏‏لقطة الشاشة (10)](https://user-images.githubusercontent.com/92248041/146685901-b44474a7-0deb-4ff6-a754-d9ec4017c328.png)
-
- ### Language page 
-  ![‏‏لقطة الشاشة (16)](https://user-images.githubusercontent.com/92248041/146685874-e881bc7c-e9f7-49bd-b9ad-d82ebfcc1ffa.png)
-
- ### Bootcamp page
-  ![‏‏لقطة الشاشة (11)](https://user-images.githubusercontent.com/92248041/146685883-58c13c97-f373-4e33-8fab-6a7ed8756f36.png)
+  
   
  ### Upload post page 
   
