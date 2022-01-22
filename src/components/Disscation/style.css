@@ -22,27 +22,4 @@
 }
 .addDivbtn:hover {
   background-color: #69b0c4;
-<<<<<<< HEAD
 }
-=======
-}
-.sendDiv {
-  border-radius: 5px;
-  background-color: #30869d;
-  padding: 8px;
-  width: 15%;
-  color: white;
-}
-.sendDiv:hover {
-  background-color: #69b0c4;
-}
-/* .textArea{
-    width: 30%;
-    border: 2px solid #30869d;
-    box-shadow: #30869d;
-    border-radius: 4px;
-    box-sizing: border-box;
-    margin-top: 6px;
-    margin-bottom: 10px; 
-} */
->>>>>>> 1a186e43f253f872297fd47a65e38e39aa136225

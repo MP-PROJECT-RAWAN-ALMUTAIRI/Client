@@ -7,7 +7,6 @@ import Swal from "sweetalert2";
 import { storage } from "../firebase";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
 
 const Post = () => {
   const BASE_URL = process.env.REACT_APP_BASE_URL;
@@ -17,13 +16,8 @@ const Post = () => {
   const [url, setUrl] = useState("");
   const [description, setDescription] = useState("");
   const [title, settitle] = useState("");
-<<<<<<< HEAD
   const [GitHubLink, setGithub] = useState("");
-=======
-  const [GitHubLink , setGithub] = useState(""); 
->>>>>>> 1a186e43f253f872297fd47a65e38e39aa136225
   const [progress, setProgress] = useState(0);
-  const { id } = useParams();
 
   const state = useSelector((state) => {
     return state;
@@ -75,10 +69,6 @@ const Post = () => {
           Authorization: `Bearer ${state.users.token}`,
         },
       });
-<<<<<<< HEAD
-=======
-      // console.log(result);
->>>>>>> 1a186e43f253f872297fd47a65e38e39aa136225
       setPosts(result.data);
     } catch (error) {
       console.log(error);
@@ -113,7 +103,6 @@ const Post = () => {
   };
 
   const deletePostByAdmin = async (id) => {
-<<<<<<< HEAD
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: "btn btn-success",
@@ -156,24 +145,6 @@ const Post = () => {
           );
         }
       });
-=======
-    console.log(id);
-    try {
-      const result = await axios.delete(
-        `${process.env.REACT_APP_BASE_URL}/deletePostByAdmin/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${state.users.token}`,
-          },
-        }
-      );
-      getAllPosts();
-      Swal.fire("Done", "", "success");
-      console.log(result.data,"Delete post");
-    } catch (error) {
-      console.log(error ,"error ");
-    }
->>>>>>> 1a186e43f253f872297fd47a65e38e39aa136225
   };
 
   return (
@@ -182,11 +153,7 @@ const Post = () => {
       <br></br>
       <div className="header">
         <h1> Upload Your Project Demo </h1>
-<<<<<<< HEAD
         <progress className="prog" value={progress} />
-=======
-        <progress className="prog" value={progress} width="33rem"/>
->>>>>>> 1a186e43f253f872297fd47a65e38e39aa136225
         <hr />
         <br></br>
         <div>
@@ -203,21 +170,12 @@ const Post = () => {
               </button>
             </div>
 
-<<<<<<< HEAD
             <img className="RawImg" src={url} alt={url} />
 
             <div className="textDiss">
               <div className="titleDiv">
                 Title:
                 <input
-=======
-            <img className="RawImg" src={url} />
-
-            <div className="textDiss">
-              <div className="titleDiv">
-                Title
-                <input 
->>>>>>> 1a186e43f253f872297fd47a65e38e39aa136225
                   required
                   className="titleInput"
                   type="text"
@@ -226,7 +184,6 @@ const Post = () => {
                   onChange={(e) => {
                     settitle(e.target.value);
                   }}
-<<<<<<< HEAD
                 />
                 Repository Link:
                 <input
@@ -250,34 +207,6 @@ const Post = () => {
                   onChange={(e) => setDescription(e.target.value)}
                 />
               </div>
-=======
-                 
-                />
-              </div>
-              <div className="Repo">
-              Repository Link:
-              <input 
-                  required
-                  className="titleInput"
-                  type="text"
-                  value={GitHubLink}
-                  placeholder="set your project Repository Link"
-                  onChange={(e) => {
-                    setGithub(e.target.value);
-                  }}
-                 
-                />
-              </div>
-              <textarea
-                required
-                rows="3"
-                className="textArea"
-                placeholder="set you description"
-                type="text"
-                resize="none"
-                onChange={(e) => setDescription(e.target.value)}
-              />
->>>>>>> 1a186e43f253f872297fd47a65e38e39aa136225
               <br></br>
               <button className="addDiv" onClick={addNewPost}>
                 <b>Add</b>
@@ -291,34 +220,18 @@ const Post = () => {
               posts.map((item) => (
                 <div key={item._id}>
                   <div className="minDivTimeLine">
-<<<<<<< HEAD
                     <img className="imgDiv" src={item.pic} alt="project" />
 
                     <div className="TimeLine">
-=======
-                    <img
-                      className="imgDiv"
-                      src={item.pic}
-                      alt="project image"
-                    />
-
-                    <div className="TimeLineTitle">
->>>>>>> 1a186e43f253f872297fd47a65e38e39aa136225
                       <b>
                         <h2 className="paragtitle">
                           <b>{item.title}</b>
                         </h2>
                       </b>
                     </div>
-<<<<<<< HEAD
                     <div className="TimeLinebtn">
                       {state.users.role === "Admin" ||
                       item.user._id === state.users.user._id ? (
-=======
-                    <div className="TimeLine">
-                      {state.users.role === "Admin" ||
-                      item.user._id == state.users.user._id ? (
->>>>>>> 1a186e43f253f872297fd47a65e38e39aa136225
                         <button
                           className="TimeLineButton"
                           onClick={() => deletePostByAdmin(item._id)}
@@ -329,21 +242,12 @@ const Post = () => {
                         <></>
                       )}
                       <div>
-<<<<<<< HEAD
                         <button
                           className="TimeLineButton"
                           onClick={() => navigate(`/post/${item._id}`)}
                         >
                           <b> view</b>
                         </button>
-=======
-                      <button
-                        className="TimeLineButton"
-                        onClick={() => navigate(`/post/${item._id}`)}
-                      >
-                        <b> view</b>
-                      </button>
->>>>>>> 1a186e43f253f872297fd47a65e38e39aa136225
                       </div>
                     </div>
                   </div>
