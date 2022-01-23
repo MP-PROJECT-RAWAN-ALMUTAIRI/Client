@@ -11,7 +11,7 @@
   width: 15vw;
 }
 .descTimeLine{
-  width: 45rem;
+  width: 86vw;
   border: 0.2em solid #30869d;
   box-shadow: #30869d;
   border-radius: 0.5rem;
@@ -19,4 +19,12 @@
   margin-top: 0rem;
   margin-bottom: 1rem;
   resize: none;
+}
+.allInfoR{
+  border-radius: 1rem;
+  padding: 1rem;
+  margin: 2rem auto;
+  box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+  background-color: rgb(238, 238, 238);
+  transition: 1s;
 }

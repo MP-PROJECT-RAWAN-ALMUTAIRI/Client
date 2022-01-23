@@ -164,8 +164,8 @@ const Disscation = () => {
           </div>
           {discussion.length &&
             discussion.map((item) => {
-              return (
-                <div className="allInfo" key={item._id}>
+              return ( 
+                <div className="allInfoR" key={item._id}>
                   <div className="divComment">
                     <img src={item.user?.avatar} alt={item.user?.avatar} 
                     onClick={() => navigate(`/profile/${item.user._id}`)}/>
