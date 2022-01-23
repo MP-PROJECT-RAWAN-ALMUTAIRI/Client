@@ -3,7 +3,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #f4f1de;
+    background-color: #eff8ff;
   }
   
   .verifyAccountBox {
@@ -14,7 +14,7 @@
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    background-color: #e07a5f;
+    background-color: #003151;
     color: white;
   }
   
