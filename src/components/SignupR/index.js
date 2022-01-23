@@ -28,7 +28,7 @@ const Signup = () => {
         email: email,
         userName: userName,
         password: password,
-        role: "61c42d094b31a32af675468e",
+        role: "61ed3bcbb8ed291355bce6db",
       });
       if (result.status === 200) {
         navigate(`/verify_account/${result.data._id}`);
