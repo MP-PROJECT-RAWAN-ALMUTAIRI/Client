@@ -236,7 +236,7 @@ const Profile = () => {
                       </button>
 
                       <img className="RawImg" src={url}alt={url}/>
-                      <button className="addDiv2" onClick={editAvatar}>
+                      <button className="addDiv2" onClick={() => editAvatar(id)}>
                         <b>Add</b>
                       </button>
                     </div>
